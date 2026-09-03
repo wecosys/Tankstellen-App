@@ -26,3 +26,7 @@ Die veröffentlichte App liest ihre Preisdaten aus einer an das Artifact gekoppe
 
 - [`index.html`](index.html) – eigenständige, offline-fähige Kopie der App (statischer Snapshot, ohne Live-Aktualisierung; die veröffentlichte Version oben ist die aktuelle)
 - [`.claude/launch.json`](.claude/launch.json) – Konfiguration, um `index.html` lokal per Claude Code Browser-Preview zu öffnen
+
+## Lizenz
+
+© 2026 Michael Riedel. Alle Rechte vorbehalten. Siehe [LICENSE](LICENSE).
