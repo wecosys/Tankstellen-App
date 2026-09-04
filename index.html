@@ -727,7 +727,11 @@
   function fmtEur(n){ return n.toLocaleString("de-DE",{minimumFractionDigits:3,maximumFractionDigits:3}) + " €"; }
   function fmtEur2(n){ return n.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " €"; }
   function fmtDate(iso){
-    try{ return new Date(iso).toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"}); }
+    try{
+      var d = new Date(iso);
+      return d.toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"}) +
+        ", " + d.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"}) + " Uhr";
+    }
     catch(e){ return iso; }
   }
   function fmtShortDate(iso){
