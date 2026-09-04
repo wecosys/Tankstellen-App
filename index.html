@@ -14,7 +14,7 @@
     --surface:#ffffff;
     --surface-2:#faf7ef;
     --line:#ddd6c6;
-    --accent-cz:#2f5f86;
+    --accent-cz:#1d5f93;
     --accent-cz-soft:#e8eff5;
     --accent-de:#af4a28;
     --accent-de-soft:#f6e9e2;
@@ -22,7 +22,7 @@
     --good-soft:#e6f0e4;
     --muted:#726d5c;
     --shadow: 0 1px 0 rgba(28,27,25,.05);
-    --focus:#2f5f86;
+    --focus:#1d5f93;
     --chart-cz:#1d5f93;
     --chart-de:#af4a28;
   }
@@ -33,7 +33,7 @@
       --surface:#1a1c20;
       --surface-2:#202226;
       --line:#2e3136;
-      --accent-cz:#75aad8;
+      --accent-cz:#4a8ac0;
       --accent-cz-soft:#1c2b36;
       --accent-de:#e78256;
       --accent-de-soft:#332420;
@@ -41,7 +41,7 @@
       --good-soft:#1c2e1e;
       --muted:#9e9a8b;
       --shadow: 0 1px 0 rgba(0,0,0,.4);
-      --focus:#75aad8;
+      --focus:#4a8ac0;
       --chart-cz:#4a8ac0;
       --chart-de:#d76d3a;
     }
@@ -52,7 +52,7 @@
     --surface:#1a1c20;
     --surface-2:#202226;
     --line:#2e3136;
-    --accent-cz:#75aad8;
+    --accent-cz:#4a8ac0;
     --accent-cz-soft:#1c2b36;
     --accent-de:#e78256;
     --accent-de-soft:#332420;
@@ -60,7 +60,7 @@
     --good-soft:#1c2e1e;
     --muted:#9e9a8b;
     --shadow: 0 1px 0 rgba(0,0,0,.4);
-    --focus:#75aad8;
+    --focus:#4a8ac0;
     --chart-cz:#4a8ac0;
     --chart-de:#d76d3a;
   }
@@ -133,111 +133,191 @@
     background:var(--accent-de);
   }
 
-  /* ---- board ---- */
-  .board{
+  /* ---- fuel toggle ---- */
+  .fuel-toggle{
+    display:inline-flex;
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:3px;
+    gap:2px;
+  }
+  .fuel-toggle button{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-size:.82rem;
+    font-weight:600;
+    padding:7px 16px;
+    border-radius:999px;
+    border:none;
+    background:transparent;
+    color:var(--muted);
+    cursor:pointer;
+  }
+  .fuel-toggle button.active{
+    background:var(--surface);
+    color:var(--ink);
+    box-shadow:var(--shadow);
+  }
+  .fuel-toggle button:focus-visible{
+    outline:2px solid var(--focus);
+    outline-offset:1px;
+  }
+
+  /* ---- stations ---- */
+  .stations{
     background:var(--surface);
     border:1px solid var(--line);
     border-radius:10px;
     box-shadow:var(--shadow);
-    overflow:hidden;
+    padding:20px 24px 22px;
     margin-bottom:22px;
   }
-  .board-row + .board-row{ border-top:1px solid var(--line); }
-  .fuel-row{
-    display:grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items:stretch;
+  .stations-head{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    margin-bottom:18px;
   }
-  .fuel-label{
-    grid-column:1 / -1;
-    padding:16px 20px 0;
+  .stations-head h2{
     font-family:"Fjalla One", sans-serif;
-    font-size:1.05rem;
-    letter-spacing:.03em;
     text-transform:uppercase;
-    color:var(--ink);
+    letter-spacing:.03em;
+    font-size:1.1rem;
+    margin:0;
   }
-  .fuel-label .note{
+  .stations-head h2 small{
+    display:block;
     font-family:"IBM Plex Sans",sans-serif;
     text-transform:none;
     letter-spacing:0;
     font-weight:400;
     font-size:.78rem;
     color:var(--muted);
-    margin-left:8px;
+    margin-top:3px;
   }
-  .side{
-    padding:14px 20px 20px;
+  .cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .col-head{
     display:flex;
-    flex-direction:column;
-    gap:6px;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:8px;
+    margin-bottom:10px;
+    padding-bottom:8px;
+    border-bottom:2px solid var(--line);
   }
-  .side.cz{ align-items:flex-start; }
-  .side.de{ align-items:flex-end; text-align:right; }
-  .side .country{
-    font-size:.72rem;
-    font-weight:600;
+  .col-head .country{
+    font-size:.74rem;
+    font-weight:700;
     letter-spacing:.08em;
     text-transform:uppercase;
   }
-  .side.cz .country{ color:var(--accent-cz); }
-  .side.de .country{ color:var(--accent-de); }
-  .price-tile{
+  .col-cz .country{ color:var(--accent-cz); }
+  .col-de .country{ color:var(--accent-de); }
+  .col-head .note{
+    font-size:.68rem;
+    color:var(--muted);
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+  }
+  .prov-badge{
+    display:inline-block;
+    font-size:.62rem;
+    font-weight:600;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--accent-de);
+    background:var(--accent-de-soft);
+    border-radius:999px;
+    padding:2px 7px;
+    margin-left:6px;
+    vertical-align:middle;
+  }
+  .station-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:9px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .station-row:last-child{ border-bottom:none; }
+  .station-row .who{ min-width:0; }
+  .station-row .name{
+    font-weight:600;
+    font-size:.88rem;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .station-row .town{
+    font-size:.72rem;
+    color:var(--muted);
+  }
+  .station-row .price{
     font-family:"IBM Plex Mono", ui-monospace, monospace;
     font-variant-numeric: tabular-nums;
     font-weight:600;
-    border-radius:8px;
-    padding:6px 12px;
-    display:inline-flex;
-    align-items:baseline;
-    gap:6px;
+    font-size:1rem;
+    white-space:nowrap;
+    flex:none;
   }
-  .side.cz .price-tile{ background:var(--accent-cz-soft); color:var(--accent-cz); }
-  .side.de .price-tile{ background:var(--accent-de-soft); color:var(--accent-de); }
-  .price-tile .num{ font-size:1.55rem; }
-  .price-tile .unit{ font-size:.72rem; font-weight:500; opacity:.85; }
-  .side .eur-eq{
-    font-family:"IBM Plex Mono", ui-monospace, monospace;
-    font-variant-numeric: tabular-nums;
-    font-size:.82rem;
+  .station-row.cheapest{
+    background:var(--good-soft);
+    margin:0 -12px;
+    padding:9px 12px;
+    border-radius:8px;
+    border-bottom-color:transparent;
+  }
+  .station-row.cheapest .price{ color:var(--good); }
+  .station-row.cheapest .badge{
+    display:inline-block;
+    font-size:.6rem;
+    font-weight:700;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    color:var(--good);
+    margin-left:6px;
+  }
+  .station-row .price .eur-eq{
+    display:block;
+    font-size:.68rem;
+    font-weight:500;
     color:var(--muted);
+    text-align:right;
   }
 
-  .divider{
-    width:1px;
-    background-image: repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 12px);
-    position:relative;
+  .summary{
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    text-align:center;
   }
-  .delta-pill{
-    position:absolute;
-    top:50%; left:50%;
-    transform:translate(-50%,-50%);
+  .summary .pill{
     background:var(--good-soft);
     color:var(--good);
     border:1px solid var(--line);
     border-radius:999px;
-    padding:5px 10px;
+    padding:8px 16px;
     font-family:"IBM Plex Mono", ui-monospace, monospace;
-    font-size:.68rem;
+    font-size:.8rem;
     font-weight:600;
-    white-space:nowrap;
-    text-align:center;
-    line-height:1.3;
-    box-shadow:0 1px 3px rgba(0,0,0,.08);
   }
-
-  /* ---- fx strip ---- */
-  .fx{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
+  .fx-note{
+    text-align:center;
     font-family:"IBM Plex Mono", ui-monospace, monospace;
-    font-size:.75rem;
+    font-size:.72rem;
     color:var(--muted);
-    padding:10px 16px;
-    background:var(--surface-2);
-    border-top:1px solid var(--line);
+    margin-top:8px;
   }
 
   /* ---- calculator ---- */
@@ -254,6 +334,11 @@
     text-transform:uppercase;
     letter-spacing:.03em;
     font-size:1rem;
+    margin:0 0 4px;
+  }
+  .calc .sub{
+    font-size:.78rem;
+    color:var(--muted);
     margin:0 0 14px;
   }
   .calc-row{
@@ -328,18 +413,11 @@
     font-size:1rem;
     margin:0 0 14px;
   }
-  .history-controls{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-bottom:12px;
-  }
   .legend{
     display:flex;
     gap:16px;
     flex-wrap:wrap;
+    margin-bottom:12px;
   }
   .legend-item{
     display:inline-flex;
@@ -444,12 +522,10 @@
     border-top:1px solid var(--line);
   }
 
-  @media (max-width:560px){
-    .fuel-row{ grid-template-columns:1fr auto 1fr; }
-    .side{ padding:12px 12px 16px; }
-    .price-tile .num{ font-size:1.25rem; }
-    .delta-pill{ font-size:.6rem; padding:4px 6px; }
+  @media (max-width:620px){
+    .cols{ grid-template-columns:1fr; }
     .gantry-title{ font-size:1.4rem; }
+    .station-row .name{ max-width:120px; }
   }
 </style>
 </head>
@@ -458,29 +534,30 @@
 
   <header class="gantry reveal">
     <h1 class="gantry-title">Tankpreise Grenzvergleich
-      <small>Tschechien vs. Deutschland &middot; Benzin &amp; Diesel</small>
+      <small>Vogtland/Selb (DE) vs. Aš/Cheb (CZ) &middot; echte Grenzstationen</small>
     </h1>
     <div class="status" id="statusBox">
       <span><span class="dot"></span>wird geladen…</span>
     </div>
   </header>
 
-  <div class="board reveal" id="board">
-    <!-- filled by render() -->
-  </div>
+  <section class="stations reveal">
+    <div class="stations-head">
+      <h2>Stationen im Grenzgebiet<small id="stationsSub">Sortiert nach Preis, günstigste zuerst</small></h2>
+      <div class="fuel-toggle" id="fuelToggle" role="group" aria-label="Kraftstoff wählen">
+        <button type="button" data-fuel="e10" class="active">Super E10 / Natural 95</button>
+        <button type="button" data-fuel="diesel">Diesel</button>
+      </div>
+    </div>
+    <div class="cols" id="stationCols"><!-- filled by render() --></div>
+    <div class="summary" id="summary"></div>
+    <div class="fx-note" id="fxNote"></div>
+  </section>
 
   <section class="calc reveal">
     <h2>Tankrechner</h2>
+    <p class="sub">Vergleicht die jeweils günstigste Station je Seite für den oben gewählten Kraftstoff.</p>
     <div class="calc-row">
-      <div class="field">
-        <label for="fuelSelect">Kraftstoff</label>
-        <select id="fuelSelect">
-          <option value="0">Super E10</option>
-          <option value="1">Super E5</option>
-          <option value="2">Premium (98 Oktan)</option>
-          <option value="3">Diesel</option>
-        </select>
-      </div>
       <div class="field">
         <label for="literInput">Liter</label>
         <input id="literInput" type="number" min="1" max="200" step="1" value="50">
@@ -488,11 +565,11 @@
     </div>
     <div class="calc-result">
       <div class="result-tile">
-        <div class="k">Preis in CZ</div>
+        <div class="k">Günstigste CZ-Station</div>
         <div class="v" id="calcCz">–</div>
       </div>
       <div class="result-tile">
-        <div class="k">Preis in DE</div>
+        <div class="k">Günstigste DE-Station</div>
         <div class="v" id="calcDe">–</div>
       </div>
       <div class="result-tile highlight">
@@ -503,32 +580,21 @@
   </section>
 
   <section class="history reveal">
-    <h2>Preisverlauf</h2>
-    <div class="history-controls">
-      <div class="field">
-        <label for="chartFuelSelect">Kraftstoff</label>
-        <select id="chartFuelSelect">
-          <option value="0">Super E10</option>
-          <option value="1">Super E5</option>
-          <option value="2">Premium (98 Oktan)</option>
-          <option value="3">Diesel</option>
-        </select>
-      </div>
-      <div class="legend">
-        <span class="legend-item cz"><span class="key"></span>Tschechien (≈ €/l)</span>
-        <span class="legend-item de"><span class="key"></span>Deutschland (€/l)</span>
-      </div>
+    <h2>Preisverlauf (günstigste Station pro Tag)</h2>
+    <div class="legend">
+      <span class="legend-item cz"><span class="key"></span>Tschechien (≈ €/l)</span>
+      <span class="legend-item de"><span class="key"></span>Deutschland (€/l)</span>
     </div>
     <div class="chart-wrap" id="chartWrap"><!-- filled by renderChart() --></div>
     <div class="history-meta" id="historyMeta"></div>
   </section>
 
   <footer>
-    <p id="sourceCz">CZ-Preise: Tank ONO (tank-ono.cz), Preisliste.</p>
-    <p id="sourceDe">DE-Preise: ADAC, bundesweiter Tagesdurchschnitt.</p>
+    <p id="sourceCz">CZ-Preise: mbenzin.cz, Stationen in Aš/Cheb/Vojtanov.</p>
+    <p id="sourceDe">DE-Preise: vorläufige Momentaufnahme für Selb.</p>
     <p id="sourceFx">Wechselkurs: Marktkurs EUR/CZK.</p>
-    <p>* Super E5 und SuperPlus (DE) sind keine Tagesdurchschnitte, sondern Richtwerte auf Basis des üblichen Aufschlags gegenüber Super E10 (ADAC: E5 ca. 5–6 Ct teurer; SuperPlus ca. 10–20 Ct teurer, hier 13 Ct angesetzt).</p>
-    <p>Alle Preise sind Momentaufnahmen und keine Live-Stationsdaten pro Zapfsäule; regionale und tagesaktuelle Abweichungen sind möglich.</p>
+    <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
+    <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich. Einzelne Preise können älter sein als der oben genannte Gesamtstand (siehe jeweilige Station).</p>
     <p>Diese Seite ruft keine Preise automatisch ab. Für eine Aktualisierung: im Chat mit Claude "aktualisiere die Preise" schreiben.</p>
     <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten.</p>
   </footer>
@@ -539,41 +605,34 @@
 (function(){
   var DEFAULTS = {
     updatedAt: "2026-09-04T00:00:00+02:00",
+    fx: { eurCzk: 24.19, source: "Marktkurs" },
     cz: {
-      source: "Tank ONO (tank-ono.cz)",
-      currency: "CZK",
-      prices: { natural95: 41.50, natural98: 43.90, diesel: 44.50 },
-      labels: { natural95: "Natural 95", natural98: "Natural 98", diesel: "Diesel" }
+      source: "mbenzin.cz",
+      stations: [
+        { name: "Robin Oil", town: "Vojtanov", e10: 39.90, diesel: null },
+        { name: "Robin Oil", town: "Cheb (Ašská)", e10: 40.90, diesel: 44.50 },
+        { name: "Prim", town: "Cheb", e10: 40.90, diesel: 44.90 },
+        { name: "Tank ONO", town: "Cheb", e10: 41.50, diesel: 44.50 },
+        { name: "F1 Gas", town: "Aš", e10: 44.50, diesel: 48.90 },
+        { name: "MOL", town: "Aš", e10: 44.50, diesel: 48.90 }
+      ]
     },
     de: {
-      source: "ADAC, bundesweiter Tagesdurchschnitt",
-      currency: "EUR",
-      prices: { superE10: 2.183, superE5: 2.238, superPlus: 2.313, diesel: 2.232 },
-      labels: { superE10: "Super E10", superE5: "Super E5", superPlus: "SuperPlus", diesel: "Diesel" },
-      estimated: { superE5: true, superPlus: true }
-    },
-    rows: [
-      { title: "Super E10", cz: "natural95", de: "superE10" },
-      { title: "Super E5", cz: "natural95", de: "superE5" },
-      { title: "Premium (98 Oktan)", cz: "natural98", de: "superPlus" },
-      { title: "Diesel", cz: "diesel", de: "diesel" }
-    ],
-    fx: {
-      eurCzk: 24.19,
-      source: "Marktkurs"
+      source: "Momentaufnahme (vorläufig, kein Live-Feed)",
+      provisional: true,
+      stations: [
+        { name: "ORLEN Express", town: "Selb", e10: 2.199, diesel: 2.219 },
+        { name: "AVIA", town: "Selb (Weissenbacher Str.)", e10: 2.219, diesel: 2.239 },
+        { name: "AVIA", town: "Selb (Geschw.-Scholl-Str.)", e10: 2.219, diesel: 2.239 },
+        { name: "Hauer Mineralöle", town: "Selb", e10: 2.224, diesel: 2.234 }
+      ]
     },
     history: {
       entries: [
         {
-          date: "2026-09-03",
-          cz: { natural95: 41.50, natural98: 43.90, diesel: 44.50 },
-          de: { superE10: 2.183, superE5: 2.238, superPlus: 2.313, diesel: 2.232 },
-          fx: { eurCzk: 24.16 }
-        },
-        {
           date: "2026-09-04",
-          cz: { natural95: 41.50, natural98: 43.90, diesel: 44.50 },
-          de: { superE10: 2.183, superE5: 2.238, superPlus: 2.313, diesel: 2.232 },
+          cz: { e10: 39.90, diesel: 44.50 },
+          de: { e10: 2.199, diesel: 2.219 },
           fx: { eurCzk: 24.19 }
         }
       ]
@@ -581,6 +640,7 @@
   };
 
   var data = DEFAULTS;
+  var fuel = "e10";
 
   function fmtCzk(n){ return n.toLocaleString("cs-CZ",{minimumFractionDigits:2,maximumFractionDigits:2}) + " Kč"; }
   function fmtEur(n){ return n.toLocaleString("de-DE",{minimumFractionDigits:3,maximumFractionDigits:3}) + " €"; }
@@ -591,75 +651,6 @@
       return d.toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"});
     }catch(e){ return iso; }
   }
-
-  function fuelRow(row){
-    var czKey = row.cz, deKey = row.de;
-    var cz = data.cz.prices[czKey], de = data.de.prices[deKey];
-    var czEur = cz / data.fx.eurCzk;
-    var diff = de - czEur;
-    var pct = de ? (diff/de*100) : 0;
-    var cheaper = diff >= 0 ? "cz" : "de";
-    var deltaText = cheaper === "cz"
-      ? "CZ günstiger<br>" + fmtEur(Math.abs(diff)) + "/l · " + Math.abs(pct).toFixed(1) + "%"
-      : "DE günstiger<br>" + fmtEur(Math.abs(diff)) + "/l · " + Math.abs(pct).toFixed(1) + "%";
-    var deEstimated = !!(data.de.estimated && data.de.estimated[deKey]);
-
-    return (
-      '<div class="board-row">' +
-        '<div class="fuel-row">' +
-          '<div class="fuel-label">' + row.title + '<span class="note">CZ: ' + data.cz.labels[czKey] + ' · DE: ' + data.de.labels[deKey] + '</span></div>' +
-          '<div class="side cz">' +
-            '<span class="country">Tschechien</span>' +
-            '<span class="price-tile"><span class="num">' + cz.toFixed(2) + '</span><span class="unit">Kč/l</span></span>' +
-            '<span class="eur-eq">≈ ' + fmtEur(czEur) + '/l</span>' +
-          '</div>' +
-          '<div class="divider"><span class="delta-pill">' + deltaText + '</span></div>' +
-          '<div class="side de">' +
-            '<span class="country">Deutschland</span>' +
-            '<span class="price-tile"><span class="num">' + de.toFixed(3) + (deEstimated ? '*' : '') + '</span><span class="unit">€/l</span></span>' +
-            '<span class="eur-eq">' + (deEstimated ? 'Richtwert' : 'Ø bundesweit') + '</span>' +
-          '</div>' +
-        '</div>' +
-      '</div>'
-    );
-  }
-
-  function render(){
-    document.getElementById("board").innerHTML =
-      data.rows.map(fuelRow).join("") +
-      '<div class="fx">1 € = ' + data.fx.eurCzk.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + ' Kč &nbsp;·&nbsp; Quelle: ' + data.fx.source + '</div>';
-
-    var ageHours = (Date.now() - new Date(data.updatedAt).getTime()) / 36e5;
-    var isStale = ageHours > 36;
-    document.getElementById("statusBox").innerHTML =
-      '<span><span class="dot' + (isStale ? ' stale' : '') + '"></span>Stand ' + fmtDate(data.updatedAt) +
-      (isStale ? ' · evtl. veraltet' : '') + '</span>';
-
-    document.getElementById("sourceCz").textContent = "CZ-Preise: " + data.cz.source + ".";
-    document.getElementById("sourceDe").textContent = "DE-Preise: " + data.de.source + ".";
-    document.getElementById("sourceFx").textContent = "Wechselkurs: 1 € = " + data.fx.eurCzk.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " Kč (" + data.fx.source + ").";
-
-    updateCalc();
-    renderChart();
-  }
-
-  function updateCalc(){
-    var rowIdx = parseInt(document.getElementById("fuelSelect").value, 10) || 0;
-    var row = data.rows[rowIdx];
-    var liters = parseFloat(document.getElementById("literInput").value) || 0;
-    var cz = data.cz.prices[row.cz], de = data.de.prices[row.de];
-    var czEur = cz / data.fx.eurCzk;
-    var totalCz = czEur * liters;
-    var totalDe = de * liters;
-    var save = totalDe - totalCz;
-
-    document.getElementById("calcCz").textContent = fmtEur2(totalCz);
-    document.getElementById("calcDe").textContent = fmtEur2(totalDe);
-    var saveTile = document.getElementById("calcSave").parentElement;
-    document.getElementById("calcSave").textContent = (save >= 0 ? "+" : "") + fmtEur2(save);
-    saveTile.classList.toggle("highlight", true);
-  }
-
   function fmtShortDate(iso){
     try{
       var d = new Date(iso + "T00:00:00");
@@ -667,30 +658,112 @@
     }catch(e){ return iso; }
   }
 
-  function historyPoints(row){
+  function cheapest(stations, key){
+    var withPrice = stations.filter(function(s){ return typeof s[key] === "number"; });
+    if (!withPrice.length) return null;
+    return withPrice.reduce(function(a,b){ return b[key] < a[key] ? b : a; });
+  }
+
+  function stationCol(countryClass, countryLabel, source, stations, currencySuffix, isCz, provisional){
+    var withPrice = stations.filter(function(s){ return typeof s[fuel] === "number"; });
+    var sorted = withPrice.slice().sort(function(a,b){ return a[fuel] - b[fuel]; });
+    var minVal = sorted.length ? sorted[0][fuel] : null;
+
+    var rows = sorted.map(function(s){
+      var isMin = s[fuel] === minVal;
+      var priceText = isCz ? s[fuel].toFixed(2) + " Kč" : fmtEur(s[fuel]);
+      var eurEq = isCz ? '<span class="eur-eq">≈ ' + fmtEur(s[fuel] / data.fx.eurCzk) + '</span>' : '';
+      return (
+        '<div class="station-row' + (isMin ? ' cheapest' : '') + '">' +
+          '<div class="who">' +
+            '<div class="name">' + s.name + '</div>' +
+            '<div class="town">' + s.town + (isMin ? '<span class="badge">günstigste</span>' : '') + '</div>' +
+          '</div>' +
+          '<div class="price">' + priceText + eurEq + '</div>' +
+        '</div>'
+      );
+    }).join("");
+
+    var provBadge = provisional ? '<span class="prov-badge">vorläufig</span>' : '';
+
+    return (
+      '<div class="col-' + countryClass + '">' +
+        '<div class="col-head">' +
+          '<span class="country">' + countryLabel + provBadge + '</span>' +
+          '<span class="note">' + sorted.length + ' Stationen</span>' +
+        '</div>' +
+        (rows || '<div class="station-row"><div class="who"><div class="name">Keine Daten</div></div></div>') +
+      '</div>'
+    );
+  }
+
+  function render(){
+    document.getElementById("stationCols").innerHTML =
+      stationCol("cz", "Tschechien", data.cz.source, data.cz.stations, "Kč", true, false) +
+      stationCol("de", "Deutschland", data.de.source, data.de.stations, "€", false, !!data.de.provisional);
+
+    var czMin = cheapest(data.cz.stations, fuel);
+    var deMin = cheapest(data.de.stations, fuel);
+    var summary = document.getElementById("summary");
+    if (czMin && deMin) {
+      var czEur = czMin[fuel] / data.fx.eurCzk;
+      var diff = deMin[fuel] - czEur;
+      var pct = deMin[fuel] ? (diff / deMin[fuel] * 100) : 0;
+      var cheaperSide = diff >= 0 ? "CZ" : "DE";
+      summary.innerHTML = '<span class="pill">' + cheaperSide + ' günstiger · ' + fmtEur(Math.abs(diff)) + '/l · ' + Math.abs(pct).toFixed(1) + '%</span>';
+    } else {
+      summary.innerHTML = '';
+    }
+    document.getElementById("fxNote").textContent = "1 € = " + data.fx.eurCzk.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " Kč · Quelle: " + data.fx.source;
+
+    var ageHours = (Date.now() - new Date(data.updatedAt).getTime()) / 36e5;
+    var isStale = ageHours > 36;
+    document.getElementById("statusBox").innerHTML =
+      '<span><span class="dot' + (isStale ? ' stale' : '') + '"></span>Stand ' + fmtDate(data.updatedAt) +
+      (isStale ? ' · evtl. veraltet' : '') + '</span>';
+
+    document.getElementById("sourceCz").textContent = "CZ-Preise: " + data.cz.source + ", Stationen in Aš/Cheb/Vojtanov.";
+    document.getElementById("sourceDe").textContent = "DE-Preise: " + data.de.source + ", Stationen in Selb/Vogtland.";
+    document.getElementById("sourceFx").textContent = "Wechselkurs: 1 € = " + data.fx.eurCzk.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " Kč (" + data.fx.source + ").";
+    document.getElementById("provisionalNote").style.display = data.de.provisional ? "" : "none";
+
+    updateCalc();
+    renderChart();
+  }
+
+  function updateCalc(){
+    var liters = parseFloat(document.getElementById("literInput").value) || 0;
+    var czMin = cheapest(data.cz.stations, fuel);
+    var deMin = cheapest(data.de.stations, fuel);
+    if (!czMin || !deMin) return;
+    var czEur = czMin[fuel] / data.fx.eurCzk;
+    var totalCz = czEur * liters;
+    var totalDe = deMin[fuel] * liters;
+    var save = totalDe - totalCz;
+
+    document.getElementById("calcCz").textContent = fmtEur2(totalCz);
+    document.getElementById("calcDe").textContent = fmtEur2(totalDe);
+    document.getElementById("calcSave").textContent = (save >= 0 ? "+" : "") + fmtEur2(save);
+  }
+
+  function historyPoints(){
     var entries = (data.history && data.history.entries) || [];
     return entries
-      .filter(function(e){ return e && e.cz && e.de && e.fx && e.fx.eurCzk; })
+      .filter(function(e){ return e && e.cz && e.de && e.fx && e.fx.eurCzk && typeof e.cz[fuel] === "number" && typeof e.de[fuel] === "number"; })
       .map(function(e){
-        return {
-          date: e.date,
-          czEur: e.cz[row.cz] / e.fx.eurCzk,
-          de: e.de[row.de]
-        };
+        return { date: e.date, czEur: e.cz[fuel] / e.fx.eurCzk, de: e.de[fuel] };
       });
   }
 
   function renderChart(){
-    var rowIdx = parseInt(document.getElementById("chartFuelSelect").value, 10) || 0;
-    var row = data.rows[rowIdx];
-    var pts = historyPoints(row);
+    var pts = historyPoints();
     var wrap = document.getElementById("chartWrap");
     var meta = document.getElementById("historyMeta");
 
     if (pts.length < 2) {
       wrap.innerHTML = '<div class="chart-empty">' +
         (pts.length === 0
-          ? 'Noch keine Verlaufsdaten vorhanden.'
+          ? 'Noch keine Verlaufsdaten für diesen Kraftstoff.'
           : 'Erst 1 Datenpunkt (' + fmtShortDate(pts[0].date) + ') – der Verlauf füllt sich ab morgen täglich.') +
         '</div>';
       meta.textContent = '';
@@ -745,7 +818,7 @@
       '<text x="' + (xOf(lastI) - 6).toFixed(1) + '" y="' + (yOf(pts[lastI].de) - 8).toFixed(1) + '" text-anchor="end" font-size="10.5" font-weight="600" font-family="IBM Plex Mono, monospace" fill="var(--chart-de)">' + fmtEur(pts[lastI].de) + '</text>';
 
     wrap.innerHTML =
-      '<svg viewBox="0 0 ' + W + ' ' + H + '" tabindex="0" role="img" aria-label="Preisverlauf ' + row.title + '">' +
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" tabindex="0" role="img" aria-label="Preisverlauf">' +
         gridSvg +
         '<path d="' + czPath + '" fill="none" stroke="var(--chart-cz)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
         '<path d="' + dePath + '" fill="none" stroke="var(--chart-de)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
@@ -806,12 +879,19 @@
 
     var days = pts.length;
     var span = Math.round((new Date(pts[lastI].date) - new Date(pts[0].date)) / 86400000) + 1;
-    meta.textContent = days + " Datenpunkte über " + span + " Tag" + (span === 1 ? "" : "e") + ". Länger zurückliegende Verläufe sind bei den Quellen nicht als offene Daten verfügbar – der Verlauf wächst täglich weiter.";
+    meta.textContent = days + " Datenpunkte über " + span + " Tag" + (span === 1 ? "" : "e") + ". Der Verlauf wächst täglich weiter.";
   }
 
-  document.getElementById("fuelSelect").addEventListener("change", updateCalc);
   document.getElementById("literInput").addEventListener("input", updateCalc);
-  document.getElementById("chartFuelSelect").addEventListener("change", renderChart);
+
+  var toggleButtons = document.querySelectorAll("#fuelToggle button");
+  toggleButtons.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      fuel = btn.getAttribute("data-fuel");
+      toggleButtons.forEach(function(b){ b.classList.toggle("active", b === btn); });
+      render();
+    });
+  });
 
   render();
 
@@ -822,7 +902,7 @@
       db.doc("prices/latest").onSnapshot(function(snap){
         if (snap.exists) {
           var d = snap.data();
-          if (d && d.cz && d.de && d.fx && d.rows) {
+          if (d && d.cz && d.de && d.fx && d.cz.stations && d.de.stations) {
             data = d;
             render();
           }
