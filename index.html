@@ -129,6 +129,9 @@
     margin-right:5px;
     position:relative; top:-1px;
   }
+  .status .dot.stale{
+    background:var(--accent-de);
+  }
 
   /* ---- board ---- */
   .board{
@@ -472,7 +475,7 @@
       <div class="field">
         <label for="fuelSelect">Kraftstoff</label>
         <select id="fuelSelect">
-          <option value="0">Benzin</option>
+          <option value="0">Super E10</option>
           <option value="1">Super E5</option>
           <option value="2">Premium (98 Oktan)</option>
           <option value="3">Diesel</option>
@@ -526,6 +529,7 @@
     <p id="sourceFx">Wechselkurs: Marktkurs EUR/CZK.</p>
     <p>* Super E5 und SuperPlus (DE) sind keine Tagesdurchschnitte, sondern Richtwerte auf Basis des üblichen Aufschlags gegenüber Super E10 (ADAC: E5 ca. 5–6 Ct teurer; SuperPlus ca. 10–20 Ct teurer, hier 13 Ct angesetzt).</p>
     <p>Alle Preise sind Momentaufnahmen und keine Live-Stationsdaten pro Zapfsäule; regionale und tagesaktuelle Abweichungen sind möglich.</p>
+    <p>Diese Seite ruft keine Preise automatisch ab. Für eine Aktualisierung: im Chat mit Claude "aktualisiere die Preise" schreiben.</p>
     <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten.</p>
   </footer>
 
@@ -625,8 +629,11 @@
       data.rows.map(fuelRow).join("") +
       '<div class="fx">1 € = ' + data.fx.eurCzk.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + ' Kč &nbsp;·&nbsp; Quelle: ' + data.fx.source + '</div>';
 
+    var ageHours = (Date.now() - new Date(data.updatedAt).getTime()) / 36e5;
+    var isStale = ageHours > 36;
     document.getElementById("statusBox").innerHTML =
-      '<span><span class="dot"></span>Stand ' + fmtDate(data.updatedAt) + '</span>';
+      '<span><span class="dot' + (isStale ? ' stale' : '') + '"></span>Stand ' + fmtDate(data.updatedAt) +
+      (isStale ? ' · evtl. veraltet' : '') + '</span>';
 
     document.getElementById("sourceCz").textContent = "CZ-Preise: " + data.cz.source + ".";
     document.getElementById("sourceDe").textContent = "DE-Preise: " + data.de.source + ".";
