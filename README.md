@@ -1,27 +1,31 @@
 # Tankpreise Grenzvergleich
 
-Vergleicht aktuelle Benzin- und Dieselpreise zwischen Tschechien und Deutschland, inklusive Kronen-Euro-Umrechnung und Preisverlauf.
+**Version 2.0.0** · [Changelog](CHANGELOG.md)
 
-**Live-App (Artifact, mit täglicher Live-Aktualisierung):** https://claude.ai/code/artifact/4c8f92f3-19a7-4b8f-ae60-539e67f26820
-**Live-App (eigene Domain, statischer Stand):** https://tanken.wecosys.com/
+Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wählbar nach Region (Sachsen · Vogtland oder Bayern · Oberfranken) und Kraftstoff, inklusive Kronen-Euro-Umrechnung, Preisverlauf und Google-Maps-Links zu jeder Station.
+
+**Live-App (Artifact):** https://claude.ai/code/artifact/4c8f92f3-19a7-4b8f-ae60-539e67f26820
+**Live-App (eigene Domain):** https://tanken.wecosys.com/
 
 ## Was die App zeigt
 
-- Vier Kraftstoffarten im Vergleich: Benzin (Super E10 / Natural 95), Super E5, Premium (SuperPlus / Natural 98), Diesel
-- CZ-Preise in Kronen und umgerechnet in Euro, DE-Preise als bundesweiter Tagesdurchschnitt
-- Tankrechner (Liter → Gesamtpreis & Ersparnis)
-- Preisverlauf-Chart (wächst täglich)
+- Regions-Auswahl: **Sachsen · Vogtland** (Klingenthal/Werdau ↔ Vojtanov/Kraslice) und **Bayern · Oberfranken** (Selb ↔ Cheb/Aš)
+- Echte, einzelne Tankstellen je Region und Land (keine Länder-Durchschnitte), günstigste zuerst
+- Vier Kraftstoffarten: Super E10, Super E5, Premium (98 Oktan), Diesel – mit `*`-Kennzeichnung, wenn ein Wert ein Richtwert statt eines gemeldeten Preises ist
+- Tankrechner mit freier Auswahl der tatsächlichen CZ- und DE-Station
+- Google-Maps-Link an jeder Station
+- Preisverlauf-Chart je Region/Kraftstoff (wächst mit jeder Aktualisierung)
 
 ## Datenquellen
 
-- **CZ:** [Tank ONO](https://tank-ono.cz/de/index.php?page=cenik) – Preisliste über alle Stationen
-- **DE:** [ADAC](https://www.adac.de/news/aktueller-spritpreis/) – bundesweiter Tagesdurchschnitt für Super E10 und Diesel
-- **Super E5 / SuperPlus (DE):** Richtwerte, berechnet als Aufschlag auf Super E10 (kein eigener Tagesdurchschnitt verfügbar)
+- **CZ:** [mbenzin.cz](https://www.mbenzin.cz/) – reale Stationspreise in Aš/Cheb/Vojtanov/Kraslice
+- **DE:** aktuell eine manuell erfasste Momentaufnahme für Selb bzw. Klingenthal/Werdau – wechselt auf echte Live-Stationsdaten (Tankerkönig-API), sobald ein API-Key vorliegt
+- **Super E5 / Premium (98 Oktan):** wo keine gemeldeten Werte vorliegen, Richtwerte als Aufschlag auf Super E10 (siehe Footnote in der App)
 - **Wechselkurs:** Marktkurs EUR/CZK
 
-## Live-Aktualisierung
+## Aktualisierung
 
-Die veröffentlichte App liest ihre Preisdaten aus einer an das Artifact gekoppelten Datenbank. Ein täglicher Cloud-Agent (07:00 Uhr, Europe/Berlin) ruft die Quellen neu ab und schreibt die aktuellen Werte sowie einen neuen Verlaufs-Datenpunkt in diese Datenbank – ohne dass die Seite selbst neu veröffentlicht werden muss.
+Aktuell **keine automatische Aktualisierung aktiv**. Die Preisdaten sind ein manueller Schnappschuss, der im Chat mit Claude ("aktualisiere die Preise") aufgefrischt wird. Eine ursprünglich eingerichtete tägliche Cloud-Routine wurde deaktiviert, da unbeaufsichtigte Datenbank-Schreibzugriffe an einem nicht umgehbaren Freigabe-Dialog scheitern (Plattform-Limitierung, kein Konfigurationsfehler). Eine GitHub-Actions-Automatisierung ist angedacht, aber noch nicht umgesetzt.
 
 ## Hosting über eigene Domain (GitHub Pages)
 
@@ -30,11 +34,12 @@ Die veröffentlichte App liest ihre Preisdaten aus einer an das Artifact gekoppe
 Dabei musste am Hostnamen `tanken` zunächst der bestehende A-Record sowie die von IONOS automatisch angelegten (aber nie genutzten) Mail-Records entfernt werden, da ein CNAME der einzige Eintrag an einem Hostnamen sein darf.
 
 - Custom-Domain-Konfiguration: [Repo-Einstellungen → Pages](https://github.com/wecosys/Tankstellen-App/settings/pages)
-- Diese Version aktualisiert sich **nicht** automatisch täglich – sie zeigt immer den Stand des letzten `git push`, im Gegensatz zur Artifact-Version oben.
+- Diese Version zeigt immer den Stand des letzten `git push`.
 
 ## Dateien in diesem Repo
 
-- [`index.html`](index.html) – eigenständige, offline-fähige Kopie der App (statischer Snapshot; wird über GitHub Pages unter `tanken.wecosys.com` ausgeliefert)
+- [`index.html`](index.html) – die App (wird über GitHub Pages unter `tanken.wecosys.com` ausgeliefert und als Claude-Artifact-Fragment veröffentlicht)
+- [`CHANGELOG.md`](CHANGELOG.md) – Versionshistorie
 - [`CNAME`](CNAME) – Custom-Domain-Konfiguration für GitHub Pages (Inhalt: `tanken.wecosys.com`)
 - [`.claude/launch.json`](.claude/launch.json) – Konfiguration, um `index.html` lokal per Claude Code Browser-Preview zu öffnen
 
