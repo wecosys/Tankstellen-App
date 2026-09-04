@@ -268,9 +268,13 @@
     margin-left:5px;
     color:var(--muted);
   }
-  .station-row .pin:hover,
-  .station-row .pin:focus-visible{
+  .col-cz .station-row .pin:hover,
+  .col-cz .station-row .pin:focus-visible{
     color:var(--accent-cz);
+  }
+  .col-de .station-row .pin:hover,
+  .col-de .station-row .pin:focus-visible{
+    color:var(--accent-de);
   }
   .station-row .price{
     font-family:"IBM Plex Mono", ui-monospace, monospace;
@@ -759,9 +763,7 @@
       var star = p.est ? '<span class="est-star">*</span>' : '';
       var priceText = isCz ? p.val.toFixed(2) + " Kč" + star : fmtEur(p.val) + star;
       var eurEq = isCz ? '<span class="eur-eq">≈ ' + fmtEur(p.val / data.fx.eurCzk) + '</span>' : '';
-      var mapsA = isCz
-        ? '<a class="pin" href="' + mapsLink(p.station, "Tschechien") + '" target="_blank" rel="noopener" title="In Google Maps öffnen" aria-label="' + p.station.name + ' in Google Maps öffnen">' + PIN_SVG + '</a>'
-        : '';
+      var mapsA = '<a class="pin" href="' + mapsLink(p.station, isCz ? "Tschechien" : "Deutschland") + '" target="_blank" rel="noopener" title="In Google Maps öffnen" aria-label="' + p.station.name + ' in Google Maps öffnen">' + PIN_SVG + '</a>';
       return (
         '<div class="station-row' + (isMin ? ' cheapest' : '') + '">' +
           '<div class="who">' +
