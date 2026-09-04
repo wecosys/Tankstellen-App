@@ -133,32 +133,40 @@
     background:var(--accent-de);
   }
 
-  /* ---- fuel toggle ---- */
-  .fuel-toggle{
+  /* ---- segmented toggles (region + fuel) ---- */
+  .toggles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .seg-toggle{
     display:inline-flex;
+    flex-wrap:wrap;
     background:var(--surface-2);
     border:1px solid var(--line);
     border-radius:999px;
     padding:3px;
     gap:2px;
   }
-  .fuel-toggle button{
+  .seg-toggle button{
     font-family:"IBM Plex Sans", sans-serif;
-    font-size:.82rem;
+    font-size:.78rem;
     font-weight:600;
-    padding:7px 16px;
+    padding:7px 14px;
     border-radius:999px;
     border:none;
     background:transparent;
     color:var(--muted);
     cursor:pointer;
+    white-space:nowrap;
   }
-  .fuel-toggle button.active{
+  .seg-toggle button.active{
     background:var(--surface);
     color:var(--ink);
     box-shadow:var(--shadow);
   }
-  .fuel-toggle button:focus-visible{
+  .seg-toggle button:focus-visible{
     outline:2px solid var(--focus);
     outline-offset:1px;
   }
@@ -173,12 +181,7 @@
     margin-bottom:22px;
   }
   .stations-head{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    justify-content:space-between;
-    gap:14px;
-    margin-bottom:18px;
+    margin-bottom:14px;
   }
   .stations-head h2{
     font-family:"Fjalla One", sans-serif;
@@ -253,6 +256,7 @@
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+    max-width:180px;
   }
   .station-row .town{
     font-size:.72rem;
@@ -265,6 +269,7 @@
     font-size:1rem;
     white-space:nowrap;
     flex:none;
+    text-align:right;
   }
   .station-row.cheapest{
     background:var(--good-soft);
@@ -274,7 +279,7 @@
     border-bottom-color:transparent;
   }
   .station-row.cheapest .price{ color:var(--good); }
-  .station-row.cheapest .badge{
+  .station-row .badge{
     display:inline-block;
     font-size:.6rem;
     font-weight:700;
@@ -289,6 +294,10 @@
     font-weight:500;
     color:var(--muted);
     text-align:right;
+  }
+  .est-star{
+    color:var(--muted);
+    font-weight:400;
   }
 
   .summary{
@@ -359,14 +368,15 @@
   }
   .field select, .field input{
     font-family:"IBM Plex Mono", ui-monospace, monospace;
-    font-size:.95rem;
+    font-size:.9rem;
     padding:8px 10px;
     border-radius:7px;
     border:1px solid var(--line);
     background:var(--surface-2);
     color:var(--ink);
-    width:140px;
   }
+  .field input{ width:110px; }
+  .field select{ width:220px; max-width:60vw; }
   .field select:focus, .field input:focus{
     outline:2px solid var(--focus);
     outline-offset:1px;
@@ -525,7 +535,9 @@
   @media (max-width:620px){
     .cols{ grid-template-columns:1fr; }
     .gantry-title{ font-size:1.4rem; }
-    .station-row .name{ max-width:120px; }
+    .station-row .name{ max-width:150px; }
+    .field select{ width:100%; max-width:100%; }
+    .calc-row{ flex-direction:column; align-items:stretch; }
   }
 </style>
 </head>
@@ -534,7 +546,7 @@
 
   <header class="gantry reveal">
     <h1 class="gantry-title">Tankpreise Grenzvergleich
-      <small>Vogtland/Selb (DE) vs. Aš/Cheb (CZ) &middot; echte Grenzstationen</small>
+      <small>Echte Stationen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
       <span><span class="dot"></span>wird geladen…</span>
@@ -544,8 +556,16 @@
   <section class="stations reveal">
     <div class="stations-head">
       <h2>Stationen im Grenzgebiet<small id="stationsSub">Sortiert nach Preis, günstigste zuerst</small></h2>
-      <div class="fuel-toggle" id="fuelToggle" role="group" aria-label="Kraftstoff wählen">
-        <button type="button" data-fuel="e10" class="active">Super E10 / Natural 95</button>
+    </div>
+    <div class="toggles">
+      <div class="seg-toggle" id="regionToggle" role="group" aria-label="Region wählen">
+        <button type="button" data-region="vogtland" class="active">Sachsen · Vogtland</button>
+        <button type="button" data-region="oberfranken">Bayern · Oberfranken</button>
+      </div>
+      <div class="seg-toggle" id="fuelToggle" role="group" aria-label="Kraftstoff wählen">
+        <button type="button" data-fuel="e10" class="active">Super E10</button>
+        <button type="button" data-fuel="e5">Super E5</button>
+        <button type="button" data-fuel="premium">Premium/98</button>
         <button type="button" data-fuel="diesel">Diesel</button>
       </div>
     </div>
@@ -556,8 +576,16 @@
 
   <section class="calc reveal">
     <h2>Tankrechner</h2>
-    <p class="sub">Vergleicht die jeweils günstigste Station je Seite für den oben gewählten Kraftstoff.</p>
+    <p class="sub">Wähle deine tatsächliche CZ- und DE-Station – nicht jeder kann zur günstigsten fahren.</p>
     <div class="calc-row">
+      <div class="field">
+        <label for="czStationSelect">CZ-Station</label>
+        <select id="czStationSelect"></select>
+      </div>
+      <div class="field">
+        <label for="deStationSelect">DE-Station</label>
+        <select id="deStationSelect"></select>
+      </div>
       <div class="field">
         <label for="literInput">Liter</label>
         <input id="literInput" type="number" min="1" max="200" step="1" value="50">
@@ -565,11 +593,11 @@
     </div>
     <div class="calc-result">
       <div class="result-tile">
-        <div class="k">Günstigste CZ-Station</div>
+        <div class="k">Preis CZ-Station</div>
         <div class="v" id="calcCz">–</div>
       </div>
       <div class="result-tile">
-        <div class="k">Günstigste DE-Station</div>
+        <div class="k">Preis DE-Station</div>
         <div class="v" id="calcDe">–</div>
       </div>
       <div class="result-tile highlight">
@@ -590,11 +618,12 @@
   </section>
 
   <footer>
-    <p id="sourceCz">CZ-Preise: mbenzin.cz, Stationen in Aš/Cheb/Vojtanov.</p>
-    <p id="sourceDe">DE-Preise: vorläufige Momentaufnahme für Selb.</p>
+    <p id="sourceCz">CZ-Preise: mbenzin.cz.</p>
+    <p id="sourceDe">DE-Preise: vorläufige Momentaufnahme.</p>
     <p id="sourceFx">Wechselkurs: Marktkurs EUR/CZK.</p>
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
-    <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich. Einzelne Preise können älter sein als der oben genannte Gesamtstand (siehe jeweilige Station).</p>
+    <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč; Super E5 ohne eigenen DE-Wert ≈ +5,5 Ct, CZ Natural 95 gilt 1:1 als E5-Äquivalent).</p>
+    <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
     <p>Diese Seite ruft keine Preise automatisch ab. Für eine Aktualisierung: im Chat mit Claude "aktualisiere die Preise" schreiben.</p>
     <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten.</p>
   </footer>
@@ -606,78 +635,118 @@
   var DEFAULTS = {
     updatedAt: "2026-09-04T00:00:00+02:00",
     fx: { eurCzk: 24.19, source: "Marktkurs" },
-    cz: {
-      source: "mbenzin.cz",
-      stations: [
-        { name: "Robin Oil", town: "Vojtanov", e10: 39.90, diesel: null },
-        { name: "Robin Oil", town: "Cheb (Ašská)", e10: 40.90, diesel: 44.50 },
-        { name: "Prim", town: "Cheb", e10: 40.90, diesel: 44.90 },
-        { name: "Tank ONO", town: "Cheb", e10: 41.50, diesel: 44.50 },
-        { name: "F1 Gas", town: "Aš", e10: 44.50, diesel: 48.90 },
-        { name: "MOL", town: "Aš", e10: 44.50, diesel: 48.90 }
-      ]
-    },
-    de: {
-      source: "Momentaufnahme (vorläufig, kein Live-Feed)",
-      provisional: true,
-      stations: [
-        { name: "ORLEN Express", town: "Selb", e10: 2.199, diesel: 2.219 },
-        { name: "AVIA", town: "Selb (Weissenbacher Str.)", e10: 2.219, diesel: 2.239 },
-        { name: "AVIA", town: "Selb (Geschw.-Scholl-Str.)", e10: 2.219, diesel: 2.239 },
-        { name: "Hauer Mineralöle", town: "Selb", e10: 2.224, diesel: 2.234 }
-      ]
+    regions: {
+      vogtland: {
+        label: "Sachsen · Vogtland",
+        cz: {
+          source: "mbenzin.cz",
+          stations: [
+            { name: "Robin Oil", town: "Vojtanov", e10: 39.90, diesel: 44.50, premium: 41.90 },
+            { name: "Orlen", town: "Kraslice", e10: 42.50, diesel: 44.30 },
+            { name: "Schnell", town: "Kraslice", e10: 42.20, diesel: 46.00 },
+            { name: "MOL", town: "Kraslice", e10: 43.50, diesel: 48.50 }
+          ]
+        },
+        de: {
+          source: "Momentaufnahme (vorläufig, kein Live-Feed)",
+          provisional: true,
+          stations: [
+            { name: "STAR", town: "Klingenthal", e10: 2.309, e5: 2.369, diesel: 2.259 },
+            { name: "Tank & Waschcenter", town: "Auerbach", e5: 2.288, diesel: 2.258 },
+            { name: "Supermarkt-Tankstelle", town: "Werdau-Steinpleis", e10: 2.259, e5: 2.319, diesel: 2.319 },
+            { name: "Freie Tankstelle", town: "Langenbernsdorf", e10: 2.269, e5: 2.289, diesel: 2.319 }
+          ]
+        }
+      },
+      oberfranken: {
+        label: "Bayern · Oberfranken",
+        cz: {
+          source: "mbenzin.cz",
+          stations: [
+            { name: "Robin Oil", town: "Cheb (Ašská)", e10: 40.90, diesel: 44.50 },
+            { name: "Prim", town: "Cheb", e10: 40.90, diesel: 44.90 },
+            { name: "Tank ONO", town: "Cheb", e10: 41.50, diesel: 44.50, premium: 43.90 },
+            { name: "F1 Gas", town: "Aš", e10: 44.50, diesel: 48.90 },
+            { name: "MOL", town: "Aš", e10: 44.50, diesel: 48.90 }
+          ]
+        },
+        de: {
+          source: "Momentaufnahme (vorläufig, kein Live-Feed)",
+          provisional: true,
+          stations: [
+            { name: "ORLEN Express", town: "Selb", e10: 2.199, e5: 2.259, diesel: 2.219 },
+            { name: "AVIA", town: "Selb (Weissenbacher Str.)", e10: 2.219, e5: 2.279, diesel: 2.239 },
+            { name: "AVIA", town: "Selb (Geschw.-Scholl-Str.)", e10: 2.219, e5: 2.279, diesel: 2.239 },
+            { name: "Hauer Mineralöle", town: "Selb", e10: 2.224, e5: 2.284, diesel: 2.234 }
+          ]
+        }
+      }
     },
     history: {
-      entries: [
-        {
-          date: "2026-09-04",
-          cz: { e10: 39.90, diesel: 44.50 },
-          de: { e10: 2.199, diesel: 2.219 },
-          fx: { eurCzk: 24.19 }
-        }
-      ]
+      vogtland: { entries: [ { date: "2026-09-04", cz: { e10: 39.90, e5: 39.90, premium: 41.90, diesel: 44.30 }, de: { e10: 2.259, e5: 2.288, premium: 2.389, diesel: 2.258 }, fx: { eurCzk: 24.19 } } ] },
+      oberfranken: { entries: [ { date: "2026-09-04", cz: { e10: 40.90, e5: 40.90, premium: 43.30, diesel: 44.50 }, de: { e10: 2.199, e5: 2.259, premium: 2.329, diesel: 2.219 }, fx: { eurCzk: 24.19 } } ] }
     }
   };
 
   var data = DEFAULTS;
-  var fuel = "e10";
+  var STATE = { region: "vogtland", fuel: "e10" };
 
-  function fmtCzk(n){ return n.toLocaleString("cs-CZ",{minimumFractionDigits:2,maximumFractionDigits:2}) + " Kč"; }
+  var FUEL_LABELS = { e10: "Super E10 / Natural 95", e5: "Super E5", premium: "Premium (98 Oktan)", diesel: "Diesel" };
+
   function fmtEur(n){ return n.toLocaleString("de-DE",{minimumFractionDigits:3,maximumFractionDigits:3}) + " €"; }
   function fmtEur2(n){ return n.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " €"; }
   function fmtDate(iso){
-    try{
-      var d = new Date(iso);
-      return d.toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"});
-    }catch(e){ return iso; }
+    try{ return new Date(iso).toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"}); }
+    catch(e){ return iso; }
   }
   function fmtShortDate(iso){
-    try{
-      var d = new Date(iso + "T00:00:00");
-      return d.toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit"});
-    }catch(e){ return iso; }
+    try{ return new Date(iso + "T00:00:00").toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit"}); }
+    catch(e){ return iso; }
   }
 
-  function cheapest(stations, key){
-    var withPrice = stations.filter(function(s){ return typeof s[key] === "number"; });
-    if (!withPrice.length) return null;
-    return withPrice.reduce(function(a,b){ return b[key] < a[key] ? b : a; });
+  // Returns {val, est} for a station's price in the given fuel, or null if unavailable.
+  function priceFor(station, fuel, isCz){
+    if (fuel === "e10") {
+      return typeof station.e10 === "number" ? { val: station.e10, est: false } : null;
+    }
+    if (fuel === "diesel") {
+      return typeof station.diesel === "number" ? { val: station.diesel, est: false } : null;
+    }
+    if (fuel === "e5") {
+      if (typeof station.e5 === "number") return { val: station.e5, est: false };
+      if (typeof station.e10 !== "number") return null;
+      return isCz ? { val: station.e10, est: false } : { val: station.e10 + 0.055, est: true };
+    }
+    if (fuel === "premium") {
+      if (typeof station.premium === "number") return { val: station.premium, est: false };
+      if (typeof station.e10 !== "number") return null;
+      return isCz ? { val: station.e10 + 2.40, est: true } : { val: station.e10 + 0.13, est: true };
+    }
+    return null;
   }
 
-  function stationCol(countryClass, countryLabel, source, stations, currencySuffix, isCz, provisional){
-    var withPrice = stations.filter(function(s){ return typeof s[fuel] === "number"; });
-    var sorted = withPrice.slice().sort(function(a,b){ return a[fuel] - b[fuel]; });
-    var minVal = sorted.length ? sorted[0][fuel] : null;
+  function pricedStations(stations, fuel, isCz){
+    return stations
+      .map(function(s){ var p = priceFor(s, fuel, isCz); return p ? { station: s, val: p.val, est: p.est } : null; })
+      .filter(Boolean)
+      .sort(function(a, b){ return a.val - b.val; });
+  }
 
-    var rows = sorted.map(function(s){
-      var isMin = s[fuel] === minVal;
-      var priceText = isCz ? s[fuel].toFixed(2) + " Kč" : fmtEur(s[fuel]);
-      var eurEq = isCz ? '<span class="eur-eq">≈ ' + fmtEur(s[fuel] / data.fx.eurCzk) + '</span>' : '';
+  function currentRegion(){ return data.regions[STATE.region]; }
+
+  function stationCol(countryClass, countryLabel, priced, isCz, provisional){
+    var minVal = priced.length ? priced[0].val : null;
+
+    var rows = priced.map(function(p){
+      var isMin = p.val === minVal;
+      var star = p.est ? '<span class="est-star">*</span>' : '';
+      var priceText = isCz ? p.val.toFixed(2) + " Kč" + star : fmtEur(p.val) + star;
+      var eurEq = isCz ? '<span class="eur-eq">≈ ' + fmtEur(p.val / data.fx.eurCzk) + '</span>' : '';
       return (
         '<div class="station-row' + (isMin ? ' cheapest' : '') + '">' +
           '<div class="who">' +
-            '<div class="name">' + s.name + '</div>' +
-            '<div class="town">' + s.town + (isMin ? '<span class="badge">günstigste</span>' : '') + '</div>' +
+            '<div class="name">' + p.station.name + '</div>' +
+            '<div class="town">' + p.station.town + (isMin ? '<span class="badge">günstigste</span>' : '') + '</div>' +
           '</div>' +
           '<div class="price">' + priceText + eurEq + '</div>' +
         '</div>'
@@ -690,31 +759,41 @@
       '<div class="col-' + countryClass + '">' +
         '<div class="col-head">' +
           '<span class="country">' + countryLabel + provBadge + '</span>' +
-          '<span class="note">' + sorted.length + ' Stationen</span>' +
+          '<span class="note">' + priced.length + ' Stationen</span>' +
         '</div>' +
-        (rows || '<div class="station-row"><div class="who"><div class="name">Keine Daten</div></div></div>') +
+        (rows || '<div class="station-row"><div class="who"><div class="name">Keine Daten für diesen Kraftstoff</div></div></div>') +
       '</div>'
     );
   }
 
-  function render(){
-    document.getElementById("stationCols").innerHTML =
-      stationCol("cz", "Tschechien", data.cz.source, data.cz.stations, "Kč", true, false) +
-      stationCol("de", "Deutschland", data.de.source, data.de.stations, "€", false, !!data.de.provisional);
+  function populateStationSelect(selectEl, priced, isCz){
+    selectEl.innerHTML = priced.map(function(p, i){
+      var priceText = isCz ? p.val.toFixed(2) + " Kč" : fmtEur(p.val);
+      return '<option value="' + i + '">' + p.station.name + ' · ' + p.station.town + ' — ' + priceText + '</option>';
+    }).join("");
+  }
 
-    var czMin = cheapest(data.cz.stations, fuel);
-    var deMin = cheapest(data.de.stations, fuel);
+  function render(){
+    var region = currentRegion();
+    var czPriced = pricedStations(region.cz.stations, STATE.fuel, true);
+    var dePriced = pricedStations(region.de.stations, STATE.fuel, false);
+
+    document.getElementById("stationCols").innerHTML =
+      stationCol("cz", "Tschechien", czPriced, true, false) +
+      stationCol("de", "Deutschland", dePriced, false, !!region.de.provisional);
+
     var summary = document.getElementById("summary");
-    if (czMin && deMin) {
-      var czEur = czMin[fuel] / data.fx.eurCzk;
-      var diff = deMin[fuel] - czEur;
-      var pct = deMin[fuel] ? (diff / deMin[fuel] * 100) : 0;
+    if (czPriced.length && dePriced.length) {
+      var czEur = czPriced[0].val / data.fx.eurCzk;
+      var diff = dePriced[0].val - czEur;
+      var pct = dePriced[0].val ? (diff / dePriced[0].val * 100) : 0;
       var cheaperSide = diff >= 0 ? "CZ" : "DE";
       summary.innerHTML = '<span class="pill">' + cheaperSide + ' günstiger · ' + fmtEur(Math.abs(diff)) + '/l · ' + Math.abs(pct).toFixed(1) + '%</span>';
     } else {
       summary.innerHTML = '';
     }
     document.getElementById("fxNote").textContent = "1 € = " + data.fx.eurCzk.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " Kč · Quelle: " + data.fx.source;
+    document.getElementById("stationsSub").textContent = region.label + " · " + FUEL_LABELS[STATE.fuel] + " · günstigste zuerst";
 
     var ageHours = (Date.now() - new Date(data.updatedAt).getTime()) / 36e5;
     var isStale = ageHours > 36;
@@ -722,23 +801,31 @@
       '<span><span class="dot' + (isStale ? ' stale' : '') + '"></span>Stand ' + fmtDate(data.updatedAt) +
       (isStale ? ' · evtl. veraltet' : '') + '</span>';
 
-    document.getElementById("sourceCz").textContent = "CZ-Preise: " + data.cz.source + ", Stationen in Aš/Cheb/Vojtanov.";
-    document.getElementById("sourceDe").textContent = "DE-Preise: " + data.de.source + ", Stationen in Selb/Vogtland.";
+    document.getElementById("sourceCz").textContent = "CZ-Preise: " + region.cz.source + " (" + region.label.split(" · ")[1] + "-Seite).";
+    document.getElementById("sourceDe").textContent = "DE-Preise: " + region.de.source + " (" + region.label.split(" · ")[0] + ").";
     document.getElementById("sourceFx").textContent = "Wechselkurs: 1 € = " + data.fx.eurCzk.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " Kč (" + data.fx.source + ").";
-    document.getElementById("provisionalNote").style.display = data.de.provisional ? "" : "none";
+    document.getElementById("provisionalNote").style.display = region.de.provisional ? "" : "none";
+
+    populateStationSelect(document.getElementById("czStationSelect"), czPriced, true);
+    populateStationSelect(document.getElementById("deStationSelect"), dePriced, false);
 
     updateCalc();
     renderChart();
   }
 
   function updateCalc(){
+    var region = currentRegion();
+    var czPriced = pricedStations(region.cz.stations, STATE.fuel, true);
+    var dePriced = pricedStations(region.de.stations, STATE.fuel, false);
+    var czIdx = parseInt(document.getElementById("czStationSelect").value, 10) || 0;
+    var deIdx = parseInt(document.getElementById("deStationSelect").value, 10) || 0;
+    var czSel = czPriced[czIdx], deSel = dePriced[deIdx];
+    if (!czSel || !deSel) return;
+
     var liters = parseFloat(document.getElementById("literInput").value) || 0;
-    var czMin = cheapest(data.cz.stations, fuel);
-    var deMin = cheapest(data.de.stations, fuel);
-    if (!czMin || !deMin) return;
-    var czEur = czMin[fuel] / data.fx.eurCzk;
+    var czEur = czSel.val / data.fx.eurCzk;
     var totalCz = czEur * liters;
-    var totalDe = deMin[fuel] * liters;
+    var totalDe = deSel.val * liters;
     var save = totalDe - totalCz;
 
     document.getElementById("calcCz").textContent = fmtEur2(totalCz);
@@ -747,12 +834,10 @@
   }
 
   function historyPoints(){
-    var entries = (data.history && data.history.entries) || [];
+    var entries = (data.history && data.history[STATE.region] && data.history[STATE.region].entries) || [];
     return entries
-      .filter(function(e){ return e && e.cz && e.de && e.fx && e.fx.eurCzk && typeof e.cz[fuel] === "number" && typeof e.de[fuel] === "number"; })
-      .map(function(e){
-        return { date: e.date, czEur: e.cz[fuel] / e.fx.eurCzk, de: e.de[fuel] };
-      });
+      .filter(function(e){ return e && e.cz && e.de && e.fx && e.fx.eurCzk && typeof e.cz[STATE.fuel] === "number" && typeof e.de[STATE.fuel] === "number"; })
+      .map(function(e){ return { date: e.date, czEur: e.cz[STATE.fuel] / e.fx.eurCzk, de: e.de[STATE.fuel] }; });
   }
 
   function renderChart(){
@@ -763,7 +848,7 @@
     if (pts.length < 2) {
       wrap.innerHTML = '<div class="chart-empty">' +
         (pts.length === 0
-          ? 'Noch keine Verlaufsdaten für diesen Kraftstoff.'
+          ? 'Noch keine Verlaufsdaten für diese Auswahl.'
           : 'Erst 1 Datenpunkt (' + fmtShortDate(pts[0].date) + ') – der Verlauf füllt sich ab morgen täglich.') +
         '</div>';
       meta.textContent = '';
@@ -793,9 +878,7 @@
     }).join("");
 
     function pathFor(key){
-      return pts.map(function(p, i){
-        return (i === 0 ? "M" : "L") + xOf(i).toFixed(1) + "," + yOf(p[key]).toFixed(1);
-      }).join(" ");
+      return pts.map(function(p, i){ return (i === 0 ? "M" : "L") + xOf(i).toFixed(1) + "," + yOf(p[key]).toFixed(1); }).join(" ");
     }
 
     var czPath = pathFor("czEur");
@@ -883,12 +966,23 @@
   }
 
   document.getElementById("literInput").addEventListener("input", updateCalc);
+  document.getElementById("czStationSelect").addEventListener("change", updateCalc);
+  document.getElementById("deStationSelect").addEventListener("change", updateCalc);
 
-  var toggleButtons = document.querySelectorAll("#fuelToggle button");
-  toggleButtons.forEach(function(btn){
+  var regionButtons = document.querySelectorAll("#regionToggle button");
+  regionButtons.forEach(function(btn){
     btn.addEventListener("click", function(){
-      fuel = btn.getAttribute("data-fuel");
-      toggleButtons.forEach(function(b){ b.classList.toggle("active", b === btn); });
+      STATE.region = btn.getAttribute("data-region");
+      regionButtons.forEach(function(b){ b.classList.toggle("active", b === btn); });
+      render();
+    });
+  });
+
+  var fuelButtons = document.querySelectorAll("#fuelToggle button");
+  fuelButtons.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      STATE.fuel = btn.getAttribute("data-fuel");
+      fuelButtons.forEach(function(b){ b.classList.toggle("active", b === btn); });
       render();
     });
   });
@@ -902,7 +996,7 @@
       db.doc("prices/latest").onSnapshot(function(snap){
         if (snap.exists) {
           var d = snap.data();
-          if (d && d.cz && d.de && d.fx && d.cz.stations && d.de.stations) {
+          if (d && d.regions && d.fx && d.history) {
             data = d;
             render();
           }
