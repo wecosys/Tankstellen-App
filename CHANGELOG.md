@@ -4,6 +4,12 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.1.2] - 2026-09-05
+
+### Geändert
+- Footer: "Tankerkönig API" zu "Tankerkönig" gekürzt
+- Veralteten Hinweis "Diese Seite ruft keine Preise automatisch ab..." entfernt – gilt seit v2.1.0 nicht mehr für die GitHub-Pages-Version
+
 ## [2.1.1] - 2026-09-05
 
 ### Geändert

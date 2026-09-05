@@ -211,7 +211,7 @@ def main():
         regions_out[region_key] = {
             "label": cfg["label"],
             "cz": {"source": "mbenzin.cz", "stations": cz_stations},
-            "de": {"source": "Tankerkönig API (Live-Stationsdaten)", "provisional": False, "stations": de_stations},
+            "de": {"source": "Tankerkönig (Live-Stationsdaten)", "provisional": False, "stations": de_stations},
         }
 
         entry = {
