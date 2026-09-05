@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-05T07:54:20+02:00",
+  "updatedAt": "2026-09-05T13:06:01+02:00",
   "fx": {
     "eurCzk": 24.19,
     "source": "frankfurter.app (EZB-Referenzkurs)"
@@ -19,7 +19,7 @@
           {
             "name": "MOL",
             "town": "Kraslice",
-            "e10": 43.5,
+            "e10": 44.5,
             "diesel": 48.5,
             "premium": 46.5
           },
@@ -55,70 +55,70 @@
           {
             "name": "STAR",
             "town": "Klingenthal",
-            "e10": 2.309,
-            "e5": 2.369,
-            "diesel": 2.259
+            "e10": 2.409,
+            "e5": 2.469,
+            "diesel": 2.409
           },
           {
             "name": "TotalEnergies",
             "town": "Schoeneck",
-            "e10": 2.319,
-            "e5": 2.379,
-            "diesel": 2.269
+            "e10": 2.419,
+            "e5": 2.479,
+            "diesel": 2.499
           },
           {
             "name": "GULF",
             "town": "Markneukirchen",
-            "e5": 2.399,
-            "diesel": 2.309
+            "e5": 2.419,
+            "diesel": 2.389
           },
           {
             "name": "AGIP ENI",
             "town": "Adorf",
-            "e10": 2.339,
-            "e5": 2.399,
-            "diesel": 2.319
+            "e10": 2.419,
+            "e5": 2.479,
+            "diesel": 2.419
           },
           {
             "name": "ARAL",
             "town": "Falkenstein",
-            "e10": 2.349,
-            "e5": 2.409,
-            "diesel": 2.269
+            "e10": 2.439,
+            "e5": 2.499,
+            "diesel": 2.509
           },
           {
             "name": "Tank & Waschcenter Auerbach",
             "town": "Auerbach",
-            "e5": 2.308,
-            "diesel": 2.308
+            "e5": 2.288,
+            "diesel": 2.288
           },
           {
             "name": "AGIP ENI",
             "town": "Auerbach",
-            "e10": 2.319,
-            "e5": 2.379,
-            "diesel": 2.319
+            "e10": 2.419,
+            "e5": 2.479,
+            "diesel": 2.479
+          },
+          {
+            "name": "Freie Tankstelle",
+            "town": "Schönheide",
+            "e10": 2.419,
+            "e5": 2.439,
+            "diesel": 2.459
           },
           {
             "name": "bft",
             "town": "Auerbach",
-            "e10": 2.249,
-            "e5": 2.309,
-            "diesel": 2.299
+            "e10": 2.399,
+            "e5": 2.459,
+            "diesel": 2.449
           },
           {
             "name": "ARAL",
             "town": "Eibenstock",
-            "e10": 2.299,
-            "e5": 2.359,
-            "diesel": 2.359
-          },
-          {
-            "name": "Supermarkt",
-            "town": "Rodewisch",
-            "e10": 2.229,
-            "e5": 2.289,
-            "diesel": 2.279
+            "e10": 2.439,
+            "e5": 2.499,
+            "diesel": 2.509
           }
         ]
       }
@@ -197,58 +197,58 @@
           {
             "name": "AVIA",
             "town": "Selb",
-            "e10": 2.219,
-            "e5": 2.279,
-            "diesel": 2.229
+            "e10": 2.339,
+            "e5": 2.399,
+            "diesel": 2.369
           },
           {
             "name": "Hauer Mineralöle GmbH",
             "town": "Selb",
-            "e10": 2.234,
-            "e5": 2.294,
-            "diesel": 2.224
+            "e10": 2.324,
+            "e5": 2.384,
+            "diesel": 2.354
           },
           {
             "name": "AVIA",
             "town": "Selb",
-            "e10": 2.219,
-            "e5": 2.279,
-            "diesel": 2.229
+            "e10": 2.339,
+            "e5": 2.399,
+            "diesel": 2.369
           },
           {
             "name": "ORLEN Express",
             "town": "Selb",
-            "e10": 2.199,
-            "e5": 2.259,
-            "diesel": 2.209
+            "e10": 2.319,
+            "e5": 2.379,
+            "diesel": 2.349
           },
           {
             "name": "AVIA",
             "town": "Schönwald",
-            "e10": 2.219,
-            "e5": 2.279,
-            "diesel": 2.229
+            "e10": 2.339,
+            "e5": 2.399,
+            "diesel": 2.369
           },
           {
             "name": "Leu Energie",
             "town": "Marktleuthen",
-            "e10": 2.169,
-            "e5": 2.219,
-            "diesel": 2.209
+            "e10": 2.299,
+            "e5": 2.349,
+            "diesel": 2.359
           },
           {
             "name": "bft - Walther",
             "town": "Rehau",
-            "e10": 2.169,
-            "e5": 2.229,
-            "diesel": 2.279
+            "e10": 2.389,
+            "e5": 2.449,
+            "diesel": 2.439
           },
           {
             "name": "Shell",
             "town": "Thiersheim",
-            "e10": 2.229,
-            "e5": 2.289,
-            "diesel": 2.279
+            "e10": 2.399,
+            "e5": 2.459,
+            "diesel": 2.469
           },
           {
             "name": "Freie Tankstelle Brunner",
@@ -259,9 +259,9 @@
           {
             "name": "bft - Walther",
             "town": "Arzberg",
-            "e10": 2.159,
-            "e5": 2.219,
-            "diesel": 2.279
+            "e10": 2.309,
+            "e5": 2.369,
+            "diesel": 2.429
           }
         ]
       }
@@ -297,10 +297,10 @@
             "diesel": 44.3
           },
           "de": {
-            "e10": 2.229,
-            "e5": 2.289,
-            "premium": 2.359,
-            "diesel": 2.259
+            "e10": 2.399,
+            "e5": 2.288,
+            "premium": 2.529,
+            "diesel": 2.288
           },
           "fx": {
             "eurCzk": 24.19
@@ -337,10 +337,10 @@
             "diesel": 44.5
           },
           "de": {
-            "e10": 2.159,
+            "e10": 2.299,
             "e5": 2.139,
-            "premium": 2.289,
-            "diesel": 2.209
+            "premium": 2.429,
+            "diesel": 2.229
           },
           "fx": {
             "eurCzk": 24.19
