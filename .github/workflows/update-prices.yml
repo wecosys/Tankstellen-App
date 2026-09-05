@@ -2,8 +2,12 @@ name: Update fuel prices
 
 on:
   schedule:
-    # 07:00 Europe/Berlin (05:00 UTC in CEST / summer time)
-    - cron: "0 5 * * *"
+    # Times are Europe/Berlin during CEST (UTC+2); GitHub Actions cron is
+    # always UTC and doesn't shift for daylight saving, so during CET
+    # (winter) these fire an hour later in local time (08:00/14:00/20:00).
+    - cron: "0 5 * * *"   # 07:00 Europe/Berlin - morning
+    - cron: "0 11 * * *"  # 13:00 Europe/Berlin - after Germany's 12:00 price-change window
+    - cron: "0 17 * * *"  # 19:00 Europe/Berlin - evening
   workflow_dispatch: {}
 
 permissions:

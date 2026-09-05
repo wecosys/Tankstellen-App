@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.2.1] - 2026-09-05
+
+### Geändert
+- Automatisierung läuft jetzt 3× täglich (07:00, 13:00, 19:00 Europe/Berlin) statt einmal – Stationsliste bleibt tagsüber frischer. Der Preisverlauf-Chart bleibt unverändert bei einem Datenpunkt pro Kalendertag (mehrfache Läufe am selben Tag überschreiben nur den heutigen Eintrag), zeigt dadurch aber den Stand nach der abendlichen Aktualisierung statt nur den frühmorgendlichen.
+
 ## [2.2.0] - 2026-09-05
 
 ### Geändert
