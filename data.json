@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-05T07:51:35+02:00",
+  "updatedAt": "2026-09-05T07:54:20+02:00",
   "fx": {
     "eurCzk": 24.19,
     "source": "frankfurter.app (EZB-Referenzkurs)"
@@ -75,8 +75,8 @@
           {
             "name": "AGIP ENI",
             "town": "Adorf",
-            "e10": 2.349,
-            "e5": 2.409,
+            "e10": 2.339,
+            "e5": 2.399,
             "diesel": 2.319
           },
           {
@@ -339,7 +339,7 @@
           "de": {
             "e10": 2.159,
             "e5": 2.139,
-            "premium": 2.2889999999999997,
+            "premium": 2.289,
             "diesel": 2.209
           },
           "fx": {

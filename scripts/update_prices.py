@@ -172,7 +172,7 @@ def estimate_premium(stations, key_source, is_cz):
         if isinstance(s.get("premium"), (int, float)):
             vals.append(s["premium"])
         elif isinstance(s.get(key_source), (int, float)):
-            vals.append(s[key_source] + (2.40 if is_cz else 0.13))
+            vals.append(round(s[key_source] + (2.40 if is_cz else 0.13), 3))
     return min(vals) if vals else None
 
 
@@ -182,7 +182,7 @@ def estimate_e5(stations, is_cz):
         if isinstance(s.get("e5"), (int, float)):
             vals.append(s["e5"])
         elif isinstance(s.get("e10"), (int, float)):
-            vals.append(s["e10"] if is_cz else s["e10"] + 0.055)
+            vals.append(s["e10"] if is_cz else round(s["e10"] + 0.055, 3))
     return min(vals) if vals else None
 
 
