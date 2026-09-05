@@ -576,7 +576,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.0.0</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.1.0</span>
       <small>Echte Stationen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -656,7 +656,7 @@
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč; Super E5 ohne eigenen DE-Wert ≈ +5,5 Ct, CZ Natural 95 gilt 1:1 als E5-Äquivalent).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
     <p>Diese Seite ruft keine Preise automatisch ab. Für eine Aktualisierung: im Chat mit Claude "aktualisiere die Preise" schreiben.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.0.0 <a href="https://github.com/wecosys/Tankstellen-App/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a></p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.1.0 <a href="https://github.com/wecosys/Tankstellen-App/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a></p>
   </footer>
 
 </div>
@@ -1031,6 +1031,20 @@
   });
 
   render();
+
+  // On GitHub Pages, data.json is refreshed by a scheduled GitHub Action —
+  // fetch it and use it in place of the embedded fallback when present.
+  // On the claude.ai Artifact there is no such file; the fetch 404s and is
+  // silently ignored, leaving the db-capability path below as the live source.
+  fetch("./data.json", { cache: "no-store" })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      if (d && d.regions && d.fx && d.history) {
+        data = d;
+        render();
+      }
+    })
+    .catch(function(){ /* not on GitHub Pages, or file missing — keep embedded defaults */ });
 
   // Live data via the artifact's db capability, when available.
   if (window.claude && typeof window.claude.use === "function") {

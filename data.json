@@ -1,0 +1,352 @@
+{
+  "updatedAt": "2026-09-05T07:46:58+02:00",
+  "fx": {
+    "eurCzk": 24.19,
+    "source": "frankfurter.app (EZB-Referenzkurs)"
+  },
+  "regions": {
+    "vogtland": {
+      "label": "Sachsen · Vogtland",
+      "cz": {
+        "source": "mbenzin.cz",
+        "stations": [
+          {
+            "name": "Orlen",
+            "town": "Kraslice",
+            "e10": 42.5,
+            "diesel": 44.3
+          },
+          {
+            "name": "MOL",
+            "town": "Kraslice",
+            "e10": 43.5,
+            "diesel": 48.5,
+            "premium": 46.5
+          },
+          {
+            "name": "Schnell",
+            "town": "Kraslice",
+            "e10": 42.2,
+            "diesel": 46.0
+          },
+          {
+            "name": "F1 Gas",
+            "town": "Kraslice - Hraničná",
+            "e10": 43.2
+          },
+          {
+            "name": "Robin Oil",
+            "town": "Vojtanov 105",
+            "e10": 39.9,
+            "diesel": 44.5,
+            "premium": 41.9
+          },
+          {
+            "name": "Armex Oil",
+            "town": "Vojtanov",
+            "e10": 40.4
+          }
+        ]
+      },
+      "de": {
+        "source": "Tankerkönig API (Live-Stationsdaten)",
+        "provisional": false,
+        "stations": [
+          {
+            "name": "STAR",
+            "town": "Klingenthal",
+            "e10": 2.309,
+            "e5": 2.369,
+            "diesel": 2.259
+          },
+          {
+            "name": "TotalEnergies",
+            "town": "Schoeneck",
+            "e10": 2.319,
+            "e5": 2.379,
+            "diesel": 2.269
+          },
+          {
+            "name": "GULF",
+            "town": "Markneukirchen",
+            "e5": 2.399,
+            "diesel": 2.309
+          },
+          {
+            "name": "AGIP ENI",
+            "town": "Adorf",
+            "e10": 2.349,
+            "e5": 2.409,
+            "diesel": 2.319
+          },
+          {
+            "name": "ARAL",
+            "town": "Falkenstein",
+            "e10": 2.349,
+            "e5": 2.409,
+            "diesel": 2.269
+          },
+          {
+            "name": "Tank & Waschcenter Auerbach",
+            "town": "Auerbach",
+            "e5": 2.308,
+            "diesel": 2.308
+          },
+          {
+            "name": "AGIP ENI",
+            "town": "Auerbach",
+            "e10": 2.319,
+            "e5": 2.379,
+            "diesel": 2.319
+          },
+          {
+            "name": "bft",
+            "town": "Auerbach",
+            "e10": 2.249,
+            "e5": 2.309,
+            "diesel": 2.299
+          },
+          {
+            "name": "ARAL",
+            "town": "Eibenstock",
+            "e10": 2.299,
+            "e5": 2.359,
+            "diesel": 2.359
+          },
+          {
+            "name": "Supermarkt",
+            "town": "Rodewisch",
+            "e10": 2.229,
+            "e5": 2.289,
+            "diesel": 2.279
+          }
+        ]
+      }
+    },
+    "oberfranken": {
+      "label": "Bayern · Oberfranken",
+      "cz": {
+        "source": "mbenzin.cz",
+        "stations": [
+          {
+            "name": "MOL",
+            "town": "Aš",
+            "e10": 45.5,
+            "diesel": 48.9
+          },
+          {
+            "name": "F1 Gas",
+            "town": "Aš",
+            "e10": 44.5,
+            "diesel": 48.9
+          },
+          {
+            "name": "MOL",
+            "town": "Nový Žďár 47",
+            "e10": 44.3,
+            "diesel": 48.7
+          },
+          {
+            "name": "Suchopár",
+            "town": "Hazlov 445",
+            "e10": 41.6,
+            "diesel": 45.4
+          },
+          {
+            "name": "Robin Oil",
+            "town": "Vojtanov 105",
+            "e10": 39.9,
+            "diesel": 44.5,
+            "premium": 41.9
+          },
+          {
+            "name": "Armex Oil",
+            "town": "Vojtanov",
+            "e10": 40.4
+          },
+          {
+            "name": "F1 Gas",
+            "town": "Hranice",
+            "diesel": 44.7
+          },
+          {
+            "name": "Tank ONO",
+            "town": "Cheb",
+            "e10": 41.9,
+            "diesel": 44.9,
+            "premium": 44.5
+          },
+          {
+            "name": "Skalenská autodoprava a.s.",
+            "town": "Skalná u Chebu",
+            "e10": 42.6,
+            "diesel": 45.6
+          },
+          {
+            "name": "Armex Oil",
+            "town": "Pomezí nad Ohří",
+            "e10": 42.9,
+            "diesel": 46.9
+          }
+        ]
+      },
+      "de": {
+        "source": "Tankerkönig API (Live-Stationsdaten)",
+        "provisional": false,
+        "stations": [
+          {
+            "name": "AVIA",
+            "town": "Selb",
+            "e10": 2.219,
+            "e5": 2.279,
+            "diesel": 2.229
+          },
+          {
+            "name": "Hauer Mineralöle GmbH",
+            "town": "Selb",
+            "e10": 2.234,
+            "e5": 2.294,
+            "diesel": 2.224
+          },
+          {
+            "name": "AVIA",
+            "town": "Selb",
+            "e10": 2.219,
+            "e5": 2.279,
+            "diesel": 2.229
+          },
+          {
+            "name": "ORLEN Express",
+            "town": "Selb",
+            "e10": 2.199,
+            "e5": 2.259,
+            "diesel": 2.209
+          },
+          {
+            "name": "AVIA",
+            "town": "Schönwald",
+            "e10": 2.219,
+            "e5": 2.279,
+            "diesel": 2.229
+          },
+          {
+            "name": "Leu Energie",
+            "town": "Marktleuthen",
+            "e10": 2.169,
+            "e5": 2.219,
+            "diesel": 2.209
+          },
+          {
+            "name": "bft - Walther",
+            "town": "Rehau",
+            "e10": 2.169,
+            "e5": 2.229,
+            "diesel": 2.279
+          },
+          {
+            "name": "Shell",
+            "town": "Thiersheim",
+            "e10": 2.229,
+            "e5": 2.289,
+            "diesel": 2.279
+          },
+          {
+            "name": "Freie Tankstelle Brunner",
+            "town": "Kirchenlamitz",
+            "e5": 2.139,
+            "diesel": 2.229
+          },
+          {
+            "name": "bft - Walther",
+            "town": "Arzberg",
+            "e10": 2.159,
+            "e5": 2.219,
+            "diesel": 2.279
+          }
+        ]
+      }
+    }
+  },
+  "history": {
+    "vogtland": {
+      "entries": [
+        {
+          "date": "2026-09-04",
+          "cz": {
+            "e10": 39.9,
+            "e5": 39.9,
+            "premium": 41.9,
+            "diesel": 44.3
+          },
+          "de": {
+            "e10": 2.289,
+            "e5": 2.308,
+            "premium": 2.419,
+            "diesel": 2.299
+          },
+          "fx": {
+            "eurCzk": 24.19
+          }
+        },
+        {
+          "date": "2026-09-05",
+          "cz": {
+            "e10": 39.9,
+            "e5": 39.9,
+            "premium": 41.9,
+            "diesel": 44.3
+          },
+          "de": {
+            "e10": 2.229,
+            "e5": 2.289,
+            "premium": 2.359,
+            "diesel": 2.259
+          },
+          "fx": {
+            "eurCzk": 24.19
+          }
+        }
+      ]
+    },
+    "oberfranken": {
+      "entries": [
+        {
+          "date": "2026-09-04",
+          "cz": {
+            "e10": 40.9,
+            "e5": 40.9,
+            "premium": 43.3,
+            "diesel": 44.5
+          },
+          "de": {
+            "e10": 2.219,
+            "e5": 2.279,
+            "premium": 2.349,
+            "diesel": 2.219
+          },
+          "fx": {
+            "eurCzk": 24.19
+          }
+        },
+        {
+          "date": "2026-09-05",
+          "cz": {
+            "e10": 39.9,
+            "e5": 39.9,
+            "premium": 41.9,
+            "diesel": 44.5
+          },
+          "de": {
+            "e10": 2.159,
+            "e5": 2.139,
+            "premium": 2.2889999999999997,
+            "diesel": 2.209
+          },
+          "fx": {
+            "eurCzk": 24.19
+          }
+        }
+      ]
+    }
+  }
+}

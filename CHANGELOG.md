@@ -4,6 +4,23 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.1.0] - 2026-09-05
+
+Echte Live-Automatisierung: keine manuellen Preis-Schnappschüsse mehr für GitHub Pages.
+
+### Hinzugefügt
+- `data.json`: Preisdaten liegen jetzt in einer eigenen JSON-Datei statt im Seiten-Code eingebettet; `index.html` lädt sie per `fetch()` und fällt bei Fehlern auf den eingebetteten Stand zurück
+- `scripts/update_prices.py`: holt DE-Preise live über die Tankerkönig-API (Radius-Suche, echte Stationsdaten inkl. E10/E5/Diesel) und CZ-Preise per Scraping von mbenzin.cz (inkl. echter Premium/98-Werte, wo gemeldet), sowie den EUR/CZK-Kurs über frankfurter.app
+- GitHub-Actions-Workflow (`.github/workflows/update-prices.yml`): läuft täglich 07:00 Uhr (Europe/Berlin) automatisch, aktualisiert `data.json` und committet die Änderung – läuft auf GitHub-Servern, unabhängig von jedem lokalen Rechner
+- Tankerkönig-API-Key liegt als verstecktes GitHub-Actions-Secret (`TANKERKOENIG_API_KEY`), nicht im Klartext im Repo
+
+### Geändert
+- DE-Seite ist nicht mehr als "vorläufig" markiert, sobald echte Live-Daten vorliegen
+- CZ-Stationsliste für Sachsen · Vogtland auf Kraslice- und Vojtanov-Orte gefiltert (die rohe mbenzin.cz-Kraslice-Seite deckt einen ganzen Landkreis bis Karlovy Vary ab)
+
+### Bekannte Einschränkungen
+- Nur die GitHub-Pages-Version (tanken.wecosys.com) wird automatisch aktualisiert. Das Claude Artifact kann aus Sandbox-Gründen nicht selbst per GitHub Action aktualisiert werden und bleibt auf manuelle Aktualisierung ("aktualisiere die Preise" im Chat) angewiesen.
+
 ## [2.0.0] - 2026-09-04
 
 Kompletter Umbau von Länder-Durchschnitten auf echte Grenzregion-Stationen.
