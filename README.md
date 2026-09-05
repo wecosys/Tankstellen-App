@@ -11,7 +11,7 @@ Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wäh
 
 - Regions-Auswahl: **Sachsen · Vogtland** (Klingenthal/Werdau ↔ Vojtanov/Kraslice) und **Bayern · Oberfranken** (Selb ↔ Cheb/Aš)
 - Echte, einzelne Tankstellen je Region und Land (keine Länder-Durchschnitte), günstigste zuerst
-- Vier Kraftstoffarten: Super E10, Super E5, Premium (98 Oktan), Diesel – mit `*`-Kennzeichnung, wenn ein Wert ein Richtwert statt eines gemeldeten Preises ist
+- Drei Kraftstoffarten: Natural 95 (entspricht Super E10), Premium (98 Oktan), Diesel – mit `*`-Kennzeichnung, wenn ein Wert ein Richtwert statt eines gemeldeten Preises ist
 - Tankrechner mit freier Auswahl der tatsächlichen CZ- und DE-Station
 - Google-Maps-Link an jeder Station
 - Preisverlauf-Chart je Region/Kraftstoff (wächst mit jeder Aktualisierung)
@@ -20,7 +20,7 @@ Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wäh
 
 - **CZ:** [mbenzin.cz](https://www.mbenzin.cz/) – reale Stationspreise, live gescrapt (siehe `scripts/update_prices.py`)
 - **DE:** [Tankerkönig-API](https://creativecommons.tankerkoenig.de/) – echte Live-Stationsdaten per Umkreissuche um Klingenthal bzw. Selb
-- **Super E5 / Premium (98 Oktan):** wo keine gemeldeten Werte vorliegen, Richtwerte als Aufschlag auf Super E10 (siehe Footnote in der App)
+- **Premium (98 Oktan):** wo keine gemeldeten Werte vorliegen, Richtwert als Aufschlag auf Natural 95/Super E10 (siehe Footnote in der App)
 - **Wechselkurs:** [frankfurter.app](https://www.frankfurter.app/) (EZB-Referenzkurs)
 
 ## Aktualisierung

@@ -4,6 +4,12 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.2.0] - 2026-09-05
+
+### Geändert
+- "Super E10"/"Super E5"-Doppelauswahl zu einer einzigen Option "Natural 95" zusammengefasst. Grund: Tschechien verkauft seit 2024 kein separates E5 mehr, daher zeigten beide Buttons auf der CZ-Seite ohnehin immer denselben Preis – das wirkte eher verwirrend als informativ. Betrifft Kraftstoff-Umschalter und Tankrechner (nutzt denselben State).
+- Dazugehörige Fußnoten zu Super E5 entfernt/verschlankt.
+
 ## [2.1.2] - 2026-09-05
 
 ### Geändert

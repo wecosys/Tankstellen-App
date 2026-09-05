@@ -576,7 +576,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.1.2</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.2.0</span>
       <small>Echte Stationen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -594,8 +594,7 @@
         <button type="button" data-region="oberfranken">Bayern · Oberfranken</button>
       </div>
       <div class="seg-toggle" id="fuelToggle" role="group" aria-label="Kraftstoff wählen">
-        <button type="button" data-fuel="e10" class="active">Super E10</button>
-        <button type="button" data-fuel="e5">Super E5</button>
+        <button type="button" data-fuel="e10" class="active">Natural 95</button>
         <button type="button" data-fuel="premium">Premium/98</button>
         <button type="button" data-fuel="diesel">Diesel</button>
       </div>
@@ -653,10 +652,9 @@
     <p id="sourceDe">DE-Preise: vorläufige Momentaufnahme.</p>
     <p id="sourceFx">Wechselkurs: Marktkurs EUR/CZK.</p>
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
-    <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč; DE Super E5 ohne eigenen Stationswert ≈ +5,5 Ct).</p>
-    <p>Tschechien verkauft seit der Umstellung 2024 kein separates Super E5 mehr – "Natural 95" ist dort einheitlich E10. Die Auswahl "Super E5" zeigt auf der CZ-Seite deshalb denselben Preis wie "Super E10" (keine Näherung, sondern die einzige verfügbare Sorte).</p>
+    <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.1.2 <a href="https://github.com/wecosys/Tankstellen-App/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a></p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.2.0 <a href="https://github.com/wecosys/Tankstellen-App/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a></p>
   </footer>
 
 </div>
@@ -722,7 +720,7 @@
   var data = DEFAULTS;
   var STATE = { region: "vogtland", fuel: "e10" };
 
-  var FUEL_LABELS = { e10: "Super E10 / Natural 95", e5: "Super E5", premium: "Premium (98 Oktan)", diesel: "Diesel" };
+  var FUEL_LABELS = { e10: "Natural 95", premium: "Premium (98 Oktan)", diesel: "Diesel" };
 
   function fmtEur(n){ return n.toLocaleString("de-DE",{minimumFractionDigits:3,maximumFractionDigits:3}) + " €"; }
   function fmtEur2(n){ return n.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " €"; }
