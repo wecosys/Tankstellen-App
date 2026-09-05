@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.1.1] - 2026-09-05
+
+### Geändert
+- Fußnote präzisiert: Tschechien hat Super E5 seit der Umstellung 2024 komplett abgeschafft (Natural 95 ist dort einheitlich E10) – der gleiche Preis bei "Super E10"/"Super E5" auf der CZ-Seite ist keine Näherung, sondern die einzige verfügbare Sorte. Vorher klang die Formulierung ("gilt 1:1 als Äquivalent") wie eine Vereinfachung.
+
 ## [2.1.0] - 2026-09-05
 
 Echte Live-Automatisierung: keine manuellen Preis-Schnappschüsse mehr für GitHub Pages.
