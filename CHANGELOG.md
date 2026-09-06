@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.2.3] - 2026-09-06
+
+### Geändert
+- Changelog-Link im Footer entfernt – muss nicht jeder Besucher zum GitHub-Repo geleitet werden; die Versionsnummer allein reicht als Referenz für Rückfragen.
+
 ## [2.2.2] - 2026-09-05
 
 ### Hinzugefügt
