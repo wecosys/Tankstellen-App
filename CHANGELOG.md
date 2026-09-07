@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.5.0] - 2026-09-07
+
+### Hinzugefügt
+- Eigenes PLZ-Eingabefeld oberhalb der Regions-Auswahl: wählt automatisch die naheliegendste Region (Vogtland, Oberfranken oder Erzgebirgskreis). Basiert auf einer festen PLZ→Region-Zuordnung (bekannte Ortschaften der App-Stationsdaten als Übersteuerung, sonst grobe Zahlenbereiche je Landkreis) – keine externe Geocoding-Abfrage, da das Claude-Artifact keinen beliebigen externen Netzwerkzugriff per Fetch erlaubt (nur Skripte von der CDN-Allowlist). Bei nicht zuordenbarer PLZ bleibt die aktuelle Region unverändert und ein Hinweistext bittet um manuelle Auswahl. Für die genau nächstgelegene Station bleiben die Google-Maps-Links pro Station die Feinauswahl.
+
 ## [2.4.1] - 2026-09-07
 
 ### Geändert
