@@ -587,7 +587,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.3.0</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.4.0</span>
       <small>Echte Stationen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -603,6 +603,7 @@
       <div class="seg-toggle" id="regionToggle" role="group" aria-label="Region wählen">
         <button type="button" data-region="vogtland" class="active">Sachsen · Vogtland</button>
         <button type="button" data-region="oberfranken">Bayern · Oberfranken</button>
+        <button type="button" data-region="erzgebirge">Sachsen · Erzgebirge</button>
       </div>
       <div class="seg-toggle" id="fuelToggle" role="group" aria-label="Kraftstoff wählen">
         <button type="button" data-fuel="e10" class="active">Natural 95</button>
@@ -663,7 +664,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.3.0</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.4.0</p>
   </footer>
 
 </div>
@@ -718,11 +719,32 @@
             { name: "Hauer Mineralöle", town: "Selb", e10: 2.224, e5: 2.284, diesel: 2.234 }
           ]
         }
+      },
+      erzgebirge: {
+        label: "Sachsen · Erzgebirgskreis",
+        cz: {
+          source: "mbenzin.cz",
+          stations: [
+            { name: "OMV", town: "Boží Dar", e10: 45.90, diesel: 49.10 },
+            { name: "F1 Gas", town: "Potůčky", e10: 46.50, diesel: 49.20, premium: 49.90 }
+          ]
+        },
+        de: {
+          source: "Momentaufnahme (vorläufig, kein Live-Feed)",
+          provisional: true,
+          stations: [
+            { name: "Q1 Automaten-Tankstelle", town: "Sehmatal", e10: 2.299, e5: 2.329, diesel: 2.279 },
+            { name: "BFT", town: "Breitenbrunn", e10: 2.309, e5: 2.369, diesel: 2.349 },
+            { name: "STAR", town: "Johanngeorgenstadt", e10: 2.319, e5: 2.379, diesel: 2.349 },
+            { name: "Schmidt Mineralöl-Vertrieb", town: "Oberwiesenthal", e5: 2.359, diesel: 2.299 }
+          ]
+        }
       }
     },
     history: {
       vogtland: { entries: [ { date: "2026-09-04", cz: { e10: 39.90, e5: 39.90, premium: 41.90, diesel: 44.30 }, de: { e10: 2.289, e5: 2.308, premium: 2.419, diesel: 2.299 }, fx: { eurCzk: 24.19 } } ] },
-      oberfranken: { entries: [ { date: "2026-09-04", cz: { e10: 40.90, e5: 40.90, premium: 43.30, diesel: 44.50 }, de: { e10: 2.219, e5: 2.279, premium: 2.349, diesel: 2.219 }, fx: { eurCzk: 24.19 } } ] }
+      oberfranken: { entries: [ { date: "2026-09-04", cz: { e10: 40.90, e5: 40.90, premium: 43.30, diesel: 44.50 }, de: { e10: 2.219, e5: 2.279, premium: 2.349, diesel: 2.219 }, fx: { eurCzk: 24.19 } } ] },
+      erzgebirge: { entries: [ { date: "2026-09-07", cz: { e10: 45.90, e5: 45.90, premium: 48.30, diesel: 49.10 }, de: { e10: 2.299, e5: 2.329, premium: 2.429, diesel: 2.279 }, fx: { eurCzk: 24.20 } } ] }
     }
   };
 

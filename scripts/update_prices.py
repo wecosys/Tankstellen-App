@@ -40,6 +40,15 @@ REGIONS = {
         "cz_town_prefixes": None,  # both town pages are already local enough
         "de_center": {"lat": 50.1740, "lng": 12.1320},  # Selb
     },
+    "erzgebirge": {
+        "label": "Sachsen · Erzgebirgskreis",
+        # Neither "Boží Dar" nor "Potůčky" has its own mbenzin.cz town page;
+        # "Jachymov" is a valid nearby town page whose "nearest first" listing
+        # covers both within ~15 km, filtered down to just those two crossings.
+        "cz_towns": ["Jachymov"],
+        "cz_town_prefixes": ["Boží Dar", "Potůčky"],
+        "de_center": {"lat": 50.4263, "lng": 12.8424},  # midpoint Johanngeorgenstadt/Oberwiesenthal
+    },
 }
 
 MAX_STATIONS_PER_SIDE = 10

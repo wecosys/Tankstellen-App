@@ -9,6 +9,11 @@ Versionierung nach [SemVer](https://semver.org/lang/de/).
 ### Geändert
 - Changelog-Link im Footer entfernt – muss nicht jeder Besucher zum GitHub-Repo geleitet werden; die Versionsnummer allein reicht als Referenz für Rückfragen.
 
+## [2.4.0] - 2026-09-07
+
+### Hinzugefügt
+- Dritte Region: **Sachsen · Erzgebirgskreis** (Johanngeorgenstadt ↔ Potůčky, Oberwiesenthal ↔ Boží Dar). CZ-Seite über mbenzin.cz (Jáchymov-Seite, nach Umkreis sortiert, gefiltert auf "Boží Dar"/"Potůčky" – keiner der beiden Grenzorte hat eine eigene mbenzin.cz-Ortsseite), DE-Seite über Tankerkönig-Umkreissuche um den Mittelpunkt zwischen Johanngeorgenstadt und Oberwiesenthal (25 km Radius deckt beide Grenzübergänge ab).
+
 ## [2.3.0] - 2026-09-07
 
 ### Geändert

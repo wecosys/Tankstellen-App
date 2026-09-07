@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T19:02:53+02:00",
+  "updatedAt": "2026-09-07T19:17:56+02:00",
   "fx": {
     "eurCzk": 24.2,
     "source": "frankfurter.app (EZB-Referenzkurs)"
@@ -59,7 +59,7 @@
             "town": "Schoeneck",
             "e10": 2.349,
             "e5": 2.409,
-            "diesel": 2.379
+            "diesel": 2.359
           },
           {
             "name": "GULF",
@@ -70,16 +70,16 @@
           {
             "name": "AGIP ENI",
             "town": "Adorf",
-            "e10": 2.359,
-            "e5": 2.419,
-            "diesel": 2.369
+            "e10": 2.349,
+            "e5": 2.409,
+            "diesel": 2.359
           },
           {
             "name": "ARAL",
             "town": "Falkenstein",
             "e10": 2.359,
             "e5": 2.419,
-            "diesel": 2.389
+            "diesel": 2.359
           },
           {
             "name": "Tank & Waschcenter Auerbach",
@@ -92,28 +92,28 @@
             "town": "Auerbach",
             "e10": 2.349,
             "e5": 2.409,
-            "diesel": 2.359
+            "diesel": 2.339
           },
           {
             "name": "bft",
             "town": "Auerbach",
-            "e10": 2.299,
-            "e5": 2.359,
+            "e10": 2.289,
+            "e5": 2.349,
             "diesel": 2.329
           },
           {
             "name": "ARAL",
             "town": "Eibenstock",
-            "e10": 2.359,
-            "e5": 2.419,
-            "diesel": 2.399
+            "e10": 2.319,
+            "e5": 2.379,
+            "diesel": 2.349
           },
           {
             "name": "Supermarkt",
             "town": "Rodewisch",
-            "e10": 2.279,
-            "e5": 2.339,
-            "diesel": 2.329
+            "e10": 2.269,
+            "e5": 2.329,
+            "diesel": 2.309
           }
         ]
       }
@@ -235,9 +235,9 @@
           {
             "name": "bft - Walther",
             "town": "Rehau",
-            "e10": 2.209,
-            "e5": 2.269,
-            "diesel": 2.259
+            "e10": 2.199,
+            "e5": 2.259,
+            "diesel": 2.249
           },
           {
             "name": "Shell",
@@ -258,6 +258,102 @@
             "e10": 2.219,
             "e5": 2.279,
             "diesel": 2.269
+          }
+        ]
+      }
+    },
+    "erzgebirge": {
+      "label": "Sachsen · Erzgebirgskreis",
+      "cz": {
+        "source": "mbenzin.cz",
+        "stations": [
+          {
+            "name": "OMV",
+            "town": "Boží Dar",
+            "e10": 45.9,
+            "diesel": 49.1
+          },
+          {
+            "name": "F1 Gas",
+            "town": "Potůčky",
+            "e10": 46.5,
+            "diesel": 49.2,
+            "premium": 49.9
+          }
+        ]
+      },
+      "de": {
+        "source": "Tankerkönig (Live-Stationsdaten)",
+        "provisional": false,
+        "stations": [
+          {
+            "name": "BFT",
+            "town": "Breitenbrunn",
+            "e10": 2.309,
+            "e5": 2.369,
+            "diesel": 2.339
+          },
+          {
+            "name": "STAR",
+            "town": "Johanngeorgenstadt",
+            "e10": 2.319,
+            "e5": 2.379,
+            "diesel": 2.349
+          },
+          {
+            "name": "Schmidt Mineralöl-Vertrieb GmbH Oberwiesental",
+            "town": "Oberwiesenthal",
+            "e5": 2.359,
+            "diesel": 2.299
+          },
+          {
+            "name": "Q1",
+            "town": "Crottendorf",
+            "e10": 2.329,
+            "e5": 2.369,
+            "diesel": 2.309
+          },
+          {
+            "name": "freie Tankstelle",
+            "town": "Schwarzenberg",
+            "e10": 2.359,
+            "e5": 2.379,
+            "diesel": 2.349
+          },
+          {
+            "name": "ARAL",
+            "town": "Schwarzenberg",
+            "e10": 2.329,
+            "e5": 2.389,
+            "diesel": 2.359
+          },
+          {
+            "name": "Shell",
+            "town": "Schwarzenberg",
+            "e10": 2.319,
+            "e5": 2.379,
+            "diesel": 2.349
+          },
+          {
+            "name": "Q1 Automaten-Tankstelle",
+            "town": "Sehmatal",
+            "e10": 2.299,
+            "e5": 2.329,
+            "diesel": 2.279
+          },
+          {
+            "name": "STAR",
+            "town": "Schwarzenberg",
+            "e10": 2.309,
+            "e5": 2.369,
+            "diesel": 2.339
+          },
+          {
+            "name": "Q1",
+            "town": "Schwarzenberg",
+            "e10": 2.324,
+            "e5": 2.374,
+            "diesel": 2.344
           }
         ]
       }
@@ -329,10 +425,10 @@
             "diesel": 44.3
           },
           "de": {
-            "e10": 2.279,
-            "e5": 2.339,
-            "premium": 2.409,
-            "diesel": 2.329
+            "e10": 2.269,
+            "e5": 2.329,
+            "premium": 2.399,
+            "diesel": 2.309
           },
           "fx": {
             "eurCzk": 24.2
@@ -405,10 +501,32 @@
             "diesel": 44.7
           },
           "de": {
-            "e10": 2.209,
+            "e10": 2.199,
             "e5": 2.139,
-            "premium": 2.339,
+            "premium": 2.329,
             "diesel": 2.229
+          },
+          "fx": {
+            "eurCzk": 24.2
+          }
+        }
+      ]
+    },
+    "erzgebirge": {
+      "entries": [
+        {
+          "date": "2026-09-07",
+          "cz": {
+            "e10": 45.9,
+            "e5": 45.9,
+            "premium": 48.3,
+            "diesel": 49.1
+          },
+          "de": {
+            "e10": 2.299,
+            "e5": 2.329,
+            "premium": 2.429,
+            "diesel": 2.279
           },
           "fx": {
             "eurCzk": 24.2
