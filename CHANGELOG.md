@@ -4,6 +4,12 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.6.1] - 2026-09-07
+
+### Behoben
+- Nutzerfrage beantwortet: "Tank ONO" in Cheb/Horní Vojtanov (nahe Skalná/Vojtanov) fehlte in der Sachsen · Erzgebirgskreis/Bayern-Oberfranken-Stationsliste. Ursache: mbenzin.cz listet zwei physisch unterschiedliche Tank-ONO-Filialen unter identischem `addressLocality="Cheb"` – unsere Duplikatserkennung verglich bisher nur `(Name, Ort)` und verwarf die zweite Station fälschlich als Duplikat. Fix: Duplikatserkennung nutzt jetzt die eindeutige Detailseiten-URL jeder Station statt `(Name, Ort)`. Zusätzlich wird die `streetAddress` (falls von mbenzin.cz separat angegeben) an den Ortsnamen angehängt, damit gleichnamige Stationen im selben Ort in der App unterscheidbar sind (z. B. "Cheb, Horní Vojtanov 39").
+- Da mbenzin.cz seine "nächstgelegene"-Sortierung relativ zum Ortszentrum (hier: Cheb) berechnet, nicht relativ zum tatsächlichen Grenzübergang, landete die Horní-Vojtanov-Filiale weit hinten in der Rohliste und wäre trotz Dedupe-Fix von der Top-10-Begrenzung abgeschnitten worden. Neue, optionale Prioritäts-Stichwörter (`cz_priority_keywords`) heben bekannte grenznahe Treffer vor dem Kürzen nach oben – für Bayern · Oberfranken aktuell "Vojtanov" und "Skalná".
+
 ## [2.6.0] - 2026-09-07
 
 ### Hinzugefügt

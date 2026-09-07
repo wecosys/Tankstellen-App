@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T19:17:56+02:00",
+  "updatedAt": "2026-09-07T20:14:40+02:00",
   "fx": {
     "eurCzk": 24.2,
     "source": "frankfurter.app (EZB-Referenzkurs)"
@@ -12,20 +12,20 @@
         "stations": [
           {
             "name": "Orlen",
-            "town": "Kraslice",
+            "town": "Kraslice, Čs. Armády 1883",
             "e10": 42.5,
             "diesel": 44.3
           },
           {
             "name": "MOL",
-            "town": "Kraslice",
+            "town": "Kraslice, Čs.armády",
             "e10": 44.51,
             "diesel": 48.5,
             "premium": 46.5
           },
           {
             "name": "Schnell",
-            "town": "Kraslice",
+            "town": "Kraslice, Hraničná 7",
             "e10": 43.9,
             "diesel": 46.0
           },
@@ -36,7 +36,7 @@
           },
           {
             "name": "Robin Oil",
-            "town": "Vojtanov 105",
+            "town": "Vojtanov 105, silnice E49",
             "e10": 39.9,
             "diesel": 44.9,
             "premium": 41.9
@@ -52,20 +52,7 @@
             "town": "Klingenthal",
             "e10": 2.339,
             "e5": 2.399,
-            "diesel": 2.349
-          },
-          {
-            "name": "TotalEnergies",
-            "town": "Schoeneck",
-            "e10": 2.349,
-            "e5": 2.409,
-            "diesel": 2.359
-          },
-          {
-            "name": "GULF",
-            "town": "Markneukirchen",
-            "e5": 2.409,
-            "diesel": 2.359
+            "diesel": 2.319
           },
           {
             "name": "AGIP ENI",
@@ -75,45 +62,53 @@
             "diesel": 2.359
           },
           {
-            "name": "ARAL",
-            "town": "Falkenstein",
-            "e10": 2.359,
-            "e5": 2.419,
-            "diesel": 2.359
-          },
-          {
-            "name": "Tank & Waschcenter Auerbach",
-            "town": "Auerbach",
-            "e5": 2.368,
-            "diesel": 2.368
-          },
-          {
             "name": "AGIP ENI",
             "town": "Auerbach",
             "e10": 2.349,
             "e5": 2.409,
-            "diesel": 2.339
+            "diesel": 2.329
           },
           {
             "name": "bft",
             "town": "Auerbach",
-            "e10": 2.289,
-            "e5": 2.349,
-            "diesel": 2.329
+            "e10": 2.279,
+            "e5": 2.339,
+            "diesel": 2.319
           },
           {
             "name": "ARAL",
             "town": "Eibenstock",
-            "e10": 2.319,
-            "e5": 2.379,
-            "diesel": 2.349
+            "e10": 2.309,
+            "e5": 2.369,
+            "diesel": 2.319
           },
           {
-            "name": "Supermarkt",
+            "name": "bft",
             "town": "Rodewisch",
+            "e10": 2.339,
+            "e5": 2.369,
+            "diesel": 2.329
+          },
+          {
+            "name": "Esso",
+            "town": "Oelsnitz/Vogtland",
+            "e10": 2.249,
+            "e5": 2.309,
+            "diesel": 2.289
+          },
+          {
+            "name": "ARAL",
+            "town": "Plauen",
+            "e10": 2.729,
+            "e5": 2.789,
+            "diesel": 2.799
+          },
+          {
+            "name": "TotalEnergies",
+            "town": "Treuen",
             "e10": 2.269,
-            "e5": 2.329,
-            "diesel": 2.309
+            "e5": 2.319,
+            "diesel": 2.289
           }
         ]
       }
@@ -124,20 +119,47 @@
         "source": "mbenzin.cz",
         "stations": [
           {
+            "name": "Robin Oil",
+            "town": "Vojtanov 105, silnice E49",
+            "e10": 39.9,
+            "diesel": 44.9,
+            "premium": 41.9
+          },
+          {
+            "name": "Tank ONO",
+            "town": "Cheb, Horní Vojtanov 39",
+            "e10": 42.5,
+            "diesel": 45.5,
+            "premium": 44.9
+          },
+          {
+            "name": "Skalenská autodoprava a.s.",
+            "town": "Skalná u Chebu, Chebská 533",
+            "e10": 42.6,
+            "diesel": 45.6
+          },
+          {
             "name": "MOL",
-            "town": "Aš",
+            "town": "Aš, Okružní 36",
             "e10": 45.5,
             "diesel": 46.5
           },
           {
             "name": "F1 Gas",
-            "town": "Aš",
+            "town": "Aš, Rybniční 2744",
             "e10": 44.5,
             "diesel": 48.9
           },
           {
+            "name": "F1 Gas",
+            "town": "Aš, Selbská 2865",
+            "e10": 47.5,
+            "diesel": 49.5,
+            "premium": 48.7
+          },
+          {
             "name": "MOL",
-            "town": "Nový Žďár 47",
+            "town": "Nový Žďár 47, silnice 217",
             "e10": 44.3,
             "diesel": 48.7
           },
@@ -148,41 +170,15 @@
             "diesel": 45.4
           },
           {
-            "name": "Robin Oil",
-            "town": "Vojtanov 105",
-            "e10": 39.9,
-            "diesel": 44.9,
-            "premium": 41.9
-          },
-          {
             "name": "F1 Gas",
             "town": "Hranice",
             "diesel": 44.7
           },
           {
-            "name": "Tank ONO",
-            "town": "Cheb",
-            "e10": 42.5,
-            "diesel": 45.5,
-            "premium": 44.9
-          },
-          {
-            "name": "Skalenská autodoprava a.s.",
-            "town": "Skalná u Chebu",
-            "e10": 42.6,
-            "diesel": 45.6
-          },
-          {
             "name": "Armex Oil",
-            "town": "Pomezí nad Ohří",
+            "town": "Pomezí nad Ohří, Pomezí nad Ohří 56",
             "e10": 42.9,
             "diesel": 46.9
-          },
-          {
-            "name": "MOL",
-            "town": "Pomezí nad Ohří",
-            "e10": 45.5,
-            "diesel": 48.9
           }
         ]
       },
@@ -235,9 +231,9 @@
           {
             "name": "bft - Walther",
             "town": "Rehau",
-            "e10": 2.199,
-            "e5": 2.259,
-            "diesel": 2.249
+            "e10": 2.169,
+            "e5": 2.229,
+            "diesel": 2.239
           },
           {
             "name": "Shell",
@@ -269,13 +265,13 @@
         "stations": [
           {
             "name": "OMV",
-            "town": "Boží Dar",
+            "town": "Boží Dar, silnice 25",
             "e10": 45.9,
             "diesel": 49.1
           },
           {
             "name": "F1 Gas",
-            "town": "Potůčky",
+            "town": "Potůčky, Potůčky 180",
             "e10": 46.5,
             "diesel": 49.2,
             "premium": 49.9
@@ -289,29 +285,15 @@
           {
             "name": "BFT",
             "town": "Breitenbrunn",
-            "e10": 2.309,
-            "e5": 2.369,
-            "diesel": 2.339
-          },
-          {
-            "name": "STAR",
-            "town": "Johanngeorgenstadt",
-            "e10": 2.319,
-            "e5": 2.379,
-            "diesel": 2.349
+            "e10": 2.299,
+            "e5": 2.359,
+            "diesel": 2.309
           },
           {
             "name": "Schmidt Mineralöl-Vertrieb GmbH Oberwiesental",
             "town": "Oberwiesenthal",
             "e5": 2.359,
             "diesel": 2.299
-          },
-          {
-            "name": "Q1",
-            "town": "Crottendorf",
-            "e10": 2.329,
-            "e5": 2.369,
-            "diesel": 2.309
           },
           {
             "name": "freie Tankstelle",
@@ -330,9 +312,9 @@
           {
             "name": "Shell",
             "town": "Schwarzenberg",
-            "e10": 2.319,
-            "e5": 2.379,
-            "diesel": 2.349
+            "e10": 2.309,
+            "e5": 2.369,
+            "diesel": 2.319
           },
           {
             "name": "Q1 Automaten-Tankstelle",
@@ -344,16 +326,30 @@
           {
             "name": "STAR",
             "town": "Schwarzenberg",
-            "e10": 2.309,
-            "e5": 2.369,
-            "diesel": 2.339
+            "e10": 2.299,
+            "e5": 2.359,
+            "diesel": 2.299
           },
           {
             "name": "Q1",
             "town": "Schwarzenberg",
             "e10": 2.324,
-            "e5": 2.374,
-            "diesel": 2.344
+            "e5": 2.364,
+            "diesel": 2.304
+          },
+          {
+            "name": "BFT",
+            "town": "Bockau",
+            "e10": 2.379,
+            "e5": 2.439,
+            "diesel": 2.439
+          },
+          {
+            "name": "Calpam Express 24/7 Tanken",
+            "town": "Lauter-Bernsbach",
+            "e10": 2.289,
+            "e5": 2.339,
+            "diesel": 2.289
           }
         ]
       }
@@ -425,10 +421,10 @@
             "diesel": 44.3
           },
           "de": {
-            "e10": 2.269,
-            "e5": 2.329,
-            "premium": 2.399,
-            "diesel": 2.309
+            "e10": 2.249,
+            "e5": 2.309,
+            "premium": 2.379,
+            "diesel": 2.289
           },
           "fx": {
             "eurCzk": 24.2
@@ -501,9 +497,9 @@
             "diesel": 44.7
           },
           "de": {
-            "e10": 2.199,
+            "e10": 2.169,
             "e5": 2.139,
-            "premium": 2.329,
+            "premium": 2.299,
             "diesel": 2.229
           },
           "fx": {
@@ -523,9 +519,9 @@
             "diesel": 49.1
           },
           "de": {
-            "e10": 2.299,
+            "e10": 2.289,
             "e5": 2.329,
-            "premium": 2.429,
+            "premium": 2.419,
             "diesel": 2.279
           },
           "fx": {

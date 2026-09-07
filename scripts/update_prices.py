@@ -38,6 +38,12 @@ REGIONS = {
         "label": "Bayern · Oberfranken",
         "cz_towns": ["As", "Cheb"],
         "cz_town_prefixes": None,  # both town pages are already local enough
+        # mbenzin.cz's "nearest" sort for the Cheb page is relative to Cheb's
+        # own center, not the actual border crossing - stations genuinely at
+        # the crossing (e.g. Tank ONO in "Cheb, Horni Vojtanov", near
+        # Skalná/Vojtanov) can rank low enough to fall off the top-N cut.
+        # Boost anything whose (locality + street) mentions these crossings.
+        "cz_priority_keywords": ["Vojtanov", "Skalná"],
         "de_center": {"lat": 50.1740, "lng": 12.1320},  # Selb
     },
     "erzgebirge": {
@@ -86,7 +92,27 @@ def fetch_cz_town(town):
         name = name_el.get_text(strip=True)
         locality = locality_el.get_text(strip=True)
 
-        station = {"name": name, "town": locality}
+        # Some rows carry a separate streetAddress alongside addressLocality
+        # (e.g. two unrelated "Tank ONO" stations in Cheb both show
+        # addressLocality="Cheb" but differ only in streetAddress) - fold it
+        # in so the two are distinguishable in the UI, not just internally.
+        street_el = row.select_one("span[itemprop=streetAddress]")
+        if street_el:
+            street = street_el.get_text(strip=True)
+            if street:
+                locality = locality + ", " + street
+
+        # mbenzin.cz's per-town page can still collapse two different
+        # stations to the same (name, town) even after the above (e.g. no
+        # streetAddress at all on either row), so (name, town) alone is not
+        # a reliable identity for dedup - it would silently merge genuinely
+        # different stations. The detail-page link href is unique per
+        # station and used for that instead; it's dropped from the dict
+        # before this feeds into data.json.
+        link_el = row.select_one(".st-name")
+        station_id = link_el.get("href") if link_el else None
+
+        station = {"name": name, "town": locality, "_id": station_id}
         for price_el in row.select(".st-price"):
             lbl_el = price_el.select_one(".lbl")
             val_el = price_el.select_one(".val")
@@ -111,12 +137,15 @@ def fetch_cz_town(town):
     return stations
 
 
-def fetch_cz_region(town_list, town_prefixes=None):
+def fetch_cz_region(town_list, town_prefixes=None, priority_keywords=None):
     stations = []
     seen = set()
     for town in town_list:
         for s in fetch_cz_town(town):
-            key = (s["name"], s["town"])
+            # Fall back to (name, town) only if a station has no detail link
+            # for some reason - better to risk a rare false-duplicate than
+            # to stop deduping entirely.
+            key = s["_id"] or (s["name"], s["town"])
             if key in seen:
                 continue
             seen.add(key)
@@ -125,7 +154,19 @@ def fetch_cz_region(town_list, town_prefixes=None):
     if town_prefixes:
         stations = [s for s in stations if any(s["town"].startswith(p) for p in town_prefixes)]
 
-    return stations[:MAX_STATIONS_PER_SIDE]
+    if priority_keywords:
+        # mbenzin.cz's own "nearest" sort is relative to the fetched town's
+        # center, not to the actual border crossing - a station right at the
+        # crossing (e.g. Tank ONO in "Cheb, Horni Vojtanov") can rank far
+        # below unrelated in-town stations and fall off the MAX_STATIONS_PER_SIDE
+        # cut. Stable-sort known border-relevant matches to the front first
+        # so the cap doesn't drop them.
+        stations.sort(key=lambda s: 0 if any(k in s["town"] for k in priority_keywords) else 1)
+
+    stations = stations[:MAX_STATIONS_PER_SIDE]
+    for s in stations:
+        del s["_id"]
+    return stations
 
 
 def fetch_de_region(center):
@@ -212,7 +253,7 @@ def main():
 
     for region_key, cfg in REGIONS.items():
         print(f"--- {region_key} ---")
-        cz_stations = fetch_cz_region(cfg["cz_towns"], cfg.get("cz_town_prefixes"))
+        cz_stations = fetch_cz_region(cfg["cz_towns"], cfg.get("cz_town_prefixes"), cfg.get("cz_priority_keywords"))
         print(f"CZ: {len(cz_stations)} stations")
         de_stations = fetch_de_region(cfg["de_center"])
         print(f"DE: {len(de_stations)} stations")

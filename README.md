@@ -1,6 +1,6 @@
 # Tankpreise Grenzvergleich
 
-**Version 2.6.0** · [Changelog](CHANGELOG.md)
+**Version 2.6.1** · [Changelog](CHANGELOG.md)
 
 Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wählbar nach Region (Sachsen · Vogtland, Bayern · Oberfranken oder Sachsen · Erzgebirgskreis) und Kraftstoff, inklusive Kronen-Euro-Umrechnung, Preisverlauf und Google-Maps-Links zu jeder Station.
 
