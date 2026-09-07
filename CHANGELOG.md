@@ -4,10 +4,10 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
-## [2.2.3] - 2026-09-06
+## [2.4.1] - 2026-09-07
 
 ### Geändert
-- Changelog-Link im Footer entfernt – muss nicht jeder Besucher zum GitHub-Repo geleitet werden; die Versionsnummer allein reicht als Referenz für Rückfragen.
+- Reihenfolge der Regions-Auswahl geändert: Sachsen · Erzgebirgskreis steht jetzt vor Sachsen · Vogtland.
 
 ## [2.4.0] - 2026-09-07
 
@@ -19,6 +19,11 @@ Versionierung nach [SemVer](https://semver.org/lang/de/).
 ### Geändert
 - Preisverlauf-Chart umgebaut: statt einer Linie für CZ und DE auf einer gemeinsamen Achse jetzt zwei unabhängig skalierte Mini-Charts (Small Multiples). Grund: CZ (~1,65 €) und DE (~2,35 €) liegen preislich so weit auseinander, dass eine gemeinsame Skala die tatsächliche Tagesbewegung innerhalb jeder Linie fast unsichtbar machte. Jede Seite zeigt jetzt zusätzlich den aktuellen Wert sowie die Veränderung gegenüber dem Vortag im Kopf.
 - Chart-Optik verfeinert (dünnere Linie, kleinere Endpunkt-Marker, leichtere Beschriftung).
+
+## [2.2.3] - 2026-09-06
+
+### Geändert
+- Changelog-Link im Footer entfernt – muss nicht jeder Besucher zum GitHub-Repo geleitet werden; die Versionsnummer allein reicht als Referenz für Rückfragen.
 
 ## [2.2.2] - 2026-09-05
 
