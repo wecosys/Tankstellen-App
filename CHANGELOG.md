@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.5.1] - 2026-09-07
+
+### Geändert
+- PLZ-Eingabefeld wählt die Region jetzt erst nach Bestätigung mit Enter aus, statt sofort bei der 5. eingegebenen Ziffer. Während der Eingabe zeigt der Hinweistext bereits als Vorschau an, welche Region ausgewählt würde.
+
 ## [2.5.0] - 2026-09-07
 
 ### Hinzugefügt
