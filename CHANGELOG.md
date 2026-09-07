@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.5.2] - 2026-09-07
+
+### Hinzugefügt
+- Kurzer Beschreibungstext oberhalb des PLZ-Felds, der den Zweck erklärt ("Nicht sicher, welche der drei Regionen am nächsten liegt? ..."). Der dynamische Hinweistext darunter beschränkt sich jetzt auf die Bedienung (Eingabe + Enter, Google-Maps-Links für die Feinauswahl).
+
 ## [2.5.1] - 2026-09-07
 
 ### Geändert
