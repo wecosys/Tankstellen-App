@@ -376,7 +376,7 @@
     font-size:1rem;
     margin:0 0 4px;
   }
-  .calc .sub{
+  .calc .sub, .history .sub{
     font-size:.78rem;
     color:var(--muted);
     margin:0 0 14px;
@@ -454,26 +454,39 @@
     font-size:1rem;
     margin:0 0 14px;
   }
-  .legend{
+  .mini-charts{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .mini-chart-col{ min-width:0; }
+  .mini-chart-head{
     display:flex;
-    gap:16px;
-    flex-wrap:wrap;
-    margin-bottom:12px;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:8px;
   }
-  .legend-item{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    font-size:.76rem;
+  .mini-chart-head .label{
+    font-size:.7rem;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .mini-chart-head.cz .label{ color:var(--chart-cz); }
+  .mini-chart-head.de .label{ color:var(--chart-de); }
+  .mini-chart-head .now{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size:1.05rem;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .mini-chart-delta{
+    font-size:.68rem;
     color:var(--muted);
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    margin:1px 0 6px;
   }
-  .legend-item .key{
-    width:14px; height:2px;
-    border-radius:1px;
-    display:inline-block;
-  }
-  .legend-item.cz .key{ background:var(--chart-cz); }
-  .legend-item.de .key{ background:var(--chart-de); }
   .chart-wrap{
     position:relative;
   }
@@ -527,9 +540,6 @@
     font-weight:600;
     color:var(--ink);
   }
-  .chart-tooltip .row .lbl{
-    color:var(--muted);
-  }
   .history-meta{
     font-size:.72rem;
     color:var(--muted);
@@ -565,6 +575,7 @@
 
   @media (max-width:620px){
     .cols{ grid-template-columns:1fr; }
+    .mini-charts{ grid-template-columns:1fr; gap:20px; }
     .gantry-title{ font-size:1.4rem; }
     .station-row .name{ max-width:150px; }
     .field select{ width:100%; max-width:100%; }
@@ -576,7 +587,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.2.3</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.3.0</span>
       <small>Echte Stationen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -639,11 +650,8 @@
 
   <section class="history reveal">
     <h2>Preisverlauf (günstigste Station pro Tag)</h2>
-    <div class="legend">
-      <span class="legend-item cz"><span class="key"></span>Tschechien (≈ €/l)</span>
-      <span class="legend-item de"><span class="key"></span>Deutschland (€/l)</span>
-    </div>
-    <div class="chart-wrap" id="chartWrap"><!-- filled by renderChart() --></div>
+    <p class="sub">Jede Seite mit eigener Skala – Tschechien und Deutschland liegen preislich zu weit auseinander, um Tagesbewegungen auf einer gemeinsamen Achse zu erkennen.</p>
+    <div class="mini-charts" id="miniCharts"><!-- filled by renderChart() --></div>
     <div class="history-meta" id="historyMeta"></div>
   </section>
 
@@ -655,7 +663,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.2.3</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.3.0</p>
   </footer>
 
 </div>
@@ -882,84 +890,76 @@
       .map(function(e){ return { date: e.date, czEur: e.cz[STATE.fuel] / e.fx.eurCzk, de: e.de[STATE.fuel] }; });
   }
 
-  function renderChart(){
-    var pts = historyPoints();
-    var wrap = document.getElementById("chartWrap");
-    var meta = document.getElementById("historyMeta");
+  var MINI_W = 340, MINI_H = 168, MINI_PAD_L = 44, MINI_PAD_R = 8, MINI_PAD_T = 12, MINI_PAD_B = 22;
 
-    if (pts.length < 2) {
-      wrap.innerHTML = '<div class="chart-empty">' +
-        (pts.length === 0
-          ? 'Noch keine Verlaufsdaten für diese Auswahl.'
-          : 'Erst 1 Datenpunkt (' + fmtShortDate(pts[0].date) + ') – der Verlauf füllt sich ab morgen täglich.') +
-        '</div>';
-      meta.textContent = '';
-      return;
-    }
+  function miniChartMarkup(side, label, colorVar, pts, key){
+    var lastI = pts.length - 1;
+    var current = pts[lastI][key];
+    var prev = pts[lastI - 1][key];
+    var delta = current - prev;
+    var deltaText = (delta >= 0 ? "+" : "") + fmtEur(delta) + " ggü. Vortag";
 
-    var W = 720, H = 260, padL = 60, padR = 14, padT = 16, padB = 28;
+    return (
+      '<div class="mini-chart-col">' +
+        '<div class="mini-chart-head ' + side + '">' +
+          '<span class="label">' + label + '</span>' +
+          '<span class="now">' + fmtEur(current) + '</span>' +
+        '</div>' +
+        '<div class="mini-chart-delta">' + deltaText + '</div>' +
+        '<div class="chart-wrap" id="miniWrap' + side + '"></div>' +
+      '</div>'
+    );
+  }
+
+  function wireMiniChart(side, pts, key){
+    var wrap = document.getElementById("miniWrap" + side);
+    var lastI = pts.length - 1;
+    var W = MINI_W, H = MINI_H, padL = MINI_PAD_L, padR = MINI_PAD_R, padT = MINI_PAD_T, padB = MINI_PAD_B;
     var plotW = W - padL - padR, plotH = H - padT - padB;
 
-    var allVals = [];
-    pts.forEach(function(p){ allVals.push(p.czEur, p.de); });
-    var min = Math.min.apply(null, allVals), max = Math.max.apply(null, allVals);
-    var range = (max - min) || 0.1;
-    var pad = range * 0.15;
+    var vals = pts.map(function(p){ return p[key]; });
+    var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
+    var range = (max - min) || (max * 0.01) || 0.1;
+    var pad = range * 0.22;
     var domMin = min - pad, domMax = max + pad;
 
     function yOf(v){ return padT + plotH - ((v - domMin) / (domMax - domMin)) * plotH; }
-    function xOf(i){ return pts.length === 1 ? padL : padL + (i / (pts.length - 1)) * plotW; }
+    function xOf(i){ return lastI === 0 ? padL : padL + (i / lastI) * plotW; }
 
-    var ticks = [];
-    for (var t = 0; t < 4; t++) { ticks.push(domMin + (t / 3) * (domMax - domMin)); }
-
+    var ticks = [domMin + (domMax - domMin) * 0.15, domMin + (domMax - domMin) * 0.85];
     var gridSvg = ticks.map(function(v){
       var y = yOf(v);
       return '<line x1="' + padL + '" y1="' + y.toFixed(1) + '" x2="' + (W - padR) + '" y2="' + y.toFixed(1) + '" stroke="var(--line)" stroke-width="1"/>' +
-        '<text x="' + (padL - 10) + '" y="' + (y + 3).toFixed(1) + '" text-anchor="end" font-size="9.5" font-family="IBM Plex Mono, monospace" fill="var(--muted)">' + fmtEur(v) + '</text>';
+        '<text x="' + (padL - 8) + '" y="' + (y + 3).toFixed(1) + '" text-anchor="end" font-size="8.5" font-family="IBM Plex Mono, monospace" fill="var(--muted)">' + fmtEur(v) + '</text>';
     }).join("");
 
-    function pathFor(key){
-      return pts.map(function(p, i){ return (i === 0 ? "M" : "L") + xOf(i).toFixed(1) + "," + yOf(p[key]).toFixed(1); }).join(" ");
-    }
-
-    var czPath = pathFor("czEur");
-    var dePath = pathFor("de");
-    var lastI = pts.length - 1;
+    var path = pts.map(function(p, i){ return (i === 0 ? "M" : "L") + xOf(i).toFixed(1) + "," + yOf(p[key]).toFixed(1); }).join(" ");
 
     var xLabelIdxs = pts.length === 2 ? [0, 1] : [0, Math.round(lastI / 2), lastI];
     var xLabelsSvg = xLabelIdxs.map(function(i){
-      return '<text x="' + xOf(i).toFixed(1) + '" y="' + (H - 6) + '" text-anchor="' + (i === 0 ? "start" : i === lastI ? "end" : "middle") + '" font-size="10" font-family="IBM Plex Mono, monospace" fill="var(--muted)">' + fmtShortDate(pts[i].date) + '</text>';
+      return '<text x="' + xOf(i).toFixed(1) + '" y="' + (H - 4) + '" text-anchor="' + (i === 0 ? "start" : i === lastI ? "end" : "middle") + '" font-size="8.5" font-family="IBM Plex Mono, monospace" fill="var(--muted)">' + fmtShortDate(pts[i].date) + '</text>';
     }).join("");
 
-    var endMarkers =
-      '<circle cx="' + xOf(lastI).toFixed(1) + '" cy="' + yOf(pts[lastI].czEur).toFixed(1) + '" r="6" fill="var(--surface)"/>' +
-      '<circle cx="' + xOf(lastI).toFixed(1) + '" cy="' + yOf(pts[lastI].czEur).toFixed(1) + '" r="4" fill="var(--chart-cz)"/>' +
-      '<circle cx="' + xOf(lastI).toFixed(1) + '" cy="' + yOf(pts[lastI].de).toFixed(1) + '" r="6" fill="var(--surface)"/>' +
-      '<circle cx="' + xOf(lastI).toFixed(1) + '" cy="' + yOf(pts[lastI].de).toFixed(1) + '" r="4" fill="var(--chart-de)"/>';
-
-    var endLabels =
-      '<text x="' + (xOf(lastI) - 6).toFixed(1) + '" y="' + (yOf(pts[lastI].czEur) - 8).toFixed(1) + '" text-anchor="end" font-size="10.5" font-weight="600" font-family="IBM Plex Mono, monospace" fill="var(--chart-cz)">' + fmtEur(pts[lastI].czEur) + '</text>' +
-      '<text x="' + (xOf(lastI) - 6).toFixed(1) + '" y="' + (yOf(pts[lastI].de) - 8).toFixed(1) + '" text-anchor="end" font-size="10.5" font-weight="600" font-family="IBM Plex Mono, monospace" fill="var(--chart-de)">' + fmtEur(pts[lastI].de) + '</text>';
+    var endMarker =
+      '<circle cx="' + xOf(lastI).toFixed(1) + '" cy="' + yOf(pts[lastI][key]).toFixed(1) + '" r="4.5" fill="var(--surface)"/>' +
+      '<circle cx="' + xOf(lastI).toFixed(1) + '" cy="' + yOf(pts[lastI][key]).toFixed(1) + '" r="2.5" fill="' + colorVarFor(key) + '"/>';
 
     wrap.innerHTML =
-      '<svg viewBox="0 0 ' + W + ' ' + H + '" tabindex="0" role="img" aria-label="Preisverlauf">' +
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" tabindex="0" role="img" aria-label="Preisverlauf ' + (key === "czEur" ? "Tschechien" : "Deutschland") + '">' +
         gridSvg +
-        '<path d="' + czPath + '" fill="none" stroke="var(--chart-cz)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
-        '<path d="' + dePath + '" fill="none" stroke="var(--chart-de)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
-        endMarkers + endLabels + xLabelsSvg +
-        '<line id="crosshair" x1="0" y1="' + padT + '" x2="0" y2="' + (H - padB) + '" stroke="var(--muted)" stroke-width="1" opacity="0"/>' +
-        '<rect id="hitArea" x="' + padL + '" y="' + padT + '" width="' + plotW + '" height="' + plotH + '" fill="transparent"/>' +
+        '<path d="' + path + '" fill="none" stroke="' + colorVarFor(key) + '" stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round"/>' +
+        endMarker + xLabelsSvg +
+        '<line id="cross' + side + '" x1="0" y1="' + padT + '" x2="0" y2="' + (H - padB) + '" stroke="var(--muted)" stroke-width="1" opacity="0"/>' +
+        '<rect id="hit' + side + '" x="' + padL + '" y="' + padT + '" width="' + plotW + '" height="' + plotH + '" fill="transparent"/>' +
       '</svg>' +
-      '<div class="chart-tooltip" id="chartTooltip"><div class="date" id="ttDate"></div>' +
-        '<div class="row cz"><span class="key"></span><span class="lbl">CZ</span> <span class="val" id="ttCz"></span></div>' +
-        '<div class="row de"><span class="key"></span><span class="lbl">DE</span> <span class="val" id="ttDe"></span></div>' +
+      '<div class="chart-tooltip" id="tip' + side + '"><div class="date" id="tipDate' + side + '"></div>' +
+        '<div class="row ' + side + '"><span class="key"></span><span class="val" id="tipVal' + side + '"></span></div>' +
       '</div>';
 
     var svg = wrap.querySelector("svg");
-    var hitArea = wrap.querySelector("#hitArea");
-    var crosshair = wrap.querySelector("#crosshair");
-    var tooltip = wrap.querySelector("#chartTooltip");
+    var hitArea = wrap.querySelector("#hit" + side);
+    var crosshair = wrap.querySelector("#cross" + side);
+    var tooltip = wrap.querySelector("#tip" + side);
 
     function showAt(i){
       i = Math.max(0, Math.min(lastI, i));
@@ -973,9 +973,8 @@
       tooltip.style.left = (x * scale) + "px";
       tooltip.style.top = "0px";
       tooltip.classList.add("visible");
-      document.getElementById("ttDate").textContent = fmtShortDate(pts[i].date);
-      document.getElementById("ttCz").textContent = fmtEur(pts[i].czEur) + "/l";
-      document.getElementById("ttDe").textContent = fmtEur(pts[i].de) + "/l";
+      document.getElementById("tipDate" + side).textContent = fmtShortDate(pts[i].date);
+      document.getElementById("tipVal" + side).textContent = fmtEur(pts[i][key]) + "/l";
     }
     function hide(){
       crosshair.setAttribute("opacity", "0");
@@ -1001,9 +1000,34 @@
       crosshair.setAttribute("data-i", current);
       showAt(current);
     });
+  }
+
+  function colorVarFor(key){ return key === "czEur" ? "var(--chart-cz)" : "var(--chart-de)"; }
+
+  function renderChart(){
+    var pts = historyPoints();
+    var container = document.getElementById("miniCharts");
+    var meta = document.getElementById("historyMeta");
+
+    if (pts.length < 2) {
+      container.innerHTML = '<div class="chart-empty">' +
+        (pts.length === 0
+          ? 'Noch keine Verlaufsdaten für diese Auswahl.'
+          : 'Erst 1 Datenpunkt (' + fmtShortDate(pts[0].date) + ') – der Verlauf füllt sich ab morgen täglich.') +
+        '</div>';
+      meta.textContent = '';
+      return;
+    }
+
+    container.innerHTML =
+      miniChartMarkup("cz", "Tschechien (≈ €/l)", "--chart-cz", pts, "czEur") +
+      miniChartMarkup("de", "Deutschland (€/l)", "--chart-de", pts, "de");
+
+    wireMiniChart("cz", pts, "czEur");
+    wireMiniChart("de", pts, "de");
 
     var days = pts.length;
-    var span = Math.round((new Date(pts[lastI].date) - new Date(pts[0].date)) / 86400000) + 1;
+    var span = Math.round((new Date(pts[pts.length - 1].date) - new Date(pts[0].date)) / 86400000) + 1;
     meta.textContent = days + " Datenpunkte über " + span + " Tag" + (span === 1 ? "" : "e") + ". Der Verlauf wächst täglich weiter.";
   }
 
