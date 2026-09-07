@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.6.0] - 2026-09-07
+
+### Hinzugefügt
+- Nach Bestätigung der PLZ erscheint direkt unter dem PLZ-Feld ein separates Ergebnisfeld mit der aktuell günstigsten DE-Tankstelle für die gewählte Region und den gewählten Kraftstoff (Name, Ort, Preis) – ohne dass man zur vollständigen Stationsliste weiterscrollen muss. Bleibt beim Wechsel des Kraftstoffs automatisch aktuell.
+
 ## [2.5.3] - 2026-09-07
 
 ### Hinzugefügt
