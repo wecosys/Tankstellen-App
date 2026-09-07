@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.5.3] - 2026-09-07
+
+### Hinzugefügt
+- "Finden"-Button neben dem PLZ-Feld zur Bestätigung per Tap. Grund: die numerische iOS-Tastatur (`inputmode="numeric"`) zeigt keine Eingabetaste/Return an, wodurch sich die Region auf dem iPhone nicht bestätigen ließ. Enter funktioniert weiterhin (Desktop), der Button ist der zusätzliche, immer sichtbare Bestätigungsweg für Touch-Tastaturen ohne Eingabetaste.
+
 ## [2.5.2] - 2026-09-07
 
 ### Hinzugefügt

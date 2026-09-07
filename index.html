@@ -159,7 +159,28 @@
     margin-bottom:14px;
   }
   .plz-finder .field{ margin-bottom:0; }
-  .plz-finder .field input{ width:88px; }
+  .plz-input-row{
+    display:flex;
+    gap:6px;
+  }
+  .plz-input-row input{ width:88px; }
+  #plzConfirm{
+    font-family:"IBM Plex Sans", sans-serif;
+    font-size:.78rem;
+    font-weight:600;
+    padding:8px 12px;
+    border-radius:7px;
+    border:1px solid var(--line);
+    background:var(--surface-2);
+    color:var(--ink);
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  #plzConfirm:hover{ background:var(--surface); }
+  #plzConfirm:focus-visible{
+    outline:2px solid var(--focus);
+    outline-offset:1px;
+  }
   .plz-hint{
     font-size:.72rem;
     color:var(--muted);
@@ -605,7 +626,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.5.2</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.5.3</span>
       <small>Echte Stationen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -621,9 +642,12 @@
     <div class="plz-finder">
       <div class="field">
         <label for="plzInput">Deine PLZ</label>
-        <input id="plzInput" type="text" inputmode="numeric" maxlength="5" placeholder="z. B. 08248" autocomplete="postal-code">
+        <div class="plz-input-row">
+          <input id="plzInput" type="text" inputmode="numeric" maxlength="5" placeholder="z. B. 08248" autocomplete="postal-code">
+          <button type="button" id="plzConfirm" aria-label="Region finden">Finden</button>
+        </div>
       </div>
-      <p class="plz-hint" id="plzHint">PLZ eingeben, dann Enter drücken. Für die genau nächste Station hilft zusätzlich der Google-Maps-Link an jeder Station.</p>
+      <p class="plz-hint" id="plzHint">PLZ eingeben und bestätigen. Für die genau nächste Station hilft zusätzlich der Google-Maps-Link an jeder Station.</p>
     </div>
     <div class="toggles">
       <div class="seg-toggle" id="regionToggle" role="group" aria-label="Region wählen">
@@ -690,7 +714,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.5.2</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.5.3</p>
   </footer>
 
 </div>
@@ -1125,8 +1149,9 @@
   };
 
   var plzInput = document.getElementById("plzInput");
+  var plzConfirm = document.getElementById("plzConfirm");
   var plzHint = document.getElementById("plzHint");
-  var PLZ_DEFAULT_HINT = "PLZ eingeben, dann Enter drücken. Für die genau nächste Station hilft zusätzlich der Google-Maps-Link an jeder Station.";
+  var PLZ_DEFAULT_HINT = "PLZ eingeben und bestätigen. Für die genau nächste Station hilft zusätzlich der Google-Maps-Link an jeder Station.";
 
   function applyPlzRegion(region){
     STATE.region = region;
@@ -1134,6 +1159,15 @@
     render();
     plzHint.textContent = "→ " + REGION_NAMES[region] + " ausgewählt.";
     plzHint.classList.add("match");
+  }
+
+  function confirmPlz(){
+    var plz = plzInput.value.replace(/\D/g, "").slice(0, 5);
+    if (plz.length < 5) return;
+    var region = guessRegionFromPlz(plz);
+    if (!region) return;
+    applyPlzRegion(region);
+    plzInput.blur();
   }
 
   plzInput.addEventListener("input", function(){
@@ -1146,20 +1180,17 @@
     }
     var region = guessRegionFromPlz(plz);
     plzHint.textContent = region
-      ? "Enter drücken für " + REGION_NAMES[region] + "."
+      ? "\"Finden\" tippen für " + REGION_NAMES[region] + "."
       : "Keine automatische Zuordnung für diese PLZ möglich – bitte Region manuell wählen.";
   });
 
   plzInput.addEventListener("keydown", function(ev){
     if (ev.key !== "Enter") return;
     ev.preventDefault();
-    var plz = this.value.replace(/\D/g, "").slice(0, 5);
-    if (plz.length < 5) return;
-    var region = guessRegionFromPlz(plz);
-    if (!region) return;
-    applyPlzRegion(region);
-    this.blur();
+    confirmPlz();
   });
+
+  plzConfirm.addEventListener("click", confirmPlz);
 
   var fuelButtons = document.querySelectorAll("#fuelToggle button");
   fuelButtons.forEach(function(btn){
