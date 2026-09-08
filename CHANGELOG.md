@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.9.5] - 2026-09-08
+
+### Hinzugefügt
+- Kurzer Hinweistext unter der Preisverlauf-Überschrift: "Bezieht sich immer auf die oben ausgewählte Region – beim Wechseln der Region ändert sich auch der Verlauf." Macht die Kopplung an die Region-Auswahl explizit, statt sie implizit vorauszusetzen.
+
 ## [2.9.4] - 2026-09-08
 
 ### Geändert
