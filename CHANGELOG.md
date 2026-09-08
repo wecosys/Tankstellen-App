@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.9.1] - 2026-09-08
+
+### Geändert
+- Region- und Kraftstoff-Auswahl sind jetzt native Dropdown-Menüs (`<select>`) statt Button-Reihen – bei fünf Regionen wirkten die Buttons unübersichtlich. Beide Auswahlfelder nutzen dieselbe Optik für ein einheitliches Bild.
+
 ## [2.9.0] - 2026-09-08
 
 ### Hinzugefügt
