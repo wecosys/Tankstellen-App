@@ -4,6 +4,12 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.8.1] - 2026-09-08
+
+### Geändert
+- Kosmetik: Footer-Untertitel im Banner von "Echte Stationen im deutsch-tschechischen Grenzgebiet" zu "Tankstellen im deutsch-tschechischen Grenzgebiet" gekürzt.
+- PLZ-Ergebnisfeld: Label-Reihenfolge von "Günstigste Tankstelle in DE im Umkreis deiner PLZ" zu "Günstigste Tankstelle im Umkreis deiner PLZ in Deutschland" geändert (Land ausgeschrieben statt "DE"-Kürzel). Gleiche Umformulierung auch beim Fallback-Label ("... in dieser Region in Deutschland").
+
 ## [2.8.0] - 2026-09-08
 
 ### Geändert

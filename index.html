@@ -661,8 +661,8 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.8.0</span>
-      <small>Echte Stationen im deutsch-tschechischen Grenzgebiet</small>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.8.1</span>
+      <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
       <span><span class="dot"></span>wird geladen…</span>
@@ -750,7 +750,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.8.0</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.8.1</p>
   </footer>
 
 </div>
@@ -976,7 +976,7 @@
       // honestly say "im Umkreis".
       var best = nearby.reduce(function(a, b){ return b.p.val < a.p.val ? b : a; });
       box.innerHTML =
-        '<div class="k">Günstigste Tankstelle in DE im Umkreis deiner PLZ (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
+        '<div class="k">Günstigste Tankstelle im Umkreis deiner PLZ in Deutschland (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
         '<div class="v">' + best.p.station.name + ' <span class="town">· ' + best.p.station.town + '</span> — ' + fmtEur(best.p.val) + '</div>' +
         '<div class="dist">≈ ' + best.km.toFixed(1).replace(".", ",") + ' km von deiner PLZ</div>';
     } else if (withDist && withDist.length) {
@@ -992,7 +992,7 @@
     } else {
       var top = dePriced[0];
       box.innerHTML =
-        '<div class="k">Günstigste Tankstelle in DE in dieser Region (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
+        '<div class="k">Günstigste Tankstelle in dieser Region in Deutschland (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
         '<div class="v">' + top.station.name + ' <span class="town">· ' + top.station.town + '</span> — ' + fmtEur(top.val) + '</div>';
     }
     box.hidden = false;
