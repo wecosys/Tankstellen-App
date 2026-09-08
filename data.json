@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-08T07:08:58+02:00",
+  "updatedAt": "2026-09-08T08:25:47+02:00",
   "fx": {
     "eurCzk": 24.2,
     "source": "frankfurter.app (EZB-Referenzkurs)"
@@ -50,13 +50,19 @@
           {
             "name": "STAR",
             "town": "Klingenthal",
+            "lat": 50.36543,
+            "lng": 12.46842,
+            "plz": "8248",
             "e10": 2.319,
             "e5": 2.379,
-            "diesel": 2.299
+            "diesel": 2.279
           },
           {
             "name": "TotalEnergies",
             "town": "Schoeneck",
+            "lat": 50.39499,
+            "lng": 12.34057,
+            "plz": "8261",
             "e10": 2.329,
             "e5": 2.389,
             "diesel": 2.309
@@ -64,12 +70,18 @@
           {
             "name": "GULF",
             "town": "Markneukirchen",
+            "lat": 50.3095,
+            "lng": 12.304,
+            "plz": "8258",
             "e5": 2.379,
             "diesel": 2.309
           },
           {
             "name": "AGIP ENI",
             "town": "Adorf",
+            "lat": 50.3265,
+            "lng": 12.25652,
+            "plz": "8626",
             "e10": 2.329,
             "e5": 2.389,
             "diesel": 2.319
@@ -77,6 +89,9 @@
           {
             "name": "ARAL",
             "town": "Falkenstein",
+            "lat": 50.47417,
+            "lng": 12.35437,
+            "plz": "8223",
             "e10": 2.359,
             "e5": 2.419,
             "diesel": 2.359
@@ -84,12 +99,18 @@
           {
             "name": "Tank & Waschcenter Auerbach",
             "town": "Auerbach",
-            "e5": 2.328,
-            "diesel": 2.308
+            "lat": 50.49692,
+            "lng": 12.42044,
+            "plz": "8209",
+            "e5": 2.308,
+            "diesel": 2.288
           },
           {
             "name": "AGIP ENI",
             "town": "Auerbach",
+            "lat": 50.49523,
+            "lng": 12.39654,
+            "plz": "8209",
             "e10": 2.329,
             "e5": 2.389,
             "diesel": 2.319
@@ -97,20 +118,29 @@
           {
             "name": "Freie Tankstelle",
             "town": "Schönheide",
-            "e10": 2.369,
-            "e5": 2.389,
-            "diesel": 2.399
+            "lat": 50.50367,
+            "lng": 12.50377,
+            "plz": "8304",
+            "e10": 2.289,
+            "e5": 2.309,
+            "diesel": 2.339
           },
           {
             "name": "bft",
             "town": "Auerbach",
-            "e10": 2.279,
-            "e5": 2.339,
-            "diesel": 2.299
+            "lat": 50.5065,
+            "lng": 12.3802,
+            "plz": "8209",
+            "e10": 2.249,
+            "e5": 2.309,
+            "diesel": 2.289
           },
           {
             "name": "ARAL",
             "town": "Eibenstock",
+            "lat": 50.5013,
+            "lng": 12.6031,
+            "plz": "8309",
             "e10": 2.309,
             "e5": 2.369,
             "diesel": 2.319
@@ -194,6 +224,9 @@
           {
             "name": "AVIA",
             "town": "Selb",
+            "lat": 50.174,
+            "lng": 12.12771,
+            "plz": "95100",
             "e10": 2.199,
             "e5": 2.259,
             "diesel": 2.249
@@ -201,6 +234,9 @@
           {
             "name": "Hauer Mineralöle GmbH",
             "town": "Selb",
+            "lat": 50.16958,
+            "lng": 12.12274,
+            "plz": "95100",
             "e10": 2.244,
             "e5": 2.304,
             "diesel": 2.244
@@ -208,6 +244,9 @@
           {
             "name": "AVIA",
             "town": "Selb",
+            "lat": 50.16936,
+            "lng": 12.12171,
+            "plz": "95100",
             "e10": 2.199,
             "e5": 2.259,
             "diesel": 2.249
@@ -215,6 +254,9 @@
           {
             "name": "ORLEN Express",
             "town": "Selb",
+            "lat": 50.16821,
+            "lng": 12.10866,
+            "plz": "95100",
             "e10": 2.179,
             "e5": 2.239,
             "diesel": 2.229
@@ -222,6 +264,9 @@
           {
             "name": "AVIA",
             "town": "Schönwald",
+            "lat": 50.19632,
+            "lng": 12.09096,
+            "plz": "95173",
             "e10": 2.199,
             "e5": 2.259,
             "diesel": 2.249
@@ -229,6 +274,9 @@
           {
             "name": "Leu Energie",
             "town": "Marktleuthen",
+            "lat": 50.1262,
+            "lng": 11.9981,
+            "plz": "95168",
             "e10": 2.149,
             "e5": 2.199,
             "diesel": 2.229
@@ -236,6 +284,9 @@
           {
             "name": "bft - Walther",
             "town": "Rehau",
+            "lat": 50.248,
+            "lng": 12.0285,
+            "plz": "95111",
             "e10": 2.149,
             "e5": 2.209,
             "diesel": 2.239
@@ -243,6 +294,9 @@
           {
             "name": "Shell",
             "town": "Thiersheim",
+            "lat": 50.07379,
+            "lng": 12.0991,
+            "plz": "95707",
             "e10": 2.229,
             "e5": 2.289,
             "diesel": 2.279
@@ -250,12 +304,18 @@
           {
             "name": "Freie Tankstelle Brunner",
             "town": "Kirchenlamitz",
+            "lat": 50.15022,
+            "lng": 11.94409,
+            "plz": "95158",
             "e5": 2.139,
             "diesel": 2.229
           },
           {
             "name": "bft - Walther",
             "town": "Arzberg",
+            "lat": 50.0554,
+            "lng": 12.1821,
+            "plz": "95659",
             "e10": 2.219,
             "e5": 2.279,
             "diesel": 2.269
@@ -290,6 +350,9 @@
           {
             "name": "BFT",
             "town": "Breitenbrunn",
+            "lat": 50.46619,
+            "lng": 12.8077,
+            "plz": "8359",
             "e10": 2.289,
             "e5": 2.349,
             "diesel": 2.299
@@ -297,6 +360,9 @@
           {
             "name": "STAR",
             "town": "Johanngeorgenstadt",
+            "lat": 50.44429,
+            "lng": 12.7278,
+            "plz": "8349",
             "e10": 2.289,
             "e5": 2.349,
             "diesel": 2.289
@@ -304,12 +370,18 @@
           {
             "name": "Schmidt Mineralöl-Vertrieb GmbH Oberwiesental",
             "town": "Oberwiesenthal",
+            "lat": 50.41988,
+            "lng": 12.97752,
+            "plz": "9484",
             "e5": 2.329,
             "diesel": 2.289
           },
           {
             "name": "Q1",
             "town": "Crottendorf",
+            "lat": 50.5031,
+            "lng": 12.9323,
+            "plz": "9474",
             "e10": 2.289,
             "e5": 2.339,
             "diesel": 2.299
@@ -317,6 +389,9 @@
           {
             "name": "freie Tankstelle",
             "town": "Schwarzenberg",
+            "lat": 50.52409,
+            "lng": 12.79004,
+            "plz": "8340",
             "e10": 2.319,
             "e5": 2.339,
             "diesel": 2.289
@@ -324,6 +399,9 @@
           {
             "name": "ARAL",
             "town": "Schwarzenberg",
+            "lat": 50.53115,
+            "lng": 12.8117,
+            "plz": "8340",
             "e10": 2.329,
             "e5": 2.389,
             "diesel": 2.359
@@ -331,6 +409,9 @@
           {
             "name": "Schmidt Mineralöl -Vertrieb GmbH Scheibenberg",
             "town": "Scheibenberg",
+            "lat": 50.54394,
+            "lng": 12.91823,
+            "plz": "9481",
             "e10": 2.269,
             "e5": 2.329,
             "diesel": 2.289
@@ -338,6 +419,9 @@
           {
             "name": "Shell",
             "town": "Schwarzenberg",
+            "lat": 50.54801,
+            "lng": 12.77272,
+            "plz": "8340",
             "e10": 2.299,
             "e5": 2.359,
             "diesel": 2.309
@@ -345,6 +429,9 @@
           {
             "name": "Q1 Automaten-Tankstelle",
             "town": "Sehmatal",
+            "lat": 50.5178,
+            "lng": 12.9936,
+            "plz": "9465",
             "e10": 2.269,
             "e5": 2.319,
             "diesel": 2.279
@@ -352,6 +439,9 @@
           {
             "name": "STAR",
             "town": "Schwarzenberg",
+            "lat": 50.55687,
+            "lng": 12.77767,
+            "plz": "8340",
             "e10": 2.289,
             "e5": 2.349,
             "diesel": 2.289
@@ -444,10 +534,10 @@
             "diesel": 44.3
           },
           "de": {
-            "e10": 2.279,
-            "e5": 2.328,
-            "premium": 2.409,
-            "diesel": 2.299
+            "e10": 2.249,
+            "e5": 2.308,
+            "premium": 2.379,
+            "diesel": 2.279
           },
           "fx": {
             "eurCzk": 24.2

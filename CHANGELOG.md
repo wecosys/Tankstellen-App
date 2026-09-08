@@ -4,6 +4,12 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.7.0] - 2026-09-08
+
+### Geändert
+- "Günstigste Tankstelle in DE" im PLZ-Ergebnisfeld meint jetzt wirklich die günstigste Station **im Umkreis der eingegebenen PLZ**, nicht mehr einfach die günstigste in der ganzen Region. Umsetzung ohne externe Geocoding-Abfrage: Tankerkönig liefert ohnehin echte Koordinaten (`lat`/`lng`) und die Postleitzahl jeder DE-Station – `scripts/update_prices.py` speichert diese jetzt mit in `data.json`. Die App sucht die eigene DE-Station, deren echte PLZ der eingegebenen am nächsten liegt, nutzt deren reale Koordinaten als Referenzpunkt und wählt per Haversine-Distanz die günstigste Station im 12-km-Umkreis (sonst die nächstgelegene). Zeigt zusätzlich die Entfernung an. Ohne passende Referenzstation (z. B. Fallback-Daten ohne Koordinaten) bleibt das bisherige Verhalten ("günstigste in der Region") als Rückfallebene erhalten.
+- Preisverlauf-Chart von Linien- auf Balkendiagramm umgestellt: ein Balken pro Tag, letzte 30 Tage. Balken wachsen jetzt von einer echten Nulllinie (Balkenlänge codiert Betrag – anders als bei einer Linie darf die Achse hier nicht gekappt werden), mit Hover-/Fokus-Tooltip pro Balken statt Fadenkreuz. Kleine Multiples (eigene Skala für CZ/DE) und die Kopfzeile mit aktuellem Wert/Vortags-Delta bleiben wie in v2.3.0.
+
 ## [2.6.1] - 2026-09-07
 
 ### Behoben

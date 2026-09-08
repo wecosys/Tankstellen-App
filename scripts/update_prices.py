@@ -188,6 +188,14 @@ def fetch_de_region(center):
         if not s.get("isOpen", True):
             continue
         entry = {"name": s.get("brand") or s.get("name") or "Tankstelle", "town": s.get("place", "")}
+        # Tankerkoenig already reports each station's real coordinates and
+        # postal code - captured so the app can compute "cheapest near your
+        # PLZ" client-side without any external geocoding call.
+        if s.get("lat") is not None and s.get("lng") is not None:
+            entry["lat"] = round(float(s["lat"]), 5)
+            entry["lng"] = round(float(s["lng"]), 5)
+        if s.get("postCode") is not None:
+            entry["plz"] = str(s["postCode"])
         if s.get("e10") is not None:
             entry["e10"] = round(float(s["e10"]), 3)
         if s.get("e5") is not None:
