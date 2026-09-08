@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Refreshes data.json with current CZ (mbenzin.cz) and DE (Tankerkoenig) station
 prices for both border regions, plus the EUR/CZK exchange rate and a rolling
-daily history of the cheapest price per fuel per side.
+daily history of the average price per fuel per side.
 
 Run from the repo root: python3 scripts/update_prices.py
 Requires TANKERKOENIG_API_KEY in the environment.
@@ -257,31 +257,42 @@ def fetch_fx_rate():
     return rate, "frankfurter.app (EZB-Referenzkurs)"
 
 
-def cheapest(stations, key):
+def average(vals):
+    return round(sum(vals) / len(vals), 3) if vals else None
+
+
+def average_price(stations, key):
+    """History reference price: the MEAN across all fetched stations, not the
+    cheapest one. A single-station minimum tends to sit flat for days at a
+    time (the same station just doesn't reprice daily), which makes the
+    Preisverlauf trend look broken even though it's technically correct -
+    averaging over the whole set reflects genuine day-to-day market movement
+    instead. The main station list/table is untouched by this - it still
+    shows and highlights the real cheapest individual station."""
     vals = [s[key] for s in stations if isinstance(s.get(key), (int, float))]
-    return min(vals) if vals else None
+    return average(vals)
 
 
-def estimate_premium(stations, key_source, is_cz):
+def average_premium(stations, key_source, is_cz):
     """Fills in a premium richtwert for stations lacking a real value, then
-    returns the cheapest premium value across the (real+estimated) set."""
+    averages the premium value across the (real+estimated) set."""
     vals = []
     for s in stations:
         if isinstance(s.get("premium"), (int, float)):
             vals.append(s["premium"])
         elif isinstance(s.get(key_source), (int, float)):
             vals.append(round(s[key_source] + (2.40 if is_cz else 0.13), 3))
-    return min(vals) if vals else None
+    return average(vals)
 
 
-def estimate_e5(stations, is_cz):
+def average_e5(stations, is_cz):
     vals = []
     for s in stations:
         if isinstance(s.get("e5"), (int, float)):
             vals.append(s["e5"])
         elif isinstance(s.get("e10"), (int, float)):
             vals.append(s["e10"] if is_cz else round(s["e10"] + 0.055, 3))
-    return min(vals) if vals else None
+    return average(vals)
 
 
 def main():
@@ -325,16 +336,16 @@ def main():
         entry = {
             "date": today,
             "cz": {
-                "e10": cheapest(cz_stations, "e10"),
-                "e5": estimate_e5(cz_stations, is_cz=True),
-                "premium": estimate_premium(cz_stations, "e10", is_cz=True),
-                "diesel": cheapest(cz_stations, "diesel"),
+                "e10": average_price(cz_stations, "e10"),
+                "e5": average_e5(cz_stations, is_cz=True),
+                "premium": average_premium(cz_stations, "e10", is_cz=True),
+                "diesel": average_price(cz_stations, "diesel"),
             },
             "de": {
-                "e10": cheapest(de_stations, "e10"),
-                "e5": estimate_e5(de_stations, is_cz=False),
-                "premium": estimate_premium(de_stations, "e10", is_cz=False),
-                "diesel": cheapest(de_stations, "diesel"),
+                "e10": average_price(de_stations, "e10"),
+                "e5": average_e5(de_stations, is_cz=False),
+                "premium": average_premium(de_stations, "e10", is_cz=False),
+                "diesel": average_price(de_stations, "diesel"),
             },
             "fx": {"eurCzk": eur_czk},
         }

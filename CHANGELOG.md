@@ -4,6 +4,12 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.9.4] - 2026-09-08
+
+### Geändert
+- Preisverlauf-Referenzpreis: statt der günstigsten Station pro Tag wird jetzt der **Durchschnittspreis über alle gefundenen Stationen** je Seite und Kraftstoff verwendet (`update_prices.py`: `cheapest()`/`estimate_*()` durch `average_price()`/`average_e5()`/`average_premium()` ersetzt). Grund: die günstigste CZ-Station blieb tagelang exakt gleich (dieselbe Station, unveränderter Preis) – der Chart zeigte dadurch keine erkennbare Bewegung, obwohl sich der Markt insgesamt sehr wohl bewegt. Der Durchschnitt über alle Stationen zeigt einen echten, repräsentativen Trend. Betrifft nur die Verlaufs-/Chart-Berechnung – die Hauptliste zeigt weiterhin jede einzelne Station mit der echten, markierten günstigsten.
+- Überschrift entsprechend angepasst: "Preisverlauf (letzte 30 Tage, Durchschnittspreis aller Stationen pro Tag)".
+
 ## [2.9.3] - 2026-09-08
 
 ### Entfernt
