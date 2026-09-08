@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.9.2] - 2026-09-08
+
+### Geändert
+- Reihenfolge im Region-Dropdown: **Bayern · Oberfranken** steht jetzt an letzter Stelle (Übersichtlichkeit) – die vier sächsischen Regionen bleiben zusammen an der Spitze.
+
 ## [2.9.1] - 2026-09-08
 
 ### Geändert
