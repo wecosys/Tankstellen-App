@@ -4,6 +4,15 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.9.3] - 2026-09-08
+
+### Entfernt
+- Erklärsatz unter der Preisverlauf-Überschrift ("Jede Seite mit eigener Skala …") gestrichen – keine Information, die Endnutzer:innen brauchen.
+- Die "± X,XXX € ggü. Vortag"-Zeile unter dem Tagespreis je Chart entfernt: mit noch wenig Historie zeigte sie fast immer "+0,000 €" (der günstigste Anbieter ändert seinen Preis selten von einem Tag auf den nächsten), was eher nach kaputter Anzeige aussah als nützliche Information zu liefern.
+
+### Geprüft
+- Bestätigt, dass der Preisverlauf für jede Region bereits die günstigste Tankstelle des jeweiligen Tages als Referenzpreis nutzt (`cheapest()` in `scripts/update_prices.py`, seit v2.1.0) – gilt identisch für alle fünf Regionen inkl. der neuen Dresden/Osterzgebirge und Oberlausitz, keine Codeänderung nötig.
+
 ## [2.9.2] - 2026-09-08
 
 ### Geändert

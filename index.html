@@ -556,12 +556,6 @@
     font-weight:600;
     color:var(--ink);
   }
-  .mini-chart-delta{
-    font-size:.68rem;
-    color:var(--muted);
-    font-family:"IBM Plex Mono", ui-monospace, monospace;
-    margin:1px 0 6px;
-  }
   .chart-wrap{
     position:relative;
   }
@@ -662,7 +656,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.9.2</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.9.3</span>
       <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -746,7 +740,6 @@
 
   <section class="history reveal">
     <h2>Preisverlauf (letzte 30 Tage, günstigste Station pro Tag)</h2>
-    <p class="sub">Jede Seite mit eigener Skala – Tschechien und Deutschland liegen preislich zu weit auseinander, um Tagesbewegungen auf einer gemeinsamen Achse zu erkennen.</p>
     <div class="mini-charts" id="miniCharts"><!-- filled by renderChart() --></div>
     <div class="history-meta" id="historyMeta"></div>
   </section>
@@ -759,7 +752,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.9.2</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.9.3</p>
   </footer>
 
 </div>
@@ -1123,9 +1116,6 @@
   function miniChartMarkup(side, label, colorVar, pts, key){
     var lastI = pts.length - 1;
     var current = pts[lastI][key];
-    var prev = pts[lastI - 1][key];
-    var delta = current - prev;
-    var deltaText = (delta >= 0 ? "+" : "") + fmtEur(delta) + " ggü. Vortag";
 
     return (
       '<div class="mini-chart-col">' +
@@ -1133,7 +1123,6 @@
           '<span class="label">' + label + '</span>' +
           '<span class="now">' + fmtEur(current) + '</span>' +
         '</div>' +
-        '<div class="mini-chart-delta">' + deltaText + '</div>' +
         '<div class="chart-wrap" id="miniWrap' + side + '"></div>' +
       '</div>'
     );
