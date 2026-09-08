@@ -195,6 +195,9 @@
     padding:10px 14px;
     margin-bottom:14px;
   }
+  .plz-de-result.far{
+    background:var(--surface-2);
+  }
   .plz-de-result .k{
     font-size:.68rem;
     text-transform:uppercase;
@@ -209,6 +212,7 @@
     font-weight:600;
     color:var(--good);
   }
+  .plz-de-result.far .v{ color:var(--ink); }
   .plz-de-result .v .town{
     font-family:"IBM Plex Sans", sans-serif;
     font-weight:400;
@@ -657,7 +661,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.7.1</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.8.0</span>
       <small>Echte Stationen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -746,7 +750,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.7.1</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.8.0</p>
   </footer>
 
 </div>
@@ -929,7 +933,7 @@
 
   var PLZ_RESULT_ACTIVE = false;
   var CONFIRMED_PLZ = null;
-  var PLZ_NEARBY_RADIUS_KM = 12;
+  var PLZ_NEARBY_RADIUS_KM = 5;
 
   // Haversine great-circle distance in km.
   function distanceKm(lat1, lng1, lat2, lng2){
@@ -952,18 +956,39 @@
     // by distance). Only PLZ we have real coordinates for get a genuine
     // "nearby" search; everything else falls back to region-wide cheapest.
     var ref = CONFIRMED_PLZ ? PLZ_COORDS[CONFIRMED_PLZ] : null;
-    var withDist = ref ? dePriced
+    // The proximity search also draws on de.plzStations - real stations from
+    // a dedicated extra search anchor for PLZ far outside the main crossing
+    // radius (e.g. Werdau, see update_prices.py). Kept out of dePriced/the
+    // main table on purpose: those stations aren't relevant to the CZ/DE
+    // crossing comparison, only to "what's actually near this PLZ".
+    var candidatePriced = ref
+      ? pricedStations((region.de.stations || []).concat(region.de.plzStations || []), STATE.fuel, false)
+      : dePriced;
+    var withDist = ref ? candidatePriced
       .filter(function(p){ return typeof p.station.lat === "number" && typeof p.station.lng === "number"; })
       .map(function(p){ return { p: p, km: distanceKm(ref.lat, ref.lng, p.station.lat, p.station.lng) }; }) : null;
 
-    if (withDist && withDist.length) {
-      var nearby = withDist.filter(function(w){ return w.km <= PLZ_NEARBY_RADIUS_KM; });
-      var pool = nearby.length ? nearby : [withDist.slice().sort(function(a, b){ return a.km - b.km; })[0]];
-      var best = pool.reduce(function(a, b){ return b.p.val < a.p.val ? b : a; });
+    var nearby = withDist ? withDist.filter(function(w){ return w.km <= PLZ_NEARBY_RADIUS_KM; }) : [];
+
+    box.classList.remove("far");
+    if (nearby.length) {
+      // A station genuinely within the radius exists - the label can
+      // honestly say "im Umkreis".
+      var best = nearby.reduce(function(a, b){ return b.p.val < a.p.val ? b : a; });
       box.innerHTML =
         '<div class="k">Günstigste Tankstelle in DE im Umkreis deiner PLZ (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
         '<div class="v">' + best.p.station.name + ' <span class="town">· ' + best.p.station.town + '</span> — ' + fmtEur(best.p.val) + '</div>' +
         '<div class="dist">≈ ' + best.km.toFixed(1).replace(".", ",") + ' km von deiner PLZ</div>';
+    } else if (withDist && withDist.length) {
+      // We know real distances, but nothing is actually nearby (e.g. a PLZ
+      // like Werdau with no station of its own in this region's dataset) -
+      // say so plainly instead of calling a 25km-away station "im Umkreis".
+      var nearest = withDist.slice().sort(function(a, b){ return a.km - b.km; })[0];
+      box.classList.add("far");
+      box.innerHTML =
+        '<div class="k">Keine Tankstelle im Umkreis deiner PLZ in diesem Datensatz – nächstgelegene (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
+        '<div class="v">' + nearest.p.station.name + ' <span class="town">· ' + nearest.p.station.town + '</span> — ' + fmtEur(nearest.p.val) + '</div>' +
+        '<div class="dist">≈ ' + nearest.km.toFixed(1).replace(".", ",") + ' km von deiner PLZ – nicht wirklich in der Nähe</div>';
     } else {
       var top = dePriced[0];
       box.innerHTML =
@@ -1094,7 +1119,12 @@
     function yOf(v){ return padT + plotH - (v / domMax) * plotH; }
     var n = pts.length;
     var slotW = plotW / n;
-    var barW = Math.max(1, Math.min(24, slotW - 2));
+    // Thinner bars with more air between them ("filigran") - a wide,
+    // tightly-packed bar reads as one solid block when a zero-baseline
+    // compresses the visible height difference between them; a slim bar
+    // plus the bright top cap (below) gives the eye two separate, easier
+    // to compare position cues instead of one hard-to-compare block edge.
+    var barW = Math.max(1, Math.min(11, slotW * 0.5));
     function slotX(i){ return padL + i * slotW; }
     function barX(i){ return slotX(i) + (slotW - barW) / 2; }
 
@@ -1106,8 +1136,18 @@
     }).join("");
 
     var barsSvg = pts.map(function(p, i){
-      var h = plotH - (yOf(p[key]) - padT);
-      return '<path id="bar' + side + i + '" d="' + barPath(barX(i), yOf(p[key]), barW, h, 3) + '" fill="' + colorVarFor(key) + '"/>';
+      var top = yOf(p[key]);
+      var h = plotH - (top - padT);
+      var x = barX(i);
+      // A soft-fill bar plus a full-opacity cap right at the value: the cap
+      // reads by POSITION (top edge), which the eye compares far more
+      // precisely across bars than it compares the LENGTH of near-identical
+      // rectangles - it's what makes small day-to-day moves legible even
+      // though the bars themselves must stay honestly zero-based.
+      return (
+        '<path id="bar' + side + i + '" d="' + barPath(x, top, barW, h, 2) + '" fill="' + colorVarFor(key) + '" fill-opacity="0.45"/>' +
+        '<rect x="' + x.toFixed(1) + '" y="' + (top - 1).toFixed(1) + '" width="' + barW.toFixed(1) + '" height="2" rx="1" fill="' + colorVarFor(key) + '"/>'
+      );
     }).join("");
 
     var xLabelIdxs = n <= 2 ? [0, lastI] : [0, Math.round(lastI / 2), lastI];
@@ -1135,11 +1175,15 @@
       i = Math.max(0, Math.min(lastI, i));
       if (activeI !== null) {
         var prevBar = document.getElementById("bar" + side + activeI);
-        if (prevBar) prevBar.removeAttribute("stroke");
+        if (prevBar) { prevBar.removeAttribute("stroke"); prevBar.setAttribute("fill-opacity", "0.45"); }
       }
       activeI = i;
       var bar = document.getElementById("bar" + side + i);
-      if (bar) { bar.setAttribute("stroke", "var(--ink)"); bar.setAttribute("stroke-width", "1.5"); }
+      if (bar) {
+        bar.setAttribute("stroke", "var(--ink)");
+        bar.setAttribute("stroke-width", "1.5");
+        bar.setAttribute("fill-opacity", "0.85");
+      }
 
       var svgRect = svg.getBoundingClientRect();
       var scale = svgRect.width / W;
@@ -1152,7 +1196,7 @@
     function hide(){
       if (activeI !== null) {
         var bar = document.getElementById("bar" + side + activeI);
-        if (bar) bar.removeAttribute("stroke");
+        if (bar) { bar.removeAttribute("stroke"); bar.setAttribute("fill-opacity", "0.45"); }
         activeI = null;
       }
       tooltip.classList.remove("visible");

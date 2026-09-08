@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-08T08:25:47+02:00",
+  "updatedAt": "2026-09-08T09:06:56+02:00",
   "fx": {
     "eurCzk": 24.2,
     "source": "frankfurter.app (EZB-Referenzkurs)"
@@ -65,7 +65,7 @@
             "plz": "8261",
             "e10": 2.329,
             "e5": 2.389,
-            "diesel": 2.309
+            "diesel": 2.289
           },
           {
             "name": "GULF",
@@ -92,9 +92,9 @@
             "lat": 50.47417,
             "lng": 12.35437,
             "plz": "8223",
-            "e10": 2.359,
-            "e5": 2.419,
-            "diesel": 2.359
+            "e10": 2.339,
+            "e5": 2.399,
+            "diesel": 2.289
           },
           {
             "name": "Tank & Waschcenter Auerbach",
@@ -141,9 +141,111 @@
             "lat": 50.5013,
             "lng": 12.6031,
             "plz": "8309",
+            "e10": 2.299,
+            "e5": 2.359,
+            "diesel": 2.299
+          }
+        ],
+        "plzStations": [
+          {
+            "name": "JET",
+            "town": "WERDAU",
+            "lat": 50.73511,
+            "lng": 12.37341,
+            "plz": "8412",
             "e10": 2.309,
             "e5": 2.369,
+            "diesel": 2.309
+          },
+          {
+            "name": "ARAL",
+            "town": "Werdau",
+            "lat": 50.7235,
+            "lng": 12.37423,
+            "plz": "8412",
+            "e10": 2.319,
+            "e5": 2.379,
+            "diesel": 2.329
+          },
+          {
+            "name": "STAR",
+            "town": "Fraureuth",
+            "lat": 50.71364,
+            "lng": 12.37183,
+            "plz": "8427",
+            "e10": 2.289,
+            "e5": 2.349,
+            "diesel": 2.309
+          },
+          {
+            "name": "SB",
+            "town": "Werdau",
+            "lat": 50.7554,
+            "lng": 12.3716,
+            "plz": "8412",
+            "e10": 2.309,
+            "e5": 2.369,
+            "diesel": 2.309
+          },
+          {
+            "name": "Supermarkt-Tankstelle",
+            "town": "WERDAU OT STEINPLEIS",
+            "lat": 50.71197,
+            "lng": 12.41651,
+            "plz": "8412",
+            "e10": 2.299,
+            "e5": 2.359,
+            "diesel": 2.299
+          },
+          {
+            "name": "HEM",
+            "town": "Zwickau",
+            "lat": 50.70928,
+            "lng": 12.46517,
+            "plz": "8056",
+            "e10": 2.289,
+            "e5": 2.349,
+            "diesel": 2.309
+          },
+          {
+            "name": "TotalEnergies",
+            "town": "Zwickau",
+            "lat": 50.7084,
+            "lng": 12.46476,
+            "plz": "8056",
+            "e10": 2.319,
+            "e5": 2.379,
             "diesel": 2.319
+          },
+          {
+            "name": "ARAL",
+            "town": "Zwickau",
+            "lat": 50.72063,
+            "lng": 12.47306,
+            "plz": "8060",
+            "e10": 2.319,
+            "e5": 2.379,
+            "diesel": 2.319
+          },
+          {
+            "name": "Freie Tankstelle",
+            "town": "Langenbernsdorf",
+            "lat": 50.76495,
+            "lng": 12.29589,
+            "plz": "8428",
+            "e10": 2.279,
+            "e5": 2.299,
+            "diesel": 2.299
+          },
+          {
+            "name": "JET",
+            "town": "ZWICKAU",
+            "lat": 50.71416,
+            "lng": 12.48154,
+            "plz": "8056",
+            "e10": 2.289,
+            "e5": 2.349,
+            "diesel": 2.309
           }
         ]
       }
@@ -316,8 +418,8 @@
             "lat": 50.0554,
             "lng": 12.1821,
             "plz": "95659",
-            "e10": 2.219,
-            "e5": 2.279,
+            "e10": 2.209,
+            "e5": 2.269,
             "diesel": 2.269
           }
         ]
@@ -402,9 +504,9 @@
             "lat": 50.53115,
             "lng": 12.8117,
             "plz": "8340",
-            "e10": 2.329,
-            "e5": 2.389,
-            "diesel": 2.359
+            "e10": 2.299,
+            "e5": 2.359,
+            "diesel": 2.309
           },
           {
             "name": "Schmidt Mineralöl -Vertrieb GmbH Scheibenberg",

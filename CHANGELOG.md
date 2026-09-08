@@ -4,6 +4,14 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.8.0] - 2026-09-08
+
+### Geändert
+- Nutzer merkte an: "die günstigste Tankstelle in Werdau und Umgebung ist doch nicht Auerbach?" – berechtigter Einwand, denn der v2.7.1-Fallback zeigte bei Werdau die nächstgelegene Station in unserem Datensatz (25,2 km entfernt), aber immer noch unter dem Label "im Umkreis deiner PLZ" – irreführend bei so einer Distanz. Jetzt gibt es drei klar unterschiedene Zustände: echte Station im Umkreis (grün, mit Distanz), keine Station im Umkreis mit ehrlichem Hinweis "nicht wirklich in der Nähe" (neutral eingefärbt), oder – ohne Koordinaten – "günstigste in der Region" ohne Distanzangabe.
+- Umkreis-Radius von 12 auf 5 km verkleinert (Nutzerwunsch) – zeigt jetzt nur noch Stationen, die wirklich in Fußweite/kurzer Fahrt liegen, nicht mehr "irgendwo in der Region".
+- Für 08412 Werdau (~42 km vom Vogtland-Suchzentrum Klingenthal entfernt, also außerhalb des normalen 25-km-Suchradius) gibt's jetzt einen eigenen, kleineren Tankerkönig-Suchanker (10 km um Werdau) – bestätigt durch einen Abgleich mit [ich-tanke.de](https://ich-tanke.de/tankstellen/super-e5/umkreis/werdau/), das reale nahegelegene Stationen (JET Werdau, ARAL Werdau, STAR Fraureuth u. a.) zeigte, die in unserem bisherigen Datensatz schlicht fehlten. Diese zusätzlichen Stationen fließen nur in die PLZ-Umkreissuche ein, nicht in die CZ/DE-Grenzvergleichstabelle (dafür bleiben nur die grenznahen Stationen relevant). `scripts/update_prices.py` unterstützt jetzt beliebige zusätzliche `plz_extra_anchors` pro Region für künftige ähnliche Fälle.
+- Preisverlauf-Balkendiagramm "filigraner" gemacht (Nutzerwunsch): dünnere Balken mit mehr Zwischenraum, plus eine helle Positionsmarkierung an der Balkenspitze – die das Auge exakter vergleichen kann als die Länge zweier fast gleich hoher Balken. Damit bleiben Tagesunterschiede trotz ehrlicher Nulllinie (siehe v2.7.0) besser erkennbar.
+
 ## [2.7.1] - 2026-09-08
 
 ### Behoben

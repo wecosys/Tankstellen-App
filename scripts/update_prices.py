@@ -33,6 +33,17 @@ REGIONS = {
         "cz_towns": ["Kraslice"],
         "cz_town_prefixes": ["Kraslice", "Vojtanov"],
         "de_center": {"lat": 50.3546, "lng": 12.4692},  # Klingenthal
+        # 08412 Werdau is a real PLZ users near here type in (see
+        # PLZ_COORDS in index.html), but it's ~42 km from Klingenthal -
+        # genuinely outside the 25 km crossing-area radius above, so no
+        # station near it would ever appear otherwise. Fetched separately
+        # (small radius, real coordinates) and kept OUT of the main
+        # de.stations list used for the CZ/DE crossing comparison table -
+        # it's not relevant to that comparison - and stored in
+        # de.plzStations, consulted only by the client's PLZ-proximity tool.
+        "plz_extra_anchors": [
+            {"label": "Werdau", "lat": 50.7333, "lng": 12.3833, "radius": 10},
+        ],
     },
     "oberfranken": {
         "label": "Bayern · Oberfranken",
@@ -169,12 +180,12 @@ def fetch_cz_region(town_list, town_prefixes=None, priority_keywords=None):
     return stations
 
 
-def fetch_de_region(center):
+def fetch_de_region(center, radius=25, limit=MAX_STATIONS_PER_SIDE):
     if not TANKERKOENIG_KEY:
         raise RuntimeError("TANKERKOENIG_API_KEY is not set")
     url = (
         "https://creativecommons.tankerkoenig.de/json/list.php"
-        f"?lat={center['lat']}&lng={center['lng']}&rad=25&sort=dist&type=all"
+        f"?lat={center['lat']}&lng={center['lng']}&rad={radius}&sort=dist&type=all"
         f"&apikey={TANKERKOENIG_KEY}"
     )
     resp = requests.get(url, timeout=20)
@@ -204,7 +215,7 @@ def fetch_de_region(center):
             entry["diesel"] = round(float(s["diesel"]), 3)
         if "e10" in entry or "diesel" in entry:
             stations.append(entry)
-        if len(stations) >= MAX_STATIONS_PER_SIDE:
+        if len(stations) >= limit:
             break
     return stations
 
@@ -266,10 +277,20 @@ def main():
         de_stations = fetch_de_region(cfg["de_center"])
         print(f"DE: {len(de_stations)} stations")
 
+        de_out = {"source": "Tankerkönig (Live-Stationsdaten)", "provisional": False, "stations": de_stations}
+
+        plz_stations = []
+        for anchor in cfg.get("plz_extra_anchors", []):
+            fetched = fetch_de_region(anchor, radius=anchor.get("radius", 10))
+            print(f"DE (extra anchor {anchor['label']}): {len(fetched)} stations")
+            plz_stations.extend(fetched)
+        if plz_stations:
+            de_out["plzStations"] = plz_stations
+
         regions_out[region_key] = {
             "label": cfg["label"],
             "cz": {"source": "mbenzin.cz", "stations": cz_stations},
-            "de": {"source": "Tankerkönig (Live-Stationsdaten)", "provisional": False, "stations": de_stations},
+            "de": de_out,
         }
 
         entry = {
