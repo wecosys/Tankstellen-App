@@ -657,7 +657,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.7.0</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.7.1</span>
       <small>Echte Stationen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -746,7 +746,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.7.0</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.7.1</p>
   </footer>
 
 </div>
@@ -942,28 +942,16 @@
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   }
 
-  // Tankerkoenig reports each DE station's real coordinates and postal code
-  // (data.json field "plz"/"lat"/"lng") - no geocoding API needed for this.
-  // The station whose own PLZ is numerically closest to the one the user
-  // typed stands in for "where the user is": its real coordinates become
-  // the reference point for a genuine distance-based "nearby" search,
-  // instead of just picking the cheapest station anywhere in the region.
-  function findReferenceStation(region, plz){
-    var plzNum = parseInt(plz, 10);
-    var best = null, bestDiff = Infinity;
-    region.de.stations.forEach(function(s){
-      if (typeof s.lat !== "number" || typeof s.lng !== "number" || !s.plz) return;
-      var diff = Math.abs(parseInt(s.plz, 10) - plzNum);
-      if (diff < bestDiff) { bestDiff = diff; best = s; }
-    });
-    return best;
-  }
-
   function updatePlzDeResult(region, dePriced){
     var box = document.getElementById("plzDeResult");
     if (!PLZ_RESULT_ACTIVE || !dePriced.length) { box.hidden = true; return; }
 
-    var ref = CONFIRMED_PLZ ? findReferenceStation(region, CONFIRMED_PLZ) : null;
+    // Real coordinates of the entered PLZ itself (PLZ_COORDS, below) - not a
+    // proxy via some station's own postcode, which can be numerically close
+    // while being geographically far away (German postcodes aren't ordered
+    // by distance). Only PLZ we have real coordinates for get a genuine
+    // "nearby" search; everything else falls back to region-wide cheapest.
+    var ref = CONFIRMED_PLZ ? PLZ_COORDS[CONFIRMED_PLZ] : null;
     var withDist = ref ? dePriced
       .filter(function(p){ return typeof p.station.lat === "number" && typeof p.station.lng === "number"; })
       .map(function(p){ return { p: p, km: distanceKm(ref.lat, ref.lng, p.station.lat, p.station.lng) }; }) : null;
@@ -1255,6 +1243,40 @@
     if (n >= 7000 && n <= 8648) return "vogtland";
     return null;
   }
+
+  // Real town coordinates (Wikipedia, DMS rounded to decimal degrees) for
+  // every PLZ in PLZ_REGION_OVERRIDES - used as the actual "you are here"
+  // point for the PLZ proximity search below. Deliberately NOT derived from
+  // any fetched station's own postcode: a PLZ can be numerically close to a
+  // station's postcode while being nowhere near it geographically (German
+  // postal codes aren't laid out by distance), which produced a wrong
+  // "nearest station" for PLZ with no station of their own nearby (e.g.
+  // 08412 Werdau matched a station ~30km away because its postcode was the
+  // closest number, not the closest place).
+  var PLZ_COORDS = {
+    "08248": { lat: 50.3546, lng: 12.4692 },  // Klingenthal
+    "08261": { lat: 50.4000, lng: 12.3333 },  // Schöneck/Vogtl.
+    "08258": { lat: 50.3167, lng: 12.3167 },  // Markneukirchen
+    "08626": { lat: 50.3167, lng: 12.2500 },  // Adorf/Vogtl.
+    "08223": { lat: 50.4667, lng: 12.3667 },  // Falkenstein/Vogtl.
+    "08209": { lat: 50.5167, lng: 12.4000 },  // Auerbach/Vogtl.
+    "08304": { lat: 50.5000, lng: 12.5167 },  // Schönheide
+    "08309": { lat: 50.5000, lng: 12.6000 },  // Eibenstock
+    "08412": { lat: 50.7333, lng: 12.3833 },  // Werdau
+    "95100": { lat: 50.1667, lng: 12.1333 },  // Selb
+    "95173": { lat: 50.2000, lng: 12.0833 },  // Schönwald (Bayern)
+    "95168": { lat: 50.1333, lng: 12.0000 },  // Marktleuthen
+    "95111": { lat: 50.2500, lng: 12.0333 },  // Rehau
+    "95707": { lat: 50.0833, lng: 12.1333 },  // Thiersheim
+    "95158": { lat: 50.1500, lng: 11.9500 },  // Kirchenlamitz
+    "95659": { lat: 50.0500, lng: 12.1833 },  // Arzberg (Oberfranken)
+    "08359": { lat: 50.4667, lng: 12.7667 },  // Breitenbrunn/Erzgeb.
+    "08349": { lat: 50.4333, lng: 12.7161 },  // Johanngeorgenstadt
+    "09484": { lat: 50.4192, lng: 12.9708 },  // Oberwiesenthal
+    "09474": { lat: 50.5167, lng: 12.9500 },  // Crottendorf
+    "08340": { lat: 50.5500, lng: 12.7833 },  // Schwarzenberg/Erzgeb.
+    "09465": { lat: 50.5000, lng: 12.9833 }   // Sehmatal
+  };
 
   var REGION_NAMES = {
     vogtland: "Sachsen · Vogtland",

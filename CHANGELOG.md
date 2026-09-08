@@ -4,6 +4,12 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.7.1] - 2026-09-08
+
+### Behoben
+- Nutzer meldete falsches Ergebnis: Bei PLZ 08412 (Werdau) zeigte das PLZ-Ergebnisfeld eine Tankstelle in Schönheide als "≈ 7,0 km von deiner PLZ" an – tatsächlich liegen beide Orte weit auseinander. Ursache: der Referenzpunkt für die Umkreissuche (v2.7.0) war die DE-Station, deren *eigene* Postleitzahl der eingegebenen PLZ numerisch am nächsten lag – das ist keine verlässliche Näherung, da deutsche Postleitzahlen nicht nach geografischer Nähe sortiert sind. Werdaus PLZ (08412) hatte zufällig eine Station mit ähnlicher PLZ-Zahl, die real aber weit entfernt liegt.
+- Fix: eigene Tabelle mit echten Koordinaten (Wikipedia-Werte) für jeden Ort, der einer PLZ in der App zugeordnet ist – die Umkreissuche nutzt jetzt die tatsächliche Position der eingegebenen PLZ als Referenzpunkt, nicht mehr den Umweg über eine zufällig ähnliche Stations-PLZ. Betrifft alle PLZ, nicht nur Werdau. Für PLZ ohne hinterlegte Koordinaten bleibt der Rückfall auf "günstigste in der Region" bestehen (kein falscher Distanzwert wird mehr angezeigt).
+
 ## [2.7.0] - 2026-09-08
 
 ### Geändert
