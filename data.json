@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T20:14:40+02:00",
+  "updatedAt": "2026-09-08T07:08:58+02:00",
   "fx": {
     "eurCzk": 24.2,
     "source": "frankfurter.app (EZB-Referenzkurs)"
@@ -50,30 +50,63 @@
           {
             "name": "STAR",
             "town": "Klingenthal",
-            "e10": 2.339,
-            "e5": 2.399,
-            "diesel": 2.319
+            "e10": 2.319,
+            "e5": 2.379,
+            "diesel": 2.299
+          },
+          {
+            "name": "TotalEnergies",
+            "town": "Schoeneck",
+            "e10": 2.329,
+            "e5": 2.389,
+            "diesel": 2.309
+          },
+          {
+            "name": "GULF",
+            "town": "Markneukirchen",
+            "e5": 2.379,
+            "diesel": 2.309
           },
           {
             "name": "AGIP ENI",
             "town": "Adorf",
-            "e10": 2.349,
-            "e5": 2.409,
+            "e10": 2.329,
+            "e5": 2.389,
+            "diesel": 2.319
+          },
+          {
+            "name": "ARAL",
+            "town": "Falkenstein",
+            "e10": 2.359,
+            "e5": 2.419,
             "diesel": 2.359
+          },
+          {
+            "name": "Tank & Waschcenter Auerbach",
+            "town": "Auerbach",
+            "e5": 2.328,
+            "diesel": 2.308
           },
           {
             "name": "AGIP ENI",
             "town": "Auerbach",
-            "e10": 2.349,
-            "e5": 2.409,
-            "diesel": 2.329
+            "e10": 2.329,
+            "e5": 2.389,
+            "diesel": 2.319
+          },
+          {
+            "name": "Freie Tankstelle",
+            "town": "Schönheide",
+            "e10": 2.369,
+            "e5": 2.389,
+            "diesel": 2.399
           },
           {
             "name": "bft",
             "town": "Auerbach",
             "e10": 2.279,
             "e5": 2.339,
-            "diesel": 2.319
+            "diesel": 2.299
           },
           {
             "name": "ARAL",
@@ -81,34 +114,6 @@
             "e10": 2.309,
             "e5": 2.369,
             "diesel": 2.319
-          },
-          {
-            "name": "bft",
-            "town": "Rodewisch",
-            "e10": 2.339,
-            "e5": 2.369,
-            "diesel": 2.329
-          },
-          {
-            "name": "Esso",
-            "town": "Oelsnitz/Vogtland",
-            "e10": 2.249,
-            "e5": 2.309,
-            "diesel": 2.289
-          },
-          {
-            "name": "ARAL",
-            "town": "Plauen",
-            "e10": 2.729,
-            "e5": 2.789,
-            "diesel": 2.799
-          },
-          {
-            "name": "TotalEnergies",
-            "town": "Treuen",
-            "e10": 2.269,
-            "e5": 2.319,
-            "diesel": 2.289
           }
         ]
       }
@@ -189,8 +194,8 @@
           {
             "name": "AVIA",
             "town": "Selb",
-            "e10": 2.229,
-            "e5": 2.289,
+            "e10": 2.199,
+            "e5": 2.259,
             "diesel": 2.249
           },
           {
@@ -203,36 +208,36 @@
           {
             "name": "AVIA",
             "town": "Selb",
-            "e10": 2.229,
-            "e5": 2.289,
+            "e10": 2.199,
+            "e5": 2.259,
             "diesel": 2.249
           },
           {
             "name": "ORLEN Express",
             "town": "Selb",
-            "e10": 2.209,
-            "e5": 2.269,
+            "e10": 2.179,
+            "e5": 2.239,
             "diesel": 2.229
           },
           {
             "name": "AVIA",
             "town": "Schönwald",
-            "e10": 2.229,
-            "e5": 2.289,
+            "e10": 2.199,
+            "e5": 2.259,
             "diesel": 2.249
           },
           {
             "name": "Leu Energie",
             "town": "Marktleuthen",
-            "e10": 2.209,
-            "e5": 2.259,
+            "e10": 2.149,
+            "e5": 2.199,
             "diesel": 2.229
           },
           {
             "name": "bft - Walther",
             "town": "Rehau",
-            "e10": 2.169,
-            "e5": 2.229,
+            "e10": 2.149,
+            "e5": 2.209,
             "diesel": 2.239
           },
           {
@@ -285,22 +290,36 @@
           {
             "name": "BFT",
             "town": "Breitenbrunn",
-            "e10": 2.299,
-            "e5": 2.359,
-            "diesel": 2.309
+            "e10": 2.289,
+            "e5": 2.349,
+            "diesel": 2.299
+          },
+          {
+            "name": "STAR",
+            "town": "Johanngeorgenstadt",
+            "e10": 2.289,
+            "e5": 2.349,
+            "diesel": 2.289
           },
           {
             "name": "Schmidt Mineralöl-Vertrieb GmbH Oberwiesental",
             "town": "Oberwiesenthal",
-            "e5": 2.359,
+            "e5": 2.329,
+            "diesel": 2.289
+          },
+          {
+            "name": "Q1",
+            "town": "Crottendorf",
+            "e10": 2.289,
+            "e5": 2.339,
             "diesel": 2.299
           },
           {
             "name": "freie Tankstelle",
             "town": "Schwarzenberg",
-            "e10": 2.359,
-            "e5": 2.379,
-            "diesel": 2.349
+            "e10": 2.319,
+            "e5": 2.339,
+            "diesel": 2.289
           },
           {
             "name": "ARAL",
@@ -310,45 +329,31 @@
             "diesel": 2.359
           },
           {
+            "name": "Schmidt Mineralöl -Vertrieb GmbH Scheibenberg",
+            "town": "Scheibenberg",
+            "e10": 2.269,
+            "e5": 2.329,
+            "diesel": 2.289
+          },
+          {
             "name": "Shell",
             "town": "Schwarzenberg",
-            "e10": 2.309,
-            "e5": 2.369,
-            "diesel": 2.319
+            "e10": 2.299,
+            "e5": 2.359,
+            "diesel": 2.309
           },
           {
             "name": "Q1 Automaten-Tankstelle",
             "town": "Sehmatal",
-            "e10": 2.299,
-            "e5": 2.329,
+            "e10": 2.269,
+            "e5": 2.319,
             "diesel": 2.279
           },
           {
             "name": "STAR",
             "town": "Schwarzenberg",
-            "e10": 2.299,
-            "e5": 2.359,
-            "diesel": 2.299
-          },
-          {
-            "name": "Q1",
-            "town": "Schwarzenberg",
-            "e10": 2.324,
-            "e5": 2.364,
-            "diesel": 2.304
-          },
-          {
-            "name": "BFT",
-            "town": "Bockau",
-            "e10": 2.379,
-            "e5": 2.439,
-            "diesel": 2.439
-          },
-          {
-            "name": "Calpam Express 24/7 Tanken",
-            "town": "Lauter-Bernsbach",
             "e10": 2.289,
-            "e5": 2.339,
+            "e5": 2.349,
             "diesel": 2.289
           }
         ]
@@ -429,6 +434,24 @@
           "fx": {
             "eurCzk": 24.2
           }
+        },
+        {
+          "date": "2026-09-08",
+          "cz": {
+            "e10": 39.9,
+            "e5": 39.9,
+            "premium": 41.9,
+            "diesel": 44.3
+          },
+          "de": {
+            "e10": 2.279,
+            "e5": 2.328,
+            "premium": 2.409,
+            "diesel": 2.299
+          },
+          "fx": {
+            "eurCzk": 24.2
+          }
         }
       ]
     },
@@ -505,6 +528,24 @@
           "fx": {
             "eurCzk": 24.2
           }
+        },
+        {
+          "date": "2026-09-08",
+          "cz": {
+            "e10": 39.9,
+            "e5": 39.9,
+            "premium": 41.9,
+            "diesel": 44.7
+          },
+          "de": {
+            "e10": 2.149,
+            "e5": 2.139,
+            "premium": 2.279,
+            "diesel": 2.229
+          },
+          "fx": {
+            "eurCzk": 24.2
+          }
         }
       ]
     },
@@ -522,6 +563,24 @@
             "e10": 2.289,
             "e5": 2.329,
             "premium": 2.419,
+            "diesel": 2.279
+          },
+          "fx": {
+            "eurCzk": 24.2
+          }
+        },
+        {
+          "date": "2026-09-08",
+          "cz": {
+            "e10": 45.9,
+            "e5": 45.9,
+            "premium": 48.3,
+            "diesel": 49.1
+          },
+          "de": {
+            "e10": 2.269,
+            "e5": 2.319,
+            "premium": 2.399,
             "diesel": 2.279
           },
           "fx": {
