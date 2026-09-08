@@ -4,6 +4,17 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.9.0] - 2026-09-08
+
+### Hinzugefügt
+- Zwei neue Regionen: **Sachsen · Dresden/Osterzgebirge** (Bad Gottleuba-Berggießhübel/Pirna ↔ Krásný Les, der A17/D8-Autobahn-Grenzübergang Dresden–Prag) und **Sachsen · Oberlausitz** (Zittau/Bautzen ↔ Hrádek nad Nisou). Vor der Recherche kurz per Websuche verifiziert, welche Übergänge in dieser Gegend tatsächlich relevant sind (A17/D8 als Hauptverbindung, Zittau/Hrádek nad Nisou für die Oberlausitz) statt zu raten.
+  - CZ-Seite Dresden: weder "Krásný Les" noch "Petrovice" (die Orte direkt am Autobahn-Grenzübergang) haben eine eigene mbenzin.cz-Seite – "Chabarovice" ist eine gültige, nach Entfernung sortierte Nachbarseite, die Chlumec, Ústí nad Labem und Krupka (Erzgebirgs-Grenzort) bereits ohne Filterung sinnvoll abdeckt.
+  - CZ-Seite Oberlausitz: Hrádek nad Nisou liegt direkt gegenüber Zittau, mit eigener mbenzin.cz-Seite und echten Stationen 0–200 m von der Grenze entfernt.
+  - Bautzen (~41 km von Zittau, genauso außerhalb des 25-km-Suchradius wie Werdau in Vogtland) bekommt nach demselben Muster einen eigenen `plz_extra_anchors`-Suchanker – Stationen fließen nur in die PLZ-Umkreissuche ein, nicht in die Grenzvergleichstabelle.
+
+### Geändert
+- Regions- und Kraftstoff-Auswahl stehen jetzt untereinander (statt nebeneinander) und haben jeweils eine eigene Beschriftung ("Region" / "Kraftstoff") – bei jetzt fünf Regionen wäre eine Zeile zu voll geworden.
+
 ## [2.8.1] - 2026-09-08
 
 ### Geändert

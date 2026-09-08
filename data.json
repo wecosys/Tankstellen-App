@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-08T09:06:56+02:00",
+  "updatedAt": "2026-09-08T09:37:14+02:00",
   "fx": {
     "eurCzk": 24.2,
     "source": "frankfurter.app (EZB-Referenzkurs)"
@@ -153,8 +153,8 @@
             "lat": 50.73511,
             "lng": 12.37341,
             "plz": "8412",
-            "e10": 2.309,
-            "e5": 2.369,
+            "e10": 2.289,
+            "e5": 2.349,
             "diesel": 2.309
           },
           {
@@ -173,8 +173,8 @@
             "lat": 50.71364,
             "lng": 12.37183,
             "plz": "8427",
-            "e10": 2.289,
-            "e5": 2.349,
+            "e10": 2.269,
+            "e5": 2.329,
             "diesel": 2.309
           },
           {
@@ -183,8 +183,8 @@
             "lat": 50.7554,
             "lng": 12.3716,
             "plz": "8412",
-            "e10": 2.309,
-            "e5": 2.369,
+            "e10": 2.289,
+            "e5": 2.349,
             "diesel": 2.309
           },
           {
@@ -193,8 +193,8 @@
             "lat": 50.71197,
             "lng": 12.41651,
             "plz": "8412",
-            "e10": 2.299,
-            "e5": 2.359,
+            "e10": 2.279,
+            "e5": 2.339,
             "diesel": 2.299
           },
           {
@@ -203,9 +203,9 @@
             "lat": 50.70928,
             "lng": 12.46517,
             "plz": "8056",
-            "e10": 2.289,
-            "e5": 2.349,
-            "diesel": 2.309
+            "e10": 2.269,
+            "e5": 2.329,
+            "diesel": 2.289
           },
           {
             "name": "TotalEnergies",
@@ -213,9 +213,9 @@
             "lat": 50.7084,
             "lng": 12.46476,
             "plz": "8056",
-            "e10": 2.319,
-            "e5": 2.379,
-            "diesel": 2.319
+            "e10": 2.299,
+            "e5": 2.359,
+            "diesel": 2.299
           },
           {
             "name": "ARAL",
@@ -243,9 +243,9 @@
             "lat": 50.71416,
             "lng": 12.48154,
             "plz": "8056",
-            "e10": 2.289,
-            "e5": 2.349,
-            "diesel": 2.309
+            "e10": 2.269,
+            "e5": 2.329,
+            "diesel": 2.289
           }
         ]
       }
@@ -484,7 +484,7 @@
             "lat": 50.5031,
             "lng": 12.9323,
             "plz": "9474",
-            "e10": 2.289,
+            "e10": 2.279,
             "e5": 2.339,
             "diesel": 2.299
           },
@@ -547,6 +547,448 @@
             "e10": 2.289,
             "e5": 2.349,
             "diesel": 2.289
+          }
+        ]
+      }
+    },
+    "dresden": {
+      "label": "Sachsen · Dresden/Osterzgebirge",
+      "cz": {
+        "source": "mbenzin.cz",
+        "stations": [
+          {
+            "name": "Tank ONO",
+            "town": "Chlumec, Ústecká 228",
+            "e10": 42.5,
+            "diesel": 45.5,
+            "premium": 44.9
+          },
+          {
+            "name": "MOL",
+            "town": "Varvažov, dálnice D8, směr Nemecko",
+            "e10": 46.9,
+            "diesel": 49.9
+          },
+          {
+            "name": "MOL",
+            "town": "Varvažov, dálnice D8, směr Praha",
+            "e10": 46.9,
+            "diesel": 49.9
+          },
+          {
+            "name": "EuroOil",
+            "town": "Ústí nad Labem, Všebořická 106",
+            "e10": 41.9,
+            "diesel": 46.5
+          },
+          {
+            "name": "Nord",
+            "town": "Krupka, Revoluční",
+            "e10": 43.9,
+            "diesel": 47.5
+          },
+          {
+            "name": "Zaris",
+            "town": "Ústí nad Labem, Masarykova 1024/236",
+            "e10": 43.8,
+            "diesel": 46.8
+          },
+          {
+            "name": "Tank ONO",
+            "town": "Ústí nad Labem, Božtěšická",
+            "e10": 42.5,
+            "diesel": 45.5,
+            "premium": 44.9
+          },
+          {
+            "name": "Shell",
+            "town": "Ústí nad Labem, Sociální péče",
+            "e10": 44.5,
+            "diesel": 48.5
+          },
+          {
+            "name": "G.A.S. Petroleum",
+            "town": "Ústí nad Labem, Tovární 3444/21",
+            "e10": 42.5,
+            "diesel": 45.5
+          },
+          {
+            "name": "Globus",
+            "town": "Trmice, Tyršova 869",
+            "e10": 43.4,
+            "diesel": 46.9,
+            "premium": 44.4
+          }
+        ]
+      },
+      "de": {
+        "source": "Tankerkönig (Live-Stationsdaten)",
+        "provisional": false,
+        "stations": [
+          {
+            "name": "ESSO",
+            "town": "KURORT BERGGIESSHUEBEL",
+            "lat": 50.88475,
+            "lng": 13.95509,
+            "plz": "1816",
+            "e10": 2.269,
+            "e5": 2.329,
+            "diesel": 2.309
+          },
+          {
+            "name": "ARAL",
+            "town": "Pirna",
+            "lat": 50.95316,
+            "lng": 13.93844,
+            "plz": "1796",
+            "e10": 2.279,
+            "e5": 2.339,
+            "diesel": 2.329
+          },
+          {
+            "name": "ARAL",
+            "town": "Pirna",
+            "lat": 50.9578,
+            "lng": 13.94946,
+            "plz": "1796",
+            "e10": 2.279,
+            "e5": 2.339,
+            "diesel": 2.319
+          },
+          {
+            "name": "HEM",
+            "town": "Pirna",
+            "lat": 50.95647,
+            "lng": 13.91314,
+            "plz": "1796",
+            "e10": 2.259,
+            "e5": 2.319,
+            "diesel": 2.299
+          },
+          {
+            "name": "SB",
+            "town": "Pirna",
+            "lat": 50.9578,
+            "lng": 13.9242,
+            "plz": "1796",
+            "e10": 2.259,
+            "e5": 2.319,
+            "diesel": 2.299
+          },
+          {
+            "name": "Sprint",
+            "town": "Pirna",
+            "lat": 50.95735,
+            "lng": 13.9165,
+            "plz": "1796",
+            "e10": 2.259,
+            "e5": 2.319,
+            "diesel": 2.299
+          },
+          {
+            "name": "BFT",
+            "town": "Glashütte",
+            "lat": 50.84288,
+            "lng": 13.77245,
+            "plz": "1768",
+            "e5": 2.319,
+            "diesel": 2.279
+          },
+          {
+            "name": "Supermarkt",
+            "town": "Pirna",
+            "lat": 50.98086,
+            "lng": 13.94946,
+            "plz": "1796",
+            "e10": 2.249,
+            "e5": 2.309,
+            "diesel": 2.289
+          },
+          {
+            "name": "JET",
+            "town": "PIRNA",
+            "lat": 50.98133,
+            "lng": 13.92638,
+            "plz": "1796",
+            "e10": 2.259,
+            "e5": 2.319,
+            "diesel": 2.299
+          },
+          {
+            "name": "STAR",
+            "town": "Heidenau",
+            "lat": 50.97239,
+            "lng": 13.86371,
+            "plz": "1809",
+            "e10": 2.259,
+            "e5": 2.319,
+            "diesel": 2.299
+          }
+        ]
+      }
+    },
+    "oberlausitz": {
+      "label": "Sachsen · Oberlausitz",
+      "cz": {
+        "source": "mbenzin.cz",
+        "stations": [
+          {
+            "name": "MOL",
+            "town": "Hrádek nad Nisou, Liberecká",
+            "e10": 44.5,
+            "diesel": 47.9
+          },
+          {
+            "name": "EuroOil",
+            "town": "Hrádek nad Nisou, Liberecká 732",
+            "e10": 41.9,
+            "diesel": 45.6
+          },
+          {
+            "name": "7 Station",
+            "town": "Hrádek nad Nisou, Žitavská 747",
+            "e10": 44.5,
+            "diesel": 48.3
+          },
+          {
+            "name": "Robin Oil",
+            "town": "Jitrava - Rynoltice, silnice E442",
+            "e10": 41.9,
+            "diesel": 45.3
+          },
+          {
+            "name": "MOL",
+            "town": "Chrastava, Bilokostelecka",
+            "e10": 44.5,
+            "diesel": 48.5
+          },
+          {
+            "name": "Orlen",
+            "town": "Rynoltice, Rynoltice 151",
+            "e10": 42.9,
+            "diesel": 45.9
+          },
+          {
+            "name": "Orlen",
+            "town": "Dolní Chrastava, Nádražní",
+            "e10": 41.9,
+            "diesel": 45.5
+          },
+          {
+            "name": "EuroOil",
+            "town": "Chrastava, Novoborská 8",
+            "e10": 41.9,
+            "diesel": 46.9
+          },
+          {
+            "name": "Orlen",
+            "town": "Jablonné v Podještědí, silnice E442",
+            "e10": 42.5,
+            "diesel": 45.5
+          },
+          {
+            "name": "MOL",
+            "town": "Jablonné v Podještědí, U Koupaliště 30",
+            "e10": 43.9,
+            "diesel": 47.9
+          }
+        ]
+      },
+      "de": {
+        "source": "Tankerkönig (Live-Stationsdaten)",
+        "provisional": false,
+        "stations": [
+          {
+            "name": "ARAL",
+            "town": "Zittau",
+            "lat": 50.89385,
+            "lng": 14.80181,
+            "plz": "2763",
+            "e10": 2.279,
+            "e5": 2.339,
+            "diesel": 2.289
+          },
+          {
+            "name": "Q1",
+            "town": "Zittau",
+            "lat": 50.9017,
+            "lng": 14.8177,
+            "plz": "2763",
+            "e10": 2.279,
+            "e5": 2.329,
+            "diesel": 2.269
+          },
+          {
+            "name": "Esso",
+            "town": "Zittau-Hirschfelde",
+            "lat": 50.9374,
+            "lng": 14.8772,
+            "plz": "2788",
+            "e10": 2.269,
+            "e5": 2.329,
+            "diesel": 2.279
+          },
+          {
+            "name": "Sprint",
+            "town": "Oderwitz",
+            "lat": 50.96708,
+            "lng": 14.71069,
+            "plz": "2791",
+            "e10": 2.249,
+            "e5": 2.309,
+            "diesel": 2.259
+          },
+          {
+            "name": "GULF",
+            "town": "Schönau - Berzdorf a. d. Eigen OT Kiesdorf",
+            "lat": 51.0389,
+            "lng": 14.883,
+            "plz": "2899",
+            "e10": 2.249,
+            "e5": 2.269,
+            "diesel": 2.219
+          },
+          {
+            "name": "ARAL",
+            "town": "Ebersbach",
+            "lat": 50.99797,
+            "lng": 14.61652,
+            "plz": "2730",
+            "e10": 2.279,
+            "e5": 2.339,
+            "diesel": 2.279
+          },
+          {
+            "name": "Sprint",
+            "town": "Löbau",
+            "lat": 51.08424,
+            "lng": 14.6607,
+            "plz": "2708",
+            "e10": 2.219,
+            "e5": 2.279,
+            "diesel": 2.259
+          },
+          {
+            "name": "Sprint",
+            "town": "Neusalza-Spremberg",
+            "lat": 51.03664,
+            "lng": 14.54419,
+            "plz": "2742",
+            "e10": 2.239,
+            "e5": 2.299,
+            "diesel": 2.269
+          },
+          {
+            "name": "TotalEnergies",
+            "town": "Loebau",
+            "lat": 51.1033,
+            "lng": 14.67016,
+            "plz": "2708",
+            "e10": 2.229,
+            "e5": 2.289,
+            "diesel": 2.239
+          }
+        ],
+        "plzStations": [
+          {
+            "name": "ARAL",
+            "town": "Bautzen",
+            "lat": 51.17923,
+            "lng": 14.4084,
+            "plz": "2625",
+            "e10": 2.269,
+            "e5": 2.329,
+            "diesel": 2.259
+          },
+          {
+            "name": "T",
+            "town": "Bautzen",
+            "lat": 51.18043,
+            "lng": 14.43009,
+            "plz": "2625",
+            "e10": 2.209,
+            "e5": 2.269,
+            "diesel": 2.219
+          },
+          {
+            "name": "ESSO",
+            "town": "BAUTZEN",
+            "lat": 51.18002,
+            "lng": 14.40244,
+            "plz": "2625",
+            "e10": 2.219,
+            "e5": 2.279,
+            "diesel": 2.239
+          },
+          {
+            "name": "JET",
+            "town": "BAUTZEN",
+            "lat": 51.17197,
+            "lng": 14.43611,
+            "plz": "2625",
+            "e10": 2.209,
+            "e5": 2.269,
+            "diesel": 2.219
+          },
+          {
+            "name": "ARAL",
+            "town": "Bautzen",
+            "lat": 51.19018,
+            "lng": 14.45167,
+            "plz": "2625",
+            "e10": 2.269,
+            "e5": 2.329,
+            "diesel": 2.259
+          },
+          {
+            "name": "ARAL",
+            "town": "Bautzen",
+            "lat": 51.17863,
+            "lng": 14.45308,
+            "plz": "2625",
+            "e10": 2.269,
+            "e5": 2.329,
+            "diesel": 2.259
+          },
+          {
+            "name": "TS am Marktkauf",
+            "town": "Bautzen",
+            "lat": 51.18824,
+            "lng": 14.45634,
+            "plz": "2625",
+            "e10": 2.179,
+            "e5": 2.239,
+            "diesel": 2.189
+          },
+          {
+            "name": "SB",
+            "town": "Bautzen",
+            "lat": 51.17319,
+            "lng": 14.47116,
+            "plz": "2627",
+            "e10": 2.229,
+            "e5": 2.289,
+            "diesel": 2.259
+          },
+          {
+            "name": "Sprint",
+            "town": "Ebendoerfel",
+            "lat": 51.14359,
+            "lng": 14.44006,
+            "plz": "2692",
+            "e10": 2.209,
+            "e5": 2.269,
+            "diesel": 2.259
+          },
+          {
+            "name": "ARAL",
+            "town": "Bautzen",
+            "lat": 51.19949,
+            "lng": 14.33199,
+            "plz": "2625",
+            "e10": 2.659,
+            "e5": 2.719,
+            "diesel": 2.719
           }
         ]
       }
@@ -774,6 +1216,50 @@
             "e5": 2.319,
             "premium": 2.399,
             "diesel": 2.279
+          },
+          "fx": {
+            "eurCzk": 24.2
+          }
+        }
+      ]
+    },
+    "dresden": {
+      "entries": [
+        {
+          "date": "2026-09-08",
+          "cz": {
+            "e10": 41.9,
+            "e5": 41.9,
+            "premium": 44.3,
+            "diesel": 45.5
+          },
+          "de": {
+            "e10": 2.249,
+            "e5": 2.309,
+            "premium": 2.379,
+            "diesel": 2.279
+          },
+          "fx": {
+            "eurCzk": 24.2
+          }
+        }
+      ]
+    },
+    "oberlausitz": {
+      "entries": [
+        {
+          "date": "2026-09-08",
+          "cz": {
+            "e10": 41.9,
+            "e5": 41.9,
+            "premium": 44.3,
+            "diesel": 45.3
+          },
+          "de": {
+            "e10": 2.219,
+            "e5": 2.269,
+            "premium": 2.349,
+            "diesel": 2.219
           },
           "fx": {
             "eurCzk": 24.2

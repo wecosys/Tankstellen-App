@@ -1,6 +1,6 @@
 # Tankpreise Grenzvergleich
 
-**Version 2.8.1** · [Changelog](CHANGELOG.md)
+**Version 2.9.0** · [Changelog](CHANGELOG.md)
 
 Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wählbar nach Region (Sachsen · Vogtland, Bayern · Oberfranken oder Sachsen · Erzgebirgskreis) und Kraftstoff, inklusive Kronen-Euro-Umrechnung, Preisverlauf und Google-Maps-Links zu jeder Station.
 
@@ -9,7 +9,7 @@ Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wäh
 
 ## Was die App zeigt
 
-- Regions-Auswahl: **Sachsen · Vogtland** (Klingenthal/Werdau ↔ Vojtanov/Kraslice), **Bayern · Oberfranken** (Selb ↔ Cheb/Aš) und **Sachsen · Erzgebirgskreis** (Johanngeorgenstadt ↔ Potůčky, Oberwiesenthal ↔ Boží Dar)
+- Regions-Auswahl: **Sachsen · Vogtland** (Klingenthal/Werdau ↔ Vojtanov/Kraslice), **Bayern · Oberfranken** (Selb ↔ Cheb/Aš), **Sachsen · Erzgebirgskreis** (Johanngeorgenstadt ↔ Potůčky, Oberwiesenthal ↔ Boží Dar), **Sachsen · Dresden/Osterzgebirge** (Bad Gottleuba-Berggießhübel/Pirna ↔ Krásný Les/Chabařovice, A17/D8) und **Sachsen · Oberlausitz** (Zittau/Bautzen ↔ Hrádek nad Nisou)
 - Echte, einzelne Tankstellen je Region und Land (keine Länder-Durchschnitte), günstigste zuerst
 - Drei Kraftstoffarten: Natural 95 (entspricht Super E10), Premium (98 Oktan), Diesel – mit `*`-Kennzeichnung, wenn ein Wert ein Richtwert statt eines gemeldeten Preises ist
 - Tankrechner mit freier Auswahl der tatsächlichen CZ- und DE-Station

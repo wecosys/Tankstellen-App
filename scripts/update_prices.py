@@ -66,6 +66,35 @@ REGIONS = {
         "cz_town_prefixes": ["Boží Dar", "Potůčky"],
         "de_center": {"lat": 50.4263, "lng": 12.8424},  # midpoint Johanngeorgenstadt/Oberwiesenthal
     },
+    "dresden": {
+        "label": "Sachsen · Dresden/Osterzgebirge",
+        # The A17/D8 motorway crossing itself is "Breitenau (DE) - Krásný Les
+        # (CZ)" - a modern Autobahn border with no real settlement on either
+        # side, and neither "Krasny-Les" nor "Petrovice" has an mbenzin.cz
+        # town page. "Chabarovice" is a valid nearby page whose "nearest
+        # first" listing already reaches Chlumec, Ústí nad Labem and Krupka
+        # (the Erzgebirge foothill town on the DE-CZ border) within ~10 km,
+        # without needing prefix filtering.
+        "cz_towns": ["Chabarovice"],
+        "cz_town_prefixes": None,
+        "de_center": {"lat": 50.85, "lng": 13.95},  # Bad Gottleuba-Berggießhübel
+    },
+    "oberlausitz": {
+        "label": "Sachsen · Oberlausitz",
+        # Hrádek nad Nisou is directly on the border opposite Zittau, with
+        # its own mbenzin.cz page and real stations right at the crossing
+        # (0-200m) - no filtering or extra anchor needed for the crossing
+        # itself.
+        "cz_towns": ["Hradek-nad-Nisou"],
+        "cz_town_prefixes": None,
+        "de_center": {"lat": 50.9, "lng": 14.8},  # Zittau
+        # Bautzen (~41 km from Zittau) is genuinely outside the 25 km
+        # crossing-area radius, same situation as Werdau in vogtland above -
+        # fetched separately into de.plzStations, not the main crossing table.
+        "plz_extra_anchors": [
+            {"label": "Bautzen", "lat": 51.1833, "lng": 14.4167, "radius": 10},
+        ],
+    },
 }
 
 MAX_STATIONS_PER_SIDE = 10
