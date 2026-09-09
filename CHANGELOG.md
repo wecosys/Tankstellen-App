@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.11.3] - 2026-09-09
+
+### Geändert
+- **Umweg-Feld auf einfache Strecke umgestellt.** "Zusätzliche km (Hin+Zurück)" hieß bisher, dass man die volle Hin- und Rückfahrt eintragen musste. Jetzt zählt die einfache Strecke zur CZ-Station – realistischer, da man auf dem Hinweg meist noch in Deutschland getankt hat. Feld und Kachel entsprechend umbenannt ("Zusätzliche km (einfache Strecke)", "Kosten einfache Strecke").
+
 ## [2.11.2] - 2026-09-09
 
 ### Behoben
