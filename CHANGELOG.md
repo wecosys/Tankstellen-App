@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.11.1] - 2026-09-09
+
+### Behoben
+- **Kosten Hin- und Rückfahrt rechnete zum falschen Preis.** Die Fahrtkosten des Umwegs wurden zum DE-Preis bewertet – logisch falsch, da man ja gerade deshalb nach CZ fährt, um dort günstiger zu tanken. Rechnet jetzt zum CZ-Preis (in Euro umgerechnet), macht die Endersparnis realistischer.
+
 ## [2.11.0] - 2026-09-09
 
 Feedback aus einem Kunden-Test.
