@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.11.6] - 2026-09-09
+
+### Geändert
+- **"Über diese App"-Link verschoben.** Störte im Header die Optik neben Titel und Versionsnummer – jetzt rechtsbündig neben der Überschrift "Stationen im Grenzgebiet". Header wieder wie vor v2.11.5.
+
 ## [2.11.5] - 2026-09-09
 
 ### Hinzugefügt
