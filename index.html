@@ -620,11 +620,6 @@
     font-weight:600;
     color:var(--ink);
   }
-  .history-meta{
-    font-size:.72rem;
-    color:var(--muted);
-    margin-top:8px;
-  }
   .chart-empty{
     display:flex;
     align-items:center;
@@ -667,7 +662,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.10.0</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.10.1</span>
       <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -765,10 +760,9 @@
   </section>
 
   <section class="history reveal">
-    <h2>Preisverlauf (letzte 30 Tage, Durchschnittspreis aller Stationen pro Tag)</h2>
+    <h2>Preisverlauf (letzte 14 Tage, Durchschnittspreis aller Stationen pro Tag)</h2>
     <p class="sub">Bezieht sich immer auf die oben ausgewählte Region – beim Wechseln der Region ändert sich auch der Verlauf.</p>
     <div class="mini-charts" id="miniCharts"><!-- filled by renderChart() --></div>
-    <div class="history-meta" id="historyMeta"></div>
   </section>
 
   <footer>
@@ -779,7 +773,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.10.0</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.10.1</p>
   </footer>
 
 </div>
@@ -1166,7 +1160,7 @@
   }
 
   var MINI_W = 340, MINI_H = 168, MINI_PAD_L = 44, MINI_PAD_R = 8, MINI_PAD_T = 12, MINI_PAD_B = 22;
-  var HISTORY_WINDOW_DAYS = 30;
+  var HISTORY_WINDOW_DAYS = 14;
 
   function miniChartMarkup(side, label, colorVar, pts, key){
     var lastI = pts.length - 1;
@@ -1234,6 +1228,11 @@
       return '<line x1="' + padL + '" y1="' + y.toFixed(1) + '" x2="' + (W - padR) + '" y2="' + y.toFixed(1) + '" stroke="var(--line)" stroke-width="1"/>' +
         '<text x="' + (padL - 8) + '" y="' + (y + 3).toFixed(1) + '" text-anchor="end" font-size="8.5" font-family="IBM Plex Mono, monospace" fill="var(--muted)">' + fmtEur(v) + '</text>';
     }).join("");
+    // A visibly stronger baseline at zero - the actual "zentrale Basis" every
+    // bar grows from, drawn heavier than the two tick gridlines above so
+    // it's unmistakably the shared starting line for both mini-charts.
+    var baseline = '<line x1="' + padL + '" y1="' + yOf(0).toFixed(1) + '" x2="' + (W - padR) + '" y2="' + yOf(0).toFixed(1) + '" stroke="var(--muted)" stroke-width="1.5"/>';
+    gridSvg += baseline;
 
     var barsSvg = pts.map(function(p, i){
       var top = yOf(p[key]);
@@ -1250,9 +1249,18 @@
       );
     }).join("");
 
-    var xLabelIdxs = n <= 2 ? [0, lastI] : [0, Math.round(lastI / 2), lastI];
+    // Below a handful of bars, label every date - sampling down to just
+    // start/middle/end (as the 30-day view needs to, for space) looks like
+    // random gaps in the data rather than a deliberate label density.
+    var xLabelIdxs;
+    if (n <= 8) {
+      xLabelIdxs = pts.map(function(_, i){ return i; });
+    } else {
+      xLabelIdxs = [0, Math.round(lastI / 2), lastI];
+    }
     var xLabelsSvg = xLabelIdxs.map(function(i){
-      return '<text x="' + (slotX(i) + slotW / 2).toFixed(1) + '" y="' + (H - 4) + '" text-anchor="' + (i === 0 ? "start" : i === lastI ? "end" : "middle") + '" font-size="8.5" font-family="IBM Plex Mono, monospace" fill="var(--muted)">' + fmtShortDate(pts[i].date) + '</text>';
+      var anchor = i === 0 ? "start" : i === lastI ? "end" : "middle";
+      return '<text x="' + (slotX(i) + slotW / 2).toFixed(1) + '" y="' + (H - 4) + '" text-anchor="' + anchor + '" font-size="8.5" font-family="IBM Plex Mono, monospace" fill="var(--muted)">' + fmtShortDate(pts[i].date) + '</text>';
     }).join("");
 
     var hitRects = pts.map(function(p, i){
@@ -1324,7 +1332,6 @@
     var allPts = historyPoints();
     var pts = allPts.slice(-HISTORY_WINDOW_DAYS);
     var container = document.getElementById("miniCharts");
-    var meta = document.getElementById("historyMeta");
 
     if (pts.length < 2) {
       container.innerHTML = '<div class="chart-empty">' +
@@ -1332,7 +1339,6 @@
           ? 'Noch keine Verlaufsdaten für diese Auswahl.'
           : 'Erst 1 Datenpunkt (' + fmtShortDate(pts[0].date) + ') – der Verlauf füllt sich ab morgen täglich.') +
         '</div>';
-      meta.textContent = '';
       return;
     }
 
@@ -1342,11 +1348,6 @@
 
     wireMiniChart("cz", pts, "czEur");
     wireMiniChart("de", pts, "de");
-
-    var days = pts.length;
-    meta.textContent = days < HISTORY_WINDOW_DAYS
-      ? days + " von " + HISTORY_WINDOW_DAYS + " Tagen gefüllt. Der Verlauf wächst täglich weiter."
-      : "Letzte " + HISTORY_WINDOW_DAYS + " Tage.";
   }
 
   document.getElementById("literInput").addEventListener("input", updateCalc);

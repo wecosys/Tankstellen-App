@@ -4,6 +4,16 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.10.1] - 2026-09-09
+
+### Entfernt
+- Zeile "X von 30 Tagen gefüllt. Der Verlauf wächst täglich weiter." unter dem Preisverlauf entfernt – keine Information, die Endnutzer:innen brauchen.
+
+### Geändert
+- Preisverlauf-Fenster von 30 auf **14 Tage** verkürzt – reicht als Rückblick.
+- Jede Mini-Chart-Spalte hat jetzt eine sichtbar hervorgehobene Nulllinie (Basis, von der alle Balken ausgehen), statt nur der beiden dünnen Hilfslinien.
+- Datumsbeschriftung unter den Balken zeigt bis 8 Tage jedes Datum einzeln statt nur Anfang/Mitte/Ende – bei wenigen Tagen wirkten die übersprungenen Daten wie fehlende Daten. Ab 9 Tagen (und im vollen 14-Tage-Fenster) bleibt die knappere Anfang/Mitte/Ende-Beschriftung, damit es nicht zu eng wird.
+
 ## [2.10.0] - 2026-09-09
 
 ### Hinzugefügt
