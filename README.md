@@ -1,6 +1,6 @@
 # Tankpreise Grenzvergleich
 
-**Version 2.11.4** · [Changelog](CHANGELOG.md)
+**Version 2.11.5** · [Changelog](CHANGELOG.md)
 
 Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wählbar nach Region (Sachsen · Vogtland, Bayern · Oberfranken oder Sachsen · Erzgebirgskreis) und Kraftstoff, inklusive Kronen-Euro-Umrechnung, Preisverlauf und Google-Maps-Links zu jeder Station.
 
@@ -45,6 +45,7 @@ Dabei musste am Hostnamen `tanken` zunächst der bestehende A-Record sowie die v
 
 - [`index.html`](index.html) – die App (wird über GitHub Pages unter `tanken.wecosys.com` ausgeliefert und als Claude-Artifact-Fragment veröffentlicht)
 - [`favicon.svg`](favicon.svg) – Logo/Favicon, Hell-/Dunkelmodus-fähig
+- [`BESCHREIBUNG.md`](BESCHREIBUNG.md) – einfache Nutzer-Beschreibung, aus der App heraus verlinkt ("ⓘ Über diese App")
 - [`data.json`](data.json) – aktuelle Preisdaten, täglich per GitHub Action aktualisiert
 - [`scripts/update_prices.py`](scripts/update_prices.py) – holt die Preise (Tankerkönig + mbenzin.cz) und schreibt `data.json`
 - [`.github/workflows/update-prices.yml`](.github/workflows/update-prices.yml) – täglicher Automatisierungs-Workflow

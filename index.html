@@ -143,6 +143,26 @@
     position:relative;
     top:-2px;
   }
+  .about-link{
+    display:inline-block;
+    font-family:"IBM Plex Sans", sans-serif;
+    text-transform:none;
+    font-size:.72rem;
+    font-weight:500;
+    letter-spacing:0;
+    color:var(--muted);
+    margin-left:10px;
+    vertical-align:middle;
+    position:relative;
+    top:-2px;
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+  }
+  .about-link:hover,
+  .about-link:focus-visible{
+    color:var(--focus);
+    border-bottom-color:var(--focus);
+  }
   .status{
     text-align:right;
     font-family:"IBM Plex Mono", ui-monospace, monospace;
@@ -686,7 +706,7 @@
   <header class="gantry reveal">
     <h1 class="gantry-title">
       <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 6C32 6 14 26 14 40a18 18 0 0 0 36 0C50 26 32 6 32 6Z" fill="var(--accent-cz)"/><path d="M32 6C32 6 50 26 50 40a18 18 0 0 1-18 18Z" fill="var(--accent-de)"/><path d="M32 8v50" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round"/></svg>
-      <span class="gantry-title-text">Tankpreise Grenzvergleich<span class="version-badge">v2.11.4</span>
+      <span class="gantry-title-text">Tankpreise Grenzvergleich<span class="version-badge">v2.11.5</span><a class="about-link" href="BESCHREIBUNG.md" target="_blank" rel="noopener">ⓘ Über diese App</a>
         <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
       </span>
     </h1>
@@ -802,7 +822,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.11.4</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.11.5</p>
   </footer>
 
 </div>

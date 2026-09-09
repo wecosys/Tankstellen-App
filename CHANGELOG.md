@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.11.5] - 2026-09-09
+
+### Hinzugefügt
+- **Einfache App-Beschreibung.** Neue Datei `BESCHREIBUNG.md` erklärt kurz und nicht-technisch, was die App macht, wie man sie benutzt und woher die Daten kommen. Direkt aus der App heraus erreichbar über den neuen Link "ⓘ Über diese App" im Header, neben der Versionsnummer.
+
 ## [2.11.4] - 2026-09-09
 
 ### Geändert
