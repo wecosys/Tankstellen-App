@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.10.3] - 2026-09-09
+
+### Hinzugefügt
+- **Logo/Favicon.** Eine eigene Bildmarke: ein Tropfen, links in Vogtland-/CZ-Blau, rechts in DE-Rostorange geteilt – Tankstellen-Symbolik plus die Grenzvergleichs-Idee in einem Zeichen. Erscheint als kleines Icon vor dem Titel im Header (nutzt dieselben CSS-Variablen wie der Rest der App, passt sich also automatisch Hell-/Dunkelmodus an) und als eigenständige `favicon.svg` im Browser-Tab (mit eigenem `prefers-color-scheme`-Umschalter, da Favicons keinen Zugriff auf die Seiten-eigenen CSS-Variablen haben).
+
 ## [2.10.2] - 2026-09-09
 
 ### Geändert

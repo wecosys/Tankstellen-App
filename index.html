@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tankpreise Grenzvergleich</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -103,6 +104,14 @@
     line-height:1.05;
     text-wrap:balance;
     margin:0;
+  }
+  .logo-mark{
+    display:inline-block;
+    width:.95em;
+    height:.95em;
+    vertical-align:-.12em;
+    margin-right:.15em;
+    flex:none;
   }
   .gantry-title small{
     display:block;
@@ -672,7 +681,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.10.2</span>
+    <h1 class="gantry-title"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 6C32 6 14 26 14 40a18 18 0 0 0 36 0C50 26 32 6 32 6Z" fill="var(--accent-cz)"/><path d="M32 6C32 6 50 26 50 40a18 18 0 0 1-18 18Z" fill="var(--accent-de)"/><path d="M32 8v50" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round"/></svg>Tankpreise Grenzvergleich<span class="version-badge">v2.10.3</span>
       <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -783,7 +792,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.10.2</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.10.3</p>
   </footer>
 
 </div>
