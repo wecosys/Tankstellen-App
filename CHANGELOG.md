@@ -4,6 +4,14 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.11.0] - 2026-09-09
+
+Feedback aus einem Kunden-Test.
+
+### Geändert
+- **Tankrechner: DE-Station folgt jetzt der PLZ-Auswahl.** Nach Eingabe der PLZ war die im Umkreis gefundene günstigste DE-Tankstelle bisher nur in der grünen Info-Box zu sehen, im Tankrechner selbst stand aber weiterhin die günstigste Station der ganzen Region. Sie steht jetzt immer als erster Eintrag im DE-Station-Dropdown und ist automatisch vorausgewählt – bleibt auch beim Wechsel von Region oder Kraftstoffart konsequent an die PLZ gekoppelt (wird für die jeweils neue Auswahl passend neu ermittelt), statt stillschweigend auf die regionsweit günstigste Station zurückzufallen.
+- **Fahrtkosten-Aufschlüsselung im Tankrechner übersichtlicher.** Statt nur einer "Netto-Ersparnis" zeigt der Rechner jetzt die volle Rechenkette als fünf Kacheln: Preis CZ-Station, Preis DE-Station, Ersparnis in CZ, Kosten Hin- und Rückfahrt, Endersparnis. Erscheint weiterhin nur, wenn eine Distanz eingetragen wurde.
+
 ## [2.10.3] - 2026-09-09
 
 ### Hinzugefügt

@@ -681,7 +681,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 6C32 6 14 26 14 40a18 18 0 0 0 36 0C50 26 32 6 32 6Z" fill="var(--accent-cz)"/><path d="M32 6C32 6 50 26 50 40a18 18 0 0 1-18 18Z" fill="var(--accent-de)"/><path d="M32 8v50" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round"/></svg>Tankpreise Grenzvergleich<span class="version-badge">v2.10.3</span>
+    <h1 class="gantry-title"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 6C32 6 14 26 14 40a18 18 0 0 0 36 0C50 26 32 6 32 6Z" fill="var(--accent-cz)"/><path d="M32 6C32 6 50 26 50 40a18 18 0 0 1-18 18Z" fill="var(--accent-de)"/><path d="M32 8v50" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round"/></svg>Tankpreise Grenzvergleich<span class="version-badge">v2.11.0</span>
       <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -771,9 +771,13 @@
         <div class="k">Ersparnis in CZ</div>
         <div class="v" id="calcSave">–</div>
       </div>
-      <div class="result-tile highlight" id="calcNetSaveTile" hidden>
-        <div class="k">Netto-Ersparnis (abzüglich Umweg)</div>
-        <div class="v" id="calcNetSave">–</div>
+      <div class="result-tile" id="calcDetourCostTile" hidden>
+        <div class="k">Kosten Hin- und Rückfahrt</div>
+        <div class="v" id="calcDetourCost">–</div>
+      </div>
+      <div class="result-tile highlight" id="calcFinalSaveTile" hidden>
+        <div class="k">Endersparnis</div>
+        <div class="v" id="calcFinalSave">–</div>
       </div>
     </div>
   </section>
@@ -792,7 +796,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.10.3</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.11.0</p>
   </footer>
 
 </div>
@@ -1030,9 +1034,17 @@
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   }
 
-  function updatePlzDeResult(region, dePriced){
-    var box = document.getElementById("plzDeResult");
-    if (!PLZ_RESULT_ACTIVE || !dePriced.length) { box.hidden = true; return; }
+  // Picks the DE station the PLZ feature considers "yours": a real match
+  // within PLZ_NEARBY_RADIUS_KM ("nearby"), else the honestly-labelled
+  // nearest known station ("far"), else the region-wide cheapest as a
+  // last resort ("none" - no PLZ coordinates on file at all). Shared by
+  // the result box AND the Tankrechner's DE-Station default, so both
+  // always agree - and both re-derive this fresh on every render(), so a
+  // region or fuel change never silently drops back to the plain
+  // region-cheapest while a PLZ is still active. Returns null only when
+  // no PLZ has been confirmed yet.
+  function pickPlzDeStation(region, dePriced){
+    if (!PLZ_RESULT_ACTIVE || !dePriced.length) return null;
 
     // Real coordinates of the entered PLZ itself (PLZ_COORDS, below) - not a
     // proxy via some station's own postcode, which can be numerically close
@@ -1054,42 +1066,63 @@
 
     var nearby = withDist ? withDist.filter(function(w){ return w.km <= PLZ_NEARBY_RADIUS_KM; }) : [];
 
-    box.classList.remove("far");
     if (nearby.length) {
       // A station genuinely within the radius exists - the label can
       // honestly say "im Umkreis".
       var best = nearby.reduce(function(a, b){ return b.p.val < a.p.val ? b : a; });
-      var bestMapsA = '<a class="pin" href="' + mapsLink(best.p.station, "Deutschland") + '" target="_blank" rel="noopener" title="In Google Maps öffnen" aria-label="' + best.p.station.name + ' in Google Maps öffnen">' + PIN_SVG + '</a>';
-      box.innerHTML =
-        '<div class="k">Günstigste Tankstelle im Umkreis deiner PLZ in Deutschland (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
-        '<div class="v">' + best.p.station.name + ' <span class="town">· ' + best.p.station.town + bestMapsA + '</span> — ' + fmtEur(best.p.val) + '</div>' +
-        '<div class="dist">≈ ' + best.km.toFixed(1).replace(".", ",") + ' km von deiner PLZ</div>';
-    } else if (withDist && withDist.length) {
+      return { station: best.p.station, val: best.p.val, km: best.km, state: "nearby" };
+    }
+    if (withDist && withDist.length) {
       // We know real distances, but nothing is actually nearby (e.g. a PLZ
       // like Werdau with no station of its own in this region's dataset) -
       // say so plainly instead of calling a 25km-away station "im Umkreis".
       var nearest = withDist.slice().sort(function(a, b){ return a.km - b.km; })[0];
-      var nearestMapsA = '<a class="pin" href="' + mapsLink(nearest.p.station, "Deutschland") + '" target="_blank" rel="noopener" title="In Google Maps öffnen" aria-label="' + nearest.p.station.name + ' in Google Maps öffnen">' + PIN_SVG + '</a>';
-      box.classList.add("far");
+      return { station: nearest.p.station, val: nearest.p.val, km: nearest.km, state: "far" };
+    }
+    var top = dePriced[0];
+    return { station: top.station, val: top.val, km: null, state: "none" };
+  }
+
+  function updatePlzDeResult(pick){
+    var box = document.getElementById("plzDeResult");
+    if (!pick) { box.hidden = true; return; }
+
+    var mapsA = '<a class="pin" href="' + mapsLink(pick.station, "Deutschland") + '" target="_blank" rel="noopener" title="In Google Maps öffnen" aria-label="' + pick.station.name + ' in Google Maps öffnen">' + PIN_SVG + '</a>';
+    box.classList.toggle("far", pick.state === "far");
+    if (pick.state === "nearby") {
+      box.innerHTML =
+        '<div class="k">Günstigste Tankstelle im Umkreis deiner PLZ in Deutschland (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
+        '<div class="v">' + pick.station.name + ' <span class="town">· ' + pick.station.town + mapsA + '</span> — ' + fmtEur(pick.val) + '</div>' +
+        '<div class="dist">≈ ' + pick.km.toFixed(1).replace(".", ",") + ' km von deiner PLZ</div>';
+    } else if (pick.state === "far") {
       box.innerHTML =
         '<div class="k">Keine Tankstelle im Umkreis deiner PLZ in diesem Datensatz – nächstgelegene (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
-        '<div class="v">' + nearest.p.station.name + ' <span class="town">· ' + nearest.p.station.town + nearestMapsA + '</span> — ' + fmtEur(nearest.p.val) + '</div>' +
-        '<div class="dist">≈ ' + nearest.km.toFixed(1).replace(".", ",") + ' km von deiner PLZ – nicht wirklich in der Nähe</div>';
+        '<div class="v">' + pick.station.name + ' <span class="town">· ' + pick.station.town + mapsA + '</span> — ' + fmtEur(pick.val) + '</div>' +
+        '<div class="dist">≈ ' + pick.km.toFixed(1).replace(".", ",") + ' km von deiner PLZ – nicht wirklich in der Nähe</div>';
     } else {
-      var top = dePriced[0];
-      var topMapsA = '<a class="pin" href="' + mapsLink(top.station, "Deutschland") + '" target="_blank" rel="noopener" title="In Google Maps öffnen" aria-label="' + top.station.name + ' in Google Maps öffnen">' + PIN_SVG + '</a>';
       box.innerHTML =
         '<div class="k">Günstigste Tankstelle in dieser Region in Deutschland (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
-        '<div class="v">' + top.station.name + ' <span class="town">· ' + top.station.town + topMapsA + '</span> — ' + fmtEur(top.val) + '</div>';
+        '<div class="v">' + pick.station.name + ' <span class="town">· ' + pick.station.town + mapsA + '</span> — ' + fmtEur(pick.val) + '</div>';
     }
     box.hidden = false;
+  }
+
+  // Moves the PLZ-picked DE station (if any) to the front of the priced
+  // list, so it becomes option 0 - and therefore the default selection -
+  // in the Tankrechner's DE-Station dropdown, without disturbing the
+  // price-ascending order of the rest.
+  function orderedDeStations(dePriced, plzPick){
+    if (!plzPick) return dePriced;
+    var rest = dePriced.filter(function(p){ return p.station !== plzPick.station; });
+    return [{ station: plzPick.station, val: plzPick.val }].concat(rest);
   }
 
   function render(){
     var region = currentRegion();
     var czPriced = pricedStations(region.cz.stations, STATE.fuel, true);
     var dePriced = pricedStations(region.de.stations, STATE.fuel, false);
-    updatePlzDeResult(region, dePriced);
+    var plzPick = pickPlzDeStation(region, dePriced);
+    updatePlzDeResult(plzPick);
 
     document.getElementById("stationCols").innerHTML =
       stationCol("cz", "Tschechien", czPriced, true, false) +
@@ -1120,7 +1153,7 @@
     document.getElementById("provisionalNote").style.display = region.de.provisional ? "" : "none";
 
     populateStationSelect(document.getElementById("czStationSelect"), czPriced, true);
-    populateStationSelect(document.getElementById("deStationSelect"), dePriced, false);
+    populateStationSelect(document.getElementById("deStationSelect"), orderedDeStations(dePriced, plzPick), false);
 
     updateCalc();
     renderChart();
@@ -1129,7 +1162,11 @@
   function updateCalc(){
     var region = currentRegion();
     var czPriced = pricedStations(region.cz.stations, STATE.fuel, true);
-    var dePriced = pricedStations(region.de.stations, STATE.fuel, false);
+    var dePricedRaw = pricedStations(region.de.stations, STATE.fuel, false);
+    // Same ordering as the dropdown in render() (PLZ pick first, if any) -
+    // must match exactly, since the select's option value is an index into
+    // this array.
+    var dePriced = orderedDeStations(dePricedRaw, pickPlzDeStation(region, dePricedRaw));
     var czIdx = parseInt(document.getElementById("czStationSelect").value, 10) || 0;
     var deIdx = parseInt(document.getElementById("deStationSelect").value, 10) || 0;
     var czSel = czPriced[czIdx], deSel = dePriced[deIdx];
@@ -1145,21 +1182,25 @@
     document.getElementById("calcDe").textContent = fmtEur2(totalDe);
     document.getElementById("calcSave").textContent = (save >= 0 ? "+" : "") + fmtEur2(save);
 
-    // Optional: net savings after subtracting the fuel cost of the detour to
-    // the CZ station, priced at the DE station's rate (that's the fuel
-    // actually burned driving there and back). Hidden at 0 km so the
-    // original "Ersparnis in CZ" figure stays the primary, unchanged number
-    // for anyone who doesn't fill this in.
+    // Optional: full breakdown once a detour distance is entered - the fuel
+    // cost of driving there and back (priced at the DE station's rate) is
+    // its own line item, then subtracted to a final bottom-line figure.
+    // Hidden at 0 km so the original "Ersparnis in CZ" stays the only
+    // number for anyone who doesn't fill this in.
     var extraKm = parseFloat(document.getElementById("extraKmInput").value) || 0;
     var consumption = parseFloat(document.getElementById("consumptionInput").value) || 0;
-    var netSaveTile = document.getElementById("calcNetSaveTile");
+    var detourCostTile = document.getElementById("calcDetourCostTile");
+    var finalSaveTile = document.getElementById("calcFinalSaveTile");
     if (extraKm > 0) {
       var detourCost = (extraKm / 100) * consumption * deSel.val;
-      var netSave = save - detourCost;
-      document.getElementById("calcNetSave").textContent = (netSave >= 0 ? "+" : "") + fmtEur2(netSave);
-      netSaveTile.hidden = false;
+      var finalSave = save - detourCost;
+      document.getElementById("calcDetourCost").textContent = "−" + fmtEur2(detourCost);
+      document.getElementById("calcFinalSave").textContent = (finalSave >= 0 ? "+" : "") + fmtEur2(finalSave);
+      detourCostTile.hidden = false;
+      finalSaveTile.hidden = false;
     } else {
-      netSaveTile.hidden = true;
+      detourCostTile.hidden = true;
+      finalSaveTile.hidden = true;
     }
   }
 
