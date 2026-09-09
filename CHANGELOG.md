@@ -4,6 +4,12 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.10.0] - 2026-09-09
+
+### Hinzugefügt
+- **Tankrechner: Fahrtkosten des Umwegs gegenrechnen.** Zwei neue, optionale Felder ("Zusätzliche km (Hin+Zurück)", "Verbrauch (l/100km)") berechnen die Spritkosten der Extra-Fahrt zur CZ-Station (zum DE-Preis) und zeigen eine "Netto-Ersparnis" zusätzlich zur bisherigen Brutto-"Ersparnis in CZ". Bei 0 km (Standard) bleibt alles wie bisher – die neue Kachel erscheint erst, wenn eine Distanz eingetragen wird. Der Verbrauch-Standardwert richtet sich nach der oben gewählten Kraftstoffart (Diesel 5,5 l/100km, Benzin 7,5 l/100km) und bleibt beim Wechsel der Kraftstoffart automatisch synchron, außer man hat ihn schon selbst geändert.
+- **Preisverlauf: 30-Tage-Spanne.** Unter dem aktuellen Durchschnittspreis zeigt jede Mini-Chart-Spalte jetzt zusätzlich "Spanne X € – Y €" (Minimum/Maximum der sichtbaren Tage) – Einordnung, ob der aktuelle Preis eher am oberen oder unteren Ende der letzten Wochen liegt.
+
 ## [2.9.6] - 2026-09-09
 
 ### Hinzugefügt

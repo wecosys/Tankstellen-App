@@ -465,6 +465,9 @@
     align-items:flex-end;
     margin-bottom:16px;
   }
+  .calc-detour-hint{
+    margin-top:-10px;
+  }
   .field label{
     display:block;
     font-size:.72rem;
@@ -557,6 +560,12 @@
     font-size:1.05rem;
     font-weight:600;
     color:var(--ink);
+  }
+  .mini-chart-range{
+    font-size:.68rem;
+    color:var(--muted);
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    margin:1px 0 6px;
   }
   .chart-wrap{
     position:relative;
@@ -658,7 +667,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.9.6</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.10.0</span>
       <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -724,6 +733,17 @@
         <input id="literInput" type="number" min="1" max="200" step="1" value="40">
       </div>
     </div>
+    <div class="calc-row">
+      <div class="field">
+        <label for="extraKmInput">Zusätzliche km (Hin+Zurück)</label>
+        <input id="extraKmInput" type="number" min="0" max="500" step="1" value="0">
+      </div>
+      <div class="field">
+        <label for="consumptionInput">Verbrauch (l/100km)</label>
+        <input id="consumptionInput" type="number" min="0" max="30" step="0.1" value="7.5">
+      </div>
+    </div>
+    <p class="sub calc-detour-hint">Optional: Umweg zur CZ-Station gegenrechnen – bei 0 km bleibt die Ersparnis wie bisher.</p>
     <div class="calc-result">
       <div class="result-tile">
         <div class="k">Preis CZ-Station</div>
@@ -736,6 +756,10 @@
       <div class="result-tile highlight">
         <div class="k">Ersparnis in CZ</div>
         <div class="v" id="calcSave">–</div>
+      </div>
+      <div class="result-tile highlight" id="calcNetSaveTile" hidden>
+        <div class="k">Netto-Ersparnis (abzüglich Umweg)</div>
+        <div class="v" id="calcNetSave">–</div>
       </div>
     </div>
   </section>
@@ -755,7 +779,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.9.6</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.10.0</p>
   </footer>
 
 </div>
@@ -1107,6 +1131,31 @@
     document.getElementById("calcCz").textContent = fmtEur2(totalCz);
     document.getElementById("calcDe").textContent = fmtEur2(totalDe);
     document.getElementById("calcSave").textContent = (save >= 0 ? "+" : "") + fmtEur2(save);
+
+    // Optional: net savings after subtracting the fuel cost of the detour to
+    // the CZ station, priced at the DE station's rate (that's the fuel
+    // actually burned driving there and back). Hidden at 0 km so the
+    // original "Ersparnis in CZ" figure stays the primary, unchanged number
+    // for anyone who doesn't fill this in.
+    var extraKm = parseFloat(document.getElementById("extraKmInput").value) || 0;
+    var consumption = parseFloat(document.getElementById("consumptionInput").value) || 0;
+    var netSaveTile = document.getElementById("calcNetSaveTile");
+    if (extraKm > 0) {
+      var detourCost = (extraKm / 100) * consumption * deSel.val;
+      var netSave = save - detourCost;
+      document.getElementById("calcNetSave").textContent = (netSave >= 0 ? "+" : "") + fmtEur2(netSave);
+      netSaveTile.hidden = false;
+    } else {
+      netSaveTile.hidden = true;
+    }
+  }
+
+  var CONSUMPTION_DEFAULTS = { e10: 7.5, premium: 7.5, diesel: 5.5 };
+  var consumptionManuallySet = false;
+
+  function updateConsumptionDefault(){
+    if (consumptionManuallySet) return;
+    document.getElementById("consumptionInput").value = CONSUMPTION_DEFAULTS[STATE.fuel];
   }
 
   function historyPoints(){
@@ -1122,6 +1171,10 @@
   function miniChartMarkup(side, label, colorVar, pts, key){
     var lastI = pts.length - 1;
     var current = pts[lastI][key];
+    var vals = pts.map(function(p){ return p[key]; });
+    var minV = Math.min.apply(null, vals);
+    var maxV = Math.max.apply(null, vals);
+    var rangeText = minV === maxV ? "noch keine Schwankung" : "Spanne " + fmtEur(minV) + " – " + fmtEur(maxV);
 
     return (
       '<div class="mini-chart-col">' +
@@ -1129,6 +1182,7 @@
           '<span class="label">' + label + '</span>' +
           '<span class="now">' + fmtEur(current) + '</span>' +
         '</div>' +
+        '<div class="mini-chart-range">' + rangeText + '</div>' +
         '<div class="chart-wrap" id="miniWrap' + side + '"></div>' +
       '</div>'
     );
@@ -1298,6 +1352,11 @@
   document.getElementById("literInput").addEventListener("input", updateCalc);
   document.getElementById("czStationSelect").addEventListener("change", updateCalc);
   document.getElementById("deStationSelect").addEventListener("change", updateCalc);
+  document.getElementById("extraKmInput").addEventListener("input", updateCalc);
+  document.getElementById("consumptionInput").addEventListener("input", function(){
+    consumptionManuallySet = true;
+    updateCalc();
+  });
 
   var regionSelect = document.getElementById("regionSelect");
   regionSelect.addEventListener("change", function(){
@@ -1430,9 +1489,11 @@
   var fuelSelect = document.getElementById("fuelSelect");
   fuelSelect.addEventListener("change", function(){
     STATE.fuel = this.value;
+    updateConsumptionDefault();
     render();
   });
 
+  updateConsumptionDefault();
   render();
 
   // On GitHub Pages, data.json is refreshed by a scheduled GitHub Action —
