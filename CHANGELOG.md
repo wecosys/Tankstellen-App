@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.11.2] - 2026-09-09
+
+### Behoben
+- **Heimat-Tankstelle blieb beim Regionswechsel nicht bestehen.** Nach PLZ-Bestätigung wechselte die im PLZ-Umkreis gefundene Tankstelle (Info-Box wie Tankrechner) beim Wechsel auf eine andere Region auf einen unpassenden Ersatzwert der neu gewählten Region (z. B. eine 100+ km entfernte Station). Die Heimat-Tankstelle wird jetzt immer gegen die Region ermittelt, die bei der PLZ-Bestätigung tatsächlich gefunden wurde – bleibt beim Durchklicken anderer Regionen zum Vergleich bestehen und ändert sich nur bei einer neuen PLZ-Eingabe. Kraftstoffwechsel aktualisiert weiterhin korrekt den Preis der Heimat-Tankstelle.
+
 ## [2.11.1] - 2026-09-09
 
 ### Behoben

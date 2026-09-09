@@ -681,7 +681,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 6C32 6 14 26 14 40a18 18 0 0 0 36 0C50 26 32 6 32 6Z" fill="var(--accent-cz)"/><path d="M32 6C32 6 50 26 50 40a18 18 0 0 1-18 18Z" fill="var(--accent-de)"/><path d="M32 8v50" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round"/></svg>Tankpreise Grenzvergleich<span class="version-badge">v2.11.1</span>
+    <h1 class="gantry-title"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 6C32 6 14 26 14 40a18 18 0 0 0 36 0C50 26 32 6 32 6Z" fill="var(--accent-cz)"/><path d="M32 6C32 6 50 26 50 40a18 18 0 0 1-18 18Z" fill="var(--accent-de)"/><path d="M32 8v50" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round"/></svg>Tankpreise Grenzvergleich<span class="version-badge">v2.11.2</span>
       <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -796,7 +796,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.11.1</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.11.2</p>
   </footer>
 
 </div>
@@ -1021,6 +1021,11 @@
 
   var PLZ_RESULT_ACTIVE = false;
   var CONFIRMED_PLZ = null;
+  // The region PLZ confirmation actually matched - the "home" station is
+  // always resolved against THIS region's stations, never the currently
+  // browsed one, so switching the region dropdown (to compare other areas)
+  // never drags the PLZ result along with it. See pickPlzDeStation().
+  var PLZ_HOME_REGION = null;
   var PLZ_NEARBY_RADIUS_KM = 5;
 
   // Haversine great-circle distance in km.
@@ -1036,15 +1041,23 @@
 
   // Picks the DE station the PLZ feature considers "yours": a real match
   // within PLZ_NEARBY_RADIUS_KM ("nearby"), else the honestly-labelled
-  // nearest known station ("far"), else the region-wide cheapest as a
+  // nearest known station ("far"), else the home region's cheapest as a
   // last resort ("none" - no PLZ coordinates on file at all). Shared by
   // the result box AND the Tankrechner's DE-Station default, so both
-  // always agree - and both re-derive this fresh on every render(), so a
-  // region or fuel change never silently drops back to the plain
-  // region-cheapest while a PLZ is still active. Returns null only when
-  // no PLZ has been confirmed yet.
-  function pickPlzDeStation(region, dePriced){
-    if (!PLZ_RESULT_ACTIVE || !dePriced.length) return null;
+  // always agree. Always resolved against PLZ_HOME_REGION (the region PLZ
+  // confirmation actually matched), NOT whatever region is currently
+  // selected in the dropdown - a user comparing a different region while
+  // their PLZ result stays visible expects their actual home station to
+  // stay put, not get replaced by a nonsense "nearest" pick 100km away in
+  // an unrelated region. Region changes still update the fuel-specific
+  // price shown (via STATE.fuel), just never the station or region used to
+  // find it. Returns null only when no PLZ has been confirmed yet.
+  function pickPlzDeStation(){
+    if (!PLZ_RESULT_ACTIVE || !PLZ_HOME_REGION) return null;
+    var homeRegion = data.regions[PLZ_HOME_REGION];
+    if (!homeRegion) return null;
+    var dePriced = pricedStations(homeRegion.de.stations, STATE.fuel, false);
+    if (!dePriced.length) return null;
 
     // Real coordinates of the entered PLZ itself (PLZ_COORDS, below) - not a
     // proxy via some station's own postcode, which can be numerically close
@@ -1058,7 +1071,7 @@
     // main table on purpose: those stations aren't relevant to the CZ/DE
     // crossing comparison, only to "what's actually near this PLZ".
     var candidatePriced = ref
-      ? pricedStations((region.de.stations || []).concat(region.de.plzStations || []), STATE.fuel, false)
+      ? pricedStations((homeRegion.de.stations || []).concat(homeRegion.de.plzStations || []), STATE.fuel, false)
       : dePriced;
     var withDist = ref ? candidatePriced
       .filter(function(p){ return typeof p.station.lat === "number" && typeof p.station.lng === "number"; })
@@ -1121,7 +1134,7 @@
     var region = currentRegion();
     var czPriced = pricedStations(region.cz.stations, STATE.fuel, true);
     var dePriced = pricedStations(region.de.stations, STATE.fuel, false);
-    var plzPick = pickPlzDeStation(region, dePriced);
+    var plzPick = pickPlzDeStation();
     updatePlzDeResult(plzPick);
 
     document.getElementById("stationCols").innerHTML =
@@ -1166,7 +1179,7 @@
     // Same ordering as the dropdown in render() (PLZ pick first, if any) -
     // must match exactly, since the select's option value is an index into
     // this array.
-    var dePriced = orderedDeStations(dePricedRaw, pickPlzDeStation(region, dePricedRaw));
+    var dePriced = orderedDeStations(dePricedRaw, pickPlzDeStation());
     var czIdx = parseInt(document.getElementById("czStationSelect").value, 10) || 0;
     var deIdx = parseInt(document.getElementById("deStationSelect").value, 10) || 0;
     var czSel = czPriced[czIdx], deSel = dePriced[deIdx];
@@ -1522,6 +1535,7 @@
   function applyPlzRegion(region, plz){
     STATE.region = region;
     CONFIRMED_PLZ = plz;
+    PLZ_HOME_REGION = region;
     PLZ_RESULT_ACTIVE = true;
     regionSelect.value = region;
     render();
