@@ -569,12 +569,22 @@
   }
   .chart-wrap{
     position:relative;
+    overflow-x:auto;
+    /* Setting overflow-x alone still makes the y-axis a clipping/scrolling
+       context per spec (an explicit non-visible axis forces the other to
+       "auto" too) - padding-top reserves room so the tooltip, which floats
+       above the hovered bar via a negative transform, never gets clipped. */
+    padding-top:56px;
+    margin-top:-56px;
+    padding-bottom:4px;
   }
   .chart-wrap svg{
     display:block;
-    width:100%;
-    height:auto;
   }
+  .chart-wrap::-webkit-scrollbar{ height:6px; }
+  .chart-wrap::-webkit-scrollbar-track{ background:transparent; }
+  .chart-wrap::-webkit-scrollbar-thumb{ background:var(--line); border-radius:999px; }
+  .chart-wrap::-webkit-scrollbar-thumb:hover{ background:var(--muted); }
   .chart-wrap svg:focus{
     outline:2px solid var(--focus);
     outline-offset:2px;
@@ -662,7 +672,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.10.1</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.10.2</span>
       <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -773,7 +783,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.10.1</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.10.2</p>
   </footer>
 
 </div>
@@ -1159,7 +1169,12 @@
       .map(function(e){ return { date: e.date, czEur: e.cz[STATE.fuel] / e.fx.eurCzk, de: e.de[STATE.fuel] }; });
   }
 
-  var MINI_W = 340, MINI_H = 168, MINI_PAD_L = 44, MINI_PAD_R = 8, MINI_PAD_T = 12, MINI_PAD_B = 22;
+  var MINI_SLOT_W = 52, MINI_H = 168, MINI_PAD_L = 44, MINI_PAD_R = 8, MINI_PAD_T = 12, MINI_PAD_B = 22;
+  // Must match .chart-wrap's padding-top in CSS - the SVG sits that far
+  // down inside the wrap (reserved so the tooltip has room above the bars
+  // without being clipped by the scroll container), so anything positioned
+  // in the wrap's own coordinate space needs this added back in.
+  var MINI_WRAP_PAD_TOP = 56;
   var HISTORY_WINDOW_DAYS = 14;
 
   function miniChartMarkup(side, label, colorVar, pts, key){
@@ -1201,8 +1216,16 @@
   function wireMiniChart(side, pts, key){
     var wrap = document.getElementById("miniWrap" + side);
     var lastI = pts.length - 1;
-    var W = MINI_W, H = MINI_H, padL = MINI_PAD_L, padR = MINI_PAD_R, padT = MINI_PAD_T, padB = MINI_PAD_B;
-    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var H = MINI_H, padL = MINI_PAD_L, padR = MINI_PAD_R, padT = MINI_PAD_T, padB = MINI_PAD_B;
+    var n = pts.length;
+    // Fixed width per day instead of squeezing every bar to fit the column -
+    // the chart area scrolls horizontally once there are more days than fit,
+    // so bars and date labels always render at a comfortable, constant size
+    // regardless of how many days are in the window.
+    var slotW = MINI_SLOT_W;
+    var plotW = n * slotW;
+    var W = padL + plotW + padR;
+    var plotH = H - padT - padB;
 
     // Bars grow from a real zero baseline (per dataviz mark spec - bar length
     // encodes magnitude, so truncating the axis the way the old line chart
@@ -1211,8 +1234,6 @@
     var domMax = Math.max.apply(null, vals) * 1.15 || 0.1;
 
     function yOf(v){ return padT + plotH - (v / domMax) * plotH; }
-    var n = pts.length;
-    var slotW = plotW / n;
     // Thinner bars with more air between them ("filigran") - a wide,
     // tightly-packed bar reads as one solid block when a zero-baseline
     // compresses the visible height difference between them; a slim bar
@@ -1249,18 +1270,12 @@
       );
     }).join("");
 
-    // Below a handful of bars, label every date - sampling down to just
-    // start/middle/end (as the 30-day view needs to, for space) looks like
-    // random gaps in the data rather than a deliberate label density.
-    var xLabelIdxs;
-    if (n <= 8) {
-      xLabelIdxs = pts.map(function(_, i){ return i; });
-    } else {
-      xLabelIdxs = [0, Math.round(lastI / 2), lastI];
-    }
+    // Every date gets its own label now - fixed-width slots plus horizontal
+    // scroll mean there's always room, so sampling down to start/middle/end
+    // (which used to look like random gaps in the data) is no longer needed.
+    var xLabelIdxs = pts.map(function(_, i){ return i; });
     var xLabelsSvg = xLabelIdxs.map(function(i){
-      var anchor = i === 0 ? "start" : i === lastI ? "end" : "middle";
-      return '<text x="' + (slotX(i) + slotW / 2).toFixed(1) + '" y="' + (H - 4) + '" text-anchor="' + anchor + '" font-size="8.5" font-family="IBM Plex Mono, monospace" fill="var(--muted)">' + fmtShortDate(pts[i].date) + '</text>';
+      return '<text x="' + (slotX(i) + slotW / 2).toFixed(1) + '" y="' + (H - 4) + '" text-anchor="middle" font-size="8.5" font-family="IBM Plex Mono, monospace" fill="var(--muted)">' + fmtShortDate(pts[i].date) + '</text>';
     }).join("");
 
     var hitRects = pts.map(function(p, i){
@@ -1268,12 +1283,16 @@
     }).join("");
 
     wrap.innerHTML =
-      '<svg viewBox="0 0 ' + W + ' ' + H + '" tabindex="0" role="img" aria-label="Preisverlauf ' + (key === "czEur" ? "Tschechien" : "Deutschland") + ', letzte ' + n + ' Tage">' +
+      '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" tabindex="0" role="img" aria-label="Preisverlauf ' + (key === "czEur" ? "Tschechien" : "Deutschland") + ', letzte ' + n + ' Tage">' +
         gridSvg + barsSvg + xLabelsSvg + hitRects +
       '</svg>' +
       '<div class="chart-tooltip" id="tip' + side + '"><div class="date" id="tipDate' + side + '"></div>' +
         '<div class="row ' + side + '"><span class="key" style="background:' + colorVarFor(key) + '"></span><span class="val" id="tipVal' + side + '"></span></div>' +
       '</div>';
+
+    // Default view: scroll to the most recent days (right edge) - the
+    // freshest data matters most, older history is a deliberate scroll away.
+    wrap.scrollLeft = wrap.scrollWidth;
 
     var svg = wrap.querySelector("svg");
     var tooltip = wrap.querySelector("#tip" + side);
@@ -1296,7 +1315,7 @@
       var svgRect = svg.getBoundingClientRect();
       var scale = svgRect.width / W;
       tooltip.style.left = ((slotX(i) + slotW / 2) * scale) + "px";
-      tooltip.style.top = (yOf(pts[i][key]) * scale) + "px";
+      tooltip.style.top = (yOf(pts[i][key]) * scale + MINI_WRAP_PAD_TOP) + "px";
       tooltip.classList.add("visible");
       document.getElementById("tipDate" + side).textContent = fmtShortDate(pts[i].date);
       document.getElementById("tipVal" + side).textContent = fmtEur(pts[i][key]) + "/l";
@@ -1323,6 +1342,8 @@
       else if (ev.key === "ArrowRight") { current = Math.min(lastI, current + 1); ev.preventDefault(); }
       else { return; }
       showAt(current);
+      var activeBar = document.getElementById("bar" + side + current);
+      if (activeBar) activeBar.scrollIntoView({ inline: "nearest", block: "nearest" });
     });
   }
 

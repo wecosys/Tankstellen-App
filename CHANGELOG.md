@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.10.2] - 2026-09-09
+
+### Geändert
+- **Preisverlauf-Chart: horizontales Scrollen statt Zusammenquetschen.** Nutzer bemängelte, dass die Datumsbeschriftung unzentriert/unprofessionell aussah, weil alle Balken in eine feste Breite gepresst wurden. Jeder Tag bekommt jetzt eine feste Breite; wird der Bereich breiter als die Spalte, erscheint eine dezente Scroll-Leiste (statt alles zu stauchen). Beim Laden wird automatisch bis zum aktuellen Tag nach rechts gescrollt, ältere Tage sind einen Wisch/Scroll entfernt. Datumsbeschriftung zeigt dadurch jetzt immer jedes einzelne Datum, zentriert unter dem jeweiligen Balken – kein Anfang/Mitte/Ende-Kompromiss mehr nötig. Pfeiltasten-Navigation scrollt die fokussierte Position bei Bedarf automatisch ins Bild.
+
 ## [2.10.1] - 2026-09-09
 
 ### Entfernt
