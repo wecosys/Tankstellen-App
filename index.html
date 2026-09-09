@@ -354,7 +354,7 @@
     font-size:.72rem;
     color:var(--muted);
   }
-  .station-row .pin{
+  .pin{
     display:inline-flex;
     vertical-align:-2px;
     margin-left:5px;
@@ -365,7 +365,9 @@
     color:var(--accent-cz);
   }
   .col-de .station-row .pin:hover,
-  .col-de .station-row .pin:focus-visible{
+  .col-de .station-row .pin:focus-visible,
+  .plz-de-result .pin:hover,
+  .plz-de-result .pin:focus-visible{
     color:var(--accent-de);
   }
   .station-row .price{
@@ -656,7 +658,7 @@
 <div class="wrap">
 
   <header class="gantry reveal">
-    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.9.5</span>
+    <h1 class="gantry-title">Tankpreise Grenzvergleich<span class="version-badge">v2.9.6</span>
       <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
     </h1>
     <div class="status" id="statusBox">
@@ -719,7 +721,7 @@
       </div>
       <div class="field">
         <label for="literInput">Liter</label>
-        <input id="literInput" type="number" min="1" max="200" step="1" value="50">
+        <input id="literInput" type="number" min="1" max="200" step="1" value="40">
       </div>
     </div>
     <div class="calc-result">
@@ -753,7 +755,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.9.5</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.9.6</p>
   </footer>
 
 </div>
@@ -1020,25 +1022,28 @@
       // A station genuinely within the radius exists - the label can
       // honestly say "im Umkreis".
       var best = nearby.reduce(function(a, b){ return b.p.val < a.p.val ? b : a; });
+      var bestMapsA = '<a class="pin" href="' + mapsLink(best.p.station, "Deutschland") + '" target="_blank" rel="noopener" title="In Google Maps öffnen" aria-label="' + best.p.station.name + ' in Google Maps öffnen">' + PIN_SVG + '</a>';
       box.innerHTML =
         '<div class="k">Günstigste Tankstelle im Umkreis deiner PLZ in Deutschland (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
-        '<div class="v">' + best.p.station.name + ' <span class="town">· ' + best.p.station.town + '</span> — ' + fmtEur(best.p.val) + '</div>' +
+        '<div class="v">' + best.p.station.name + ' <span class="town">· ' + best.p.station.town + bestMapsA + '</span> — ' + fmtEur(best.p.val) + '</div>' +
         '<div class="dist">≈ ' + best.km.toFixed(1).replace(".", ",") + ' km von deiner PLZ</div>';
     } else if (withDist && withDist.length) {
       // We know real distances, but nothing is actually nearby (e.g. a PLZ
       // like Werdau with no station of its own in this region's dataset) -
       // say so plainly instead of calling a 25km-away station "im Umkreis".
       var nearest = withDist.slice().sort(function(a, b){ return a.km - b.km; })[0];
+      var nearestMapsA = '<a class="pin" href="' + mapsLink(nearest.p.station, "Deutschland") + '" target="_blank" rel="noopener" title="In Google Maps öffnen" aria-label="' + nearest.p.station.name + ' in Google Maps öffnen">' + PIN_SVG + '</a>';
       box.classList.add("far");
       box.innerHTML =
         '<div class="k">Keine Tankstelle im Umkreis deiner PLZ in diesem Datensatz – nächstgelegene (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
-        '<div class="v">' + nearest.p.station.name + ' <span class="town">· ' + nearest.p.station.town + '</span> — ' + fmtEur(nearest.p.val) + '</div>' +
+        '<div class="v">' + nearest.p.station.name + ' <span class="town">· ' + nearest.p.station.town + nearestMapsA + '</span> — ' + fmtEur(nearest.p.val) + '</div>' +
         '<div class="dist">≈ ' + nearest.km.toFixed(1).replace(".", ",") + ' km von deiner PLZ – nicht wirklich in der Nähe</div>';
     } else {
       var top = dePriced[0];
+      var topMapsA = '<a class="pin" href="' + mapsLink(top.station, "Deutschland") + '" target="_blank" rel="noopener" title="In Google Maps öffnen" aria-label="' + top.station.name + ' in Google Maps öffnen">' + PIN_SVG + '</a>';
       box.innerHTML =
         '<div class="k">Günstigste Tankstelle in dieser Region in Deutschland (' + FUEL_LABELS[STATE.fuel] + ')</div>' +
-        '<div class="v">' + top.station.name + ' <span class="town">· ' + top.station.town + '</span> — ' + fmtEur(top.val) + '</div>';
+        '<div class="v">' + top.station.name + ' <span class="town">· ' + top.station.town + topMapsA + '</span> — ' + fmtEur(top.val) + '</div>';
     }
     box.hidden = false;
   }
@@ -1063,7 +1068,7 @@
     } else {
       summary.innerHTML = '';
     }
-    document.getElementById("fxNote").textContent = "1 € = " + data.fx.eurCzk.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " Kč · Quelle: " + data.fx.source;
+    document.getElementById("fxNote").textContent = "1 € = " + data.fx.eurCzk.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " Kč *";
     document.getElementById("stationsSub").textContent = region.label + " · " + FUEL_LABELS[STATE.fuel] + " · günstigste zuerst";
 
     var ageHours = (Date.now() - new Date(data.updatedAt).getTime()) / 36e5;
@@ -1074,7 +1079,7 @@
 
     document.getElementById("sourceCz").textContent = "CZ-Preise: " + region.cz.source + " (" + region.label.split(" · ")[1] + "-Seite).";
     document.getElementById("sourceDe").textContent = "DE-Preise: " + region.de.source + " (" + region.label.split(" · ")[0] + ").";
-    document.getElementById("sourceFx").textContent = "Wechselkurs: 1 € = " + data.fx.eurCzk.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " Kč (" + data.fx.source + ").";
+    document.getElementById("sourceFx").textContent = "* Wechselkurs: 1 € = " + data.fx.eurCzk.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}) + " Kč (" + data.fx.source + ").";
     document.getElementById("provisionalNote").style.display = region.de.provisional ? "" : "none";
 
     populateStationSelect(document.getElementById("czStationSelect"), czPriced, true);

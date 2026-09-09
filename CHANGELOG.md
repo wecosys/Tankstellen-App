@@ -4,6 +4,15 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.9.6] - 2026-09-09
+
+### Hinzugefügt
+- Google-Maps-Link an der im PLZ-Feld ermittelten nächstgelegenen Tankstelle (Umkreis-Ergebnis in Deutschland) – vorher gab es den Link nur in der Haupttabelle.
+
+### Geändert
+- Wechselkurs-Zeile über der Stationsliste zeigt jetzt "1 € = 24,19 Kč *" statt zusätzlich die Quelle auszuschreiben; die Fußnote (*) verweist auf die bereits vorhandene, ausführlichere Quellenangabe im Footer.
+- Standard-Literzahl im Tankrechner von 50 auf 40 geändert.
+
 ## [2.9.5] - 2026-09-08
 
 ### Hinzugefügt
