@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.11.4] - 2026-09-09
+
+### Geändert
+- **Header-Layout überarbeitet.** Titel und Untertitel stehen jetzt linksbündig direkt untereinander ("T" von "Tankpreise" genau über dem "T" von "Tankstellen"), das Logo davor ist größer und erstreckt sich über beide Zeilen statt nur neben dem Titel zu stehen.
+
 ## [2.11.3] - 2026-09-09
 
 ### Geändert
