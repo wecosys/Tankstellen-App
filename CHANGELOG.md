@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.11.7] - 2026-09-10
+
+### Behoben
+- **Google-Maps-Link zeigte teils auf die falsche Tankstelle.** Der Link wurde bisher per Namens-/Ortssuche gebildet, wobei Google gelegentlich eine andere, ähnlich benannte Station in der Nähe fand statt der gemeinten. DE-Stationen haben über Tankerkönig echte Koordinaten – der Link nutzt jetzt diese exakten Koordinaten statt einer Textsuche, betrifft alle DE-Pins (Hauptliste, PLZ-Ergebnis). CZ-Stationen haben keine Koordinaten (mbenzin.cz liefert keine) und bleiben bei der Namens-/Ortssuche.
+
 ## [2.11.6] - 2026-09-09
 
 ### Geändert
