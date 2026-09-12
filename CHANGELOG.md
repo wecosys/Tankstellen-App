@@ -4,6 +4,15 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.12.0] - 2026-09-12
+
+### Hinzugefügt
+- **Standort-Button (GPS).** Neben der PLZ-Eingabe gibt es jetzt "📍 Standort verwenden" – fragt per Browser-Geolocation den aktuellen Standort ab und wählt automatisch die nächstgelegene Region, genau wie die PLZ-Eingabe (inkl. der ehrlichen "im Umkreis"/"nicht wirklich in der Nähe"-Logik für die nächste DE-Station). Funktioniert auf allen Geräten, gedacht vor allem für unterwegs auf dem Handy. Bei verweigerter Berechtigung, Timeout oder fehlender Geolocation-Unterstützung erscheint eine klare Fehlermeldung statt eines hängenden Buttons.
+- **Grenzübergang Ebmath/Bad Elster ↔ Hazlov/Hranice bei Aš (Region Vogtland).** Diese Tankstelle (Suchopár, Hazlov 445) fehlte bisher komplett, da Hazlov keine eigene mbenzin.cz-Seite hat – wird jetzt wie schon bei anderen Orten in dieser Situation über die Seite eines Nachbarorts (hier: Aš) mitgeholt und passend gefiltert.
+
+### Geändert
+- **Region-Namen vereinheitlicht.** Aus "Sachsen · Vogtland" usw. wird jetzt konsequent "Grenzgebiet Sachsen-Vogtland" (entsprechend für alle 5 Regionen) – macht auf einen Blick klar, dass es um den jeweiligen Grenzabschnitt geht, nicht nur um ein Bundesland/eine Region für sich.
+
 ## [2.11.7] - 2026-09-10
 
 ### Behoben

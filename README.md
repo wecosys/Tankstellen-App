@@ -1,15 +1,16 @@
 # Tankpreise Grenzvergleich
 
-**Version 2.11.7** · [Changelog](CHANGELOG.md)
+**Version 2.12.0** · [Changelog](CHANGELOG.md)
 
-Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wählbar nach Region (Sachsen · Vogtland, Bayern · Oberfranken oder Sachsen · Erzgebirgskreis) und Kraftstoff, inklusive Kronen-Euro-Umrechnung, Preisverlauf und Google-Maps-Links zu jeder Station.
+Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wählbar nach Region (Grenzgebiet Sachsen-Vogtland, Grenzgebiet Bayern-Oberfranken, Grenzgebiet Sachsen-Erzgebirge, Grenzgebiet Sachsen-Dresden/Osterzgebirge oder Grenzgebiet Sachsen-Oberlausitz) und Kraftstoff, inklusive Kronen-Euro-Umrechnung, Preisverlauf und Google-Maps-Links zu jeder Station.
 
 **Live-App (Artifact):** https://claude.ai/code/artifact/4c8f92f3-19a7-4b8f-ae60-539e67f26820
 **Live-App (eigene Domain, vollautomatisch):** https://tanken.wecosys.com/
 
 ## Was die App zeigt
 
-- Regions-Auswahl: **Sachsen · Vogtland** (Klingenthal/Werdau ↔ Vojtanov/Kraslice), **Bayern · Oberfranken** (Selb ↔ Cheb/Aš), **Sachsen · Erzgebirgskreis** (Johanngeorgenstadt ↔ Potůčky, Oberwiesenthal ↔ Boží Dar), **Sachsen · Dresden/Osterzgebirge** (Bad Gottleuba-Berggießhübel/Pirna ↔ Krásný Les/Chabařovice, A17/D8) und **Sachsen · Oberlausitz** (Zittau/Bautzen ↔ Hrádek nad Nisou)
+- Regions-Auswahl: **Grenzgebiet Sachsen-Vogtland** (Klingenthal/Werdau ↔ Vojtanov/Kraslice, Ebmath/Bad Elster ↔ Hazlov/Hranice bei Aš), **Grenzgebiet Bayern-Oberfranken** (Selb ↔ Cheb/Aš), **Grenzgebiet Sachsen-Erzgebirge** (Johanngeorgenstadt ↔ Potůčky, Oberwiesenthal ↔ Boží Dar), **Grenzgebiet Sachsen-Dresden/Osterzgebirge** (Bad Gottleuba-Berggießhübel/Pirna ↔ Krásný Les/Chabařovice, A17/D8) und **Grenzgebiet Sachsen-Oberlausitz** (Zittau/Bautzen ↔ Hrádek nad Nisou)
+- Standort-Button (GPS) zur automatischen Regionswahl, als Alternative zur PLZ-Eingabe
 - Echte, einzelne Tankstellen je Region und Land (keine Länder-Durchschnitte), günstigste zuerst
 - Drei Kraftstoffarten: Natural 95 (entspricht Super E10), Premium (98 Oktan), Diesel – mit `*`-Kennzeichnung, wenn ein Wert ein Richtwert statt eines gemeldeten Preises ist
 - Tankrechner mit freier Auswahl der tatsächlichen CZ- und DE-Station

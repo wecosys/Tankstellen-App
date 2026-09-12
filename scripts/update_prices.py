@@ -25,13 +25,19 @@ TANKERKOENIG_KEY = os.environ.get("TANKERKOENIG_API_KEY", "").strip()
 # center point for DE. Radius is Tankerkoenig's max (25 km).
 REGIONS = {
     "vogtland": {
-        "label": "Sachsen · Vogtland",
+        "label": "Grenzgebiet Sachsen-Vogtland",
         # "Vojtanov" has no standalone mbenzin.cz page (redirects to the
         # nationwide homepage) - Kraslice's page covers the whole Sokolov
         # district (30+ stations reaching to Karlovy Vary), so it's fetched
         # and then filtered down to the towns actually near this crossing.
-        "cz_towns": ["Kraslice"],
-        "cz_town_prefixes": ["Kraslice", "Vojtanov"],
+        # "Hazlov" has the same no-standalone-page problem, for the second
+        # real crossing in this region: Ebmath (part of Bad Elster, DE) -
+        # Rossbach/Hranice u Ase (CZ), near As. The "As" town page (already
+        # used by the Oberfranken region below) reaches Hazlov/Hranice in
+        # its own nearest-first list, so it's fetched here too and filtered
+        # down the same way.
+        "cz_towns": ["Kraslice", "As"],
+        "cz_town_prefixes": ["Kraslice", "Vojtanov", "Hazlov", "Hranice"],
         "de_center": {"lat": 50.3546, "lng": 12.4692},  # Klingenthal
         # 08412 Werdau is a real PLZ users near here type in (see
         # PLZ_COORDS in index.html), but it's ~42 km from Klingenthal -
@@ -46,7 +52,7 @@ REGIONS = {
         ],
     },
     "oberfranken": {
-        "label": "Bayern · Oberfranken",
+        "label": "Grenzgebiet Bayern-Oberfranken",
         "cz_towns": ["As", "Cheb"],
         "cz_town_prefixes": None,  # both town pages are already local enough
         # mbenzin.cz's "nearest" sort for the Cheb page is relative to Cheb's
@@ -58,7 +64,7 @@ REGIONS = {
         "de_center": {"lat": 50.1740, "lng": 12.1320},  # Selb
     },
     "erzgebirge": {
-        "label": "Sachsen · Erzgebirgskreis",
+        "label": "Grenzgebiet Sachsen-Erzgebirge",
         # Neither "Boží Dar" nor "Potůčky" has its own mbenzin.cz town page;
         # "Jachymov" is a valid nearby town page whose "nearest first" listing
         # covers both within ~15 km, filtered down to just those two crossings.
@@ -67,7 +73,7 @@ REGIONS = {
         "de_center": {"lat": 50.4263, "lng": 12.8424},  # midpoint Johanngeorgenstadt/Oberwiesenthal
     },
     "dresden": {
-        "label": "Sachsen · Dresden/Osterzgebirge",
+        "label": "Grenzgebiet Sachsen-Dresden/Osterzgebirge",
         # The A17/D8 motorway crossing itself is "Breitenau (DE) - Krásný Les
         # (CZ)" - a modern Autobahn border with no real settlement on either
         # side, and neither "Krasny-Les" nor "Petrovice" has an mbenzin.cz
@@ -80,7 +86,7 @@ REGIONS = {
         "de_center": {"lat": 50.85, "lng": 13.95},  # Bad Gottleuba-Berggießhübel
     },
     "oberlausitz": {
-        "label": "Sachsen · Oberlausitz",
+        "label": "Grenzgebiet Sachsen-Oberlausitz",
         # Hrádek nad Nisou is directly on the border opposite Zittau, with
         # its own mbenzin.cz page and real stations right at the crossing
         # (0-200m) - no filtering or extra anchor needed for the crossing
