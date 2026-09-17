@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.12.1] - 2026-09-17
+
+### Behoben
+- **Automatische Preisaktualisierung brach mit einem GitHub-Actions-Fehler ab.** mbenzin.cz hat einzelne Anfragen von GitHub-Actions-Runnern mit `403 Forbidden` beantwortet (offenbar IP-bezogen und nicht dauerhaft – ein manuell angestoßener Lauf kurz darauf lief wieder normal). Da bislang jeder CZ-Abruf einer Region den gesamten Skriptlauf abbrach, blieb dadurch die komplette Aktualisierung stehen – auch die von mbenzin.cz unabhängige DE-Seite (Tankerkönig) und alle anderen Regionen. `scripts/update_prices.py` versucht jetzt pro Tankstellen-Ort einen kurzen Retry und fällt bei anhaltendem Fehler nur für die betroffene Region auf die zuletzt bekannten CZ-Daten zurück (kein Absturz mehr) – die anderen Regionen sowie die DE-Seite aktualisieren sich unabhängig davon weiter. Der Preisverlauf-Eintrag für den Tag wird in diesem Fall nicht mit veralteten CZ-Daten überschrieben, sondern bleibt wie er war, bis ein späterer Lauf am selben Tag wieder frische Daten liefert.
+
 ## [2.12.0] - 2026-09-12
 
 ### Hinzugefügt

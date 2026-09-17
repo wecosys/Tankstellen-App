@@ -10,6 +10,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.request
 from datetime import datetime, timezone, timedelta
 
@@ -112,11 +113,26 @@ CZ_LABEL_MAP = {
 }
 
 
-def fetch_cz_town(town):
-    """Scrape one mbenzin.cz town page into a list of station dicts."""
+def fetch_cz_town(town, retries=2, backoff=3):
+    """Scrape one mbenzin.cz town page into a list of station dicts.
+
+    mbenzin.cz occasionally 403s requests from some GitHub Actions runner
+    IPs (observed 2026-09-17, seemingly IP-based/intermittent - a retry
+    from the same runner/IP mostly won't clear it, but the short backoff
+    is cheap insurance against a genuine transient blip; the caller
+    (fetch_cz_region, via main()) falls back to the previous data.json's
+    stations for the whole region if every attempt still fails).
+    """
     url = f"https://www.mbenzin.cz/Ceny-benzinu-a-nafty/{town}"
-    resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=20)
-    resp.raise_for_status()
+    for attempt in range(retries + 1):
+        try:
+            resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=20)
+            resp.raise_for_status()
+            break
+        except requests.exceptions.RequestException:
+            if attempt == retries:
+                raise
+            time.sleep(backoff)
 
     # A town slug that doesn't exist on mbenzin.cz 301s to the generic
     # nationwide listing instead of 404ing - that would silently poison the
@@ -318,8 +334,21 @@ def main():
 
     for region_key, cfg in REGIONS.items():
         print(f"--- {region_key} ---")
-        cz_stations = fetch_cz_region(cfg["cz_towns"], cfg.get("cz_town_prefixes"), cfg.get("cz_priority_keywords"))
-        print(f"CZ: {len(cz_stations)} stations")
+        # mbenzin.cz has occasionally 403ed every request from a given
+        # GitHub Actions runner IP (observed 2026-09-17) - rather than
+        # crashing the whole run (which would also skip the unrelated DE
+        # side and every other region), fall back to the previous run's CZ
+        # stations for just this region and keep going. The history entry
+        # below is skipped in that case, not built from stale stations
+        # under today's date.
+        try:
+            cz_stations = fetch_cz_region(cfg["cz_towns"], cfg.get("cz_town_prefixes"), cfg.get("cz_priority_keywords"))
+            print(f"CZ: {len(cz_stations)} stations")
+            cz_fresh = True
+        except requests.exceptions.RequestException as e:
+            print(f"WARNING: CZ fetch failed for {region_key} ({e}) - keeping previous CZ stations", file=sys.stderr)
+            cz_stations = existing.get("regions", {}).get(region_key, {}).get("cz", {}).get("stations", [])
+            cz_fresh = False
         de_stations = fetch_de_region(cfg["de_center"])
         print(f"DE: {len(de_stations)} stations")
 
@@ -339,29 +368,32 @@ def main():
             "de": de_out,
         }
 
-        entry = {
-            "date": today,
-            "cz": {
-                "e10": average_price(cz_stations, "e10"),
-                "e5": average_e5(cz_stations, is_cz=True),
-                "premium": average_premium(cz_stations, "e10", is_cz=True),
-                "diesel": average_price(cz_stations, "diesel"),
-            },
-            "de": {
-                "e10": average_price(de_stations, "e10"),
-                "e5": average_e5(de_stations, is_cz=False),
-                "premium": average_premium(de_stations, "e10", is_cz=False),
-                "diesel": average_price(de_stations, "diesel"),
-            },
-            "fx": {"eurCzk": eur_czk},
-        }
-        entry["cz"] = {k: v for k, v in entry["cz"].items() if v is not None}
-        entry["de"] = {k: v for k, v in entry["de"].items() if v is not None}
-
         entries = history_out.get(region_key, {}).get("entries", [])
-        entries = [e for e in entries if e.get("date") != today]
-        entries.append(entry)
-        entries = entries[-60:]
+        if cz_fresh:
+            entry = {
+                "date": today,
+                "cz": {
+                    "e10": average_price(cz_stations, "e10"),
+                    "e5": average_e5(cz_stations, is_cz=True),
+                    "premium": average_premium(cz_stations, "e10", is_cz=True),
+                    "diesel": average_price(cz_stations, "diesel"),
+                },
+                "de": {
+                    "e10": average_price(de_stations, "e10"),
+                    "e5": average_e5(de_stations, is_cz=False),
+                    "premium": average_premium(de_stations, "e10", is_cz=False),
+                    "diesel": average_price(de_stations, "diesel"),
+                },
+                "fx": {"eurCzk": eur_czk},
+            }
+            entry["cz"] = {k: v for k, v in entry["cz"].items() if v is not None}
+            entry["de"] = {k: v for k, v in entry["de"].items() if v is not None}
+            entries = [e for e in entries if e.get("date") != today]
+            entries.append(entry)
+            entries = entries[-60:]
+        # else: leave today's history entry as-is (from an earlier successful
+        # run today, or absent) - a fresh DE average paired with a stale CZ
+        # fallback would desync the two mini-charts for this one day.
         history_out[region_key] = {"entries": entries}
 
     out = {
