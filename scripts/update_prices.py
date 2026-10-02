@@ -334,20 +334,28 @@ def main():
 
     for region_key, cfg in REGIONS.items():
         print(f"--- {region_key} ---")
-        # mbenzin.cz has occasionally 403ed every request from a given
-        # GitHub Actions runner IP (observed 2026-09-17) - rather than
-        # crashing the whole run (which would also skip the unrelated DE
-        # side and every other region), fall back to the previous run's CZ
-        # stations for just this region and keep going. The history entry
-        # below is skipped in that case, not built from stale stations
-        # under today's date.
+        # mbenzin.cz has occasionally blocked every request from a given
+        # GitHub Actions runner IP (observed 2026-09-17, and persistently
+        # since 2026-09-18 - see cz.updatedAt below) - rather than crashing
+        # the whole run (which would also skip the unrelated DE side and
+        # every other region), fall back to the previous run's CZ stations
+        # for just this region and keep going. The history entry below is
+        # skipped in that case, not built from stale stations under today's
+        # date. cz.updatedAt tracks the last time this region's CZ side was
+        # genuinely refreshed, independent of the top-level `updatedAt`
+        # (which keeps moving via the DE side/FX rate even while CZ is
+        # stuck) - the frontend uses it to show an honest "veraltet" badge
+        # instead of silently presenting frozen prices as current.
+        prev_cz = existing.get("regions", {}).get(region_key, {}).get("cz", {})
         try:
             cz_stations = fetch_cz_region(cfg["cz_towns"], cfg.get("cz_town_prefixes"), cfg.get("cz_priority_keywords"))
             print(f"CZ: {len(cz_stations)} stations")
             cz_fresh = True
+            cz_updated_at = now_iso
         except requests.exceptions.RequestException as e:
             print(f"WARNING: CZ fetch failed for {region_key} ({e}) - keeping previous CZ stations", file=sys.stderr)
-            cz_stations = existing.get("regions", {}).get(region_key, {}).get("cz", {}).get("stations", [])
+            cz_stations = prev_cz.get("stations", [])
+            cz_updated_at = prev_cz.get("updatedAt")
             cz_fresh = False
         de_stations = fetch_de_region(cfg["de_center"])
         print(f"DE: {len(de_stations)} stations")
@@ -364,7 +372,7 @@ def main():
 
         regions_out[region_key] = {
             "label": cfg["label"],
-            "cz": {"source": "mbenzin.cz", "stations": cz_stations},
+            "cz": {"source": "mbenzin.cz", "stations": cz_stations, "updatedAt": cz_updated_at},
             "de": de_out,
         }
 

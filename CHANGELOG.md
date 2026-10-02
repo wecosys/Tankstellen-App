@@ -4,6 +4,12 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.12.2] - 2026-10-02
+
+### Behoben
+- **CZ-Preise wurden seit über zwei Wochen lautlos nicht mehr aktualisiert.** mbenzin.cz hat eine JavaScript-"Browser-Verifizierung" eingeführt, die automatisierte Anfragen (ohne echten Browser) abweist – der in v2.12.1 eingebaute Fallback hat den Skriptlauf dadurch zwar korrekt vor dem Absturz bewahrt, aber auch verschleiert, dass die tschechischen Preise seit dem 18.09. eingefroren waren, ohne jeden Hinweis in der App. Jede Region trägt jetzt einen eigenen `cz.updatedAt`-Zeitstempel, unabhängig vom DE-/Gesamtstand; ist dieser älter als 36 Stunden, zeigt die Tschechien-Spalte jetzt ehrlich "veraltet · X Tage" an (mit Tooltip für den genauen Zeitpunkt), statt die alten Preise unkommentiert als aktuell darzustellen.
+- Kontakt zu mbenzin.cz aufgenommen, da deren Verifizierungsseite ausdrücklich einen Zugangsschlüssel für Skripte anbietet – sobald verfügbar, wird der Abruf entsprechend umgestellt.
+
 ## [2.12.1] - 2026-09-17
 
 ### Behoben

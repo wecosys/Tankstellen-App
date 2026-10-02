@@ -47,7 +47,8 @@
             "e10": 45.5,
             "diesel": 48.7
           }
-        ]
+        ],
+        "updatedAt": "2026-09-18T13:07:14+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -324,7 +325,8 @@
             "e10": 46.5,
             "diesel": 50.5
           }
-        ]
+        ],
+        "updatedAt": "2026-09-18T13:07:14+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -455,7 +457,8 @@
             "diesel": 51.25,
             "premium": 49.9
           }
-        ]
+        ],
+        "updatedAt": "2026-09-18T13:07:14+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -630,7 +633,8 @@
             "diesel": 48.4,
             "premium": 45.4
           }
-        ]
+        ],
+        "updatedAt": "2026-09-18T13:07:14+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -804,7 +808,8 @@
             "e10": 45.9,
             "diesel": 49.5
           }
-        ]
+        ],
+        "updatedAt": "2026-09-18T13:07:14+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
