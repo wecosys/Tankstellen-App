@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [3.0.2] - 2026-10-04
+
+### Geändert
+- **Ampel: Hinweiszeile in Klammern.** "(Berechnet mit den angezeigten Preisen; bis zur Ankunft können sie sich ändern.)" steht jetzt in Klammern und wirkt dadurch als Nebenbemerkung. Die Warnung bei veralteten CZ-Preisen bleibt bewusst ohne Klammern.
+
 ## [3.0.1] - 2026-10-04
 
 ### Geändert
