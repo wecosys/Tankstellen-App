@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.12.4] - 2026-10-04
+
+### Geändert
+- **Quellenangaben deutlich sichtbarer.** mbenzin.cz konnte die Nennung als Quelle auf der Seite nicht finden (bisher nur dezenter, grauer Footer-Text). Jetzt steht unter jeder Stationsliste ein eigener Hinweis "Quelle: mbenzin.cz" bzw. "Quelle: Tankerkönig (CC BY 4.0)" mit unterstrichenem Link, und der Footer hat einen abgesetzten, hervorgehobenen Block "Datenquellen" mit Links auf mbenzin.cz und Tankerkönig (dessen CC-BY-Lizenz ebenfalls eine Nennung verlangt).
+
 ## [2.12.3] - 2026-10-04
 
 ### Behoben
