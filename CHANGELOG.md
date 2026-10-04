@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.13.1] - 2026-10-04
+
+### Geändert
+- **Ampel zeigt die Fahrtkosten ausdrücklich.** Die "Kosten einfache Strecke" flossen schon in das Urteil ein, waren dort aber nicht zu sehen. Die Ampel enthält jetzt eine Rechenzeile ("10,44 € Ersparnis − 8,09 € Kosten einfache Strecke (60 km) = 2,34 €"). Ist noch keine Entfernung eingetragen, weist sie darauf hin, dass ohne Weg gerechnet wurde und wo man die Kilometer einträgt.
+
 ## [2.13.0] - 2026-10-04
 
 ### Hinzugefügt
