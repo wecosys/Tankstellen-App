@@ -21,6 +21,13 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(REPO_ROOT, "data.json")
 
 TANKERKOENIG_KEY = os.environ.get("TANKERKOENIG_API_KEY", "").strip()
+# Access key issued by mbenzin.cz for scripted access (their browser-check
+# page offers one on request) - sent as X-Mbenzin-Klic. Limit: 60 pages/hour,
+# over it the site answers 429. Never commit it; it lives in the
+# MBENZIN_API_KEY GitHub Actions secret.
+MBENZIN_KEY = os.environ.get("MBENZIN_API_KEY", "").strip()
+MBENZIN_UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+              "Chrome/129.0.0.0 Safari/537.36 TankpreiseGrenzvergleich/1.0 (+https://tanken.wecosys.com)")
 
 # Region anchors: mbenzin.cz town pages for CZ, Tankerkoenig radius search
 # center point for DE. Radius is Tankerkoenig's max (25 km).
@@ -124,10 +131,21 @@ def fetch_cz_town(town, retries=2, backoff=3):
     stations for the whole region if every attempt still fails).
     """
     url = f"https://www.mbenzin.cz/Ceny-benzinu-a-nafty/{town}"
+    # The site's browser check resets bare "Mozilla/5.0" clients at TCP level
+    # even with a valid key; a browser-like UA plus our own identifier works.
+    headers = {"User-Agent": MBENZIN_UA}
+    if MBENZIN_KEY:
+        headers["X-Mbenzin-Klic"] = MBENZIN_KEY
     for attempt in range(retries + 1):
         try:
-            resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=20)
+            resp = requests.get(url, headers=headers, timeout=20)
             resp.raise_for_status()
+            # Without a valid key the site answers 200 with a JS
+            # "Ověřuji prohlížeč…" interstitial that has no stations -
+            # parsing that would yield an empty list and wipe the region.
+            if "Ověřuji prohlížeč" in resp.text[:2000]:
+                raise requests.exceptions.RequestException(
+                    "mbenzin.cz browser-verification page (MBENZIN_API_KEY missing or invalid?)")
             break
         except requests.exceptions.RequestException:
             if attempt == retries:

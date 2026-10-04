@@ -4,6 +4,14 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.12.3] - 2026-10-04
+
+### Behoben
+- **CZ-Preise werden wieder live aktualisiert.** mbenzin.cz hat auf Anfrage einen Zugangsschlüssel für den automatisierten Abruf ausgestellt (Limit 60 Seiten/Stunde, unser Bedarf liegt bei ca. 7 Seiten × 3 pro Tag). Der Schlüssel liegt als GitHub-Actions-Secret `MBENZIN_API_KEY` (nicht im Repo) und wird als Header `X-Mbenzin-Klic` mitgesendet; der Abruf nutzt dazu einen browserähnlichen, aber identifizierbaren User-Agent (ein nacktes `Mozilla/5.0` wird von der Seite weiterhin auf TCP-Ebene abgewiesen). Erkennt das Skript statt echter Daten die "Ověřuji prohlížeč…"-Zwischenseite (Schlüssel fehlt/ungültig), wird der Abruf als Fehler behandelt, statt eine Region mit einer leeren Stationsliste zu überschreiben.
+
+### Geändert
+- **Quellenangabe mit Link.** Als Bedingung für den Zugang zeigt der Footer die CZ-Datenquelle jetzt als sichtbaren Link auf mbenzin.cz (bisher nur Text).
+
 ## [2.12.2] - 2026-10-02
 
 ### Behoben

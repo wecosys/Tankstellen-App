@@ -29,6 +29,7 @@ jobs:
       - name: Update data.json
         env:
           TANKERKOENIG_API_KEY: ${{ secrets.TANKERKOENIG_API_KEY }}
+          MBENZIN_API_KEY: ${{ secrets.MBENZIN_API_KEY }}
         run: python3 scripts/update_prices.py
 
       - name: Commit and push if changed
