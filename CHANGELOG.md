@@ -4,6 +4,23 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [3.0.0] - 2026-10-04
+
+Meilenstein-Version: die App ist mit den letzten Ausbaustufen vom reinen Preisvergleich zu einer Entscheidungshilfe geworden. Keine inkompatiblen Änderungen für Nutzer; der Versionssprung markiert den Funktionsumfang. Die Neuerungen seit v2.11 im Überblick (Details in den Einträgen darunter):
+
+### Neu
+- **Ampel "Lohnt sich das Tanken?"** im Tankrechner – berücksichtigt Entfernung und Verbrauch, zeigt die Rechnung, den Break-even (maximale Entfernung / Mindest-Liter) und einen Rückblick auf die letzten 14 Tage (v2.13).
+- **Standort-Button (GPS)** zur automatischen Regionswahl, zusätzlich zur PLZ-Eingabe (v2.12.0).
+- **Grenzübergang Ebmath/Bad Elster ↔ Hazlov** in der Region Vogtland (v2.12.0).
+- **Einheitliche Region-Namen** "Grenzgebiet Sachsen-Vogtland" usw. (v2.12.0).
+- **Ehrliche Datenstand-Anzeige:** "veraltet · X Tage" in der Tschechien-Spalte, wenn die CZ-Preise nicht aktuell sind (v2.12.2).
+
+### Verbessert
+- **Zuverlässigerer Preisabruf:** Zugangsschlüssel von mbenzin.cz, Fallback auf die letzten Daten pro Region statt Totalausfall (v2.12.1, v2.12.3).
+- **Sichtbare Quellenangabe** mit Links auf mbenzin.cz und Tankerkönig im Footer (v2.12.3–v2.12.7).
+- **Verständlicherer Preisvergleich** in einer Zeile mit Fußnote (v2.12.6–v2.12.8) und lesbare Stations-Dropdowns im Tankrechner (v2.12.5).
+- Google-Maps-Links nutzen echte Koordinaten (v2.11.7).
+
 ## [2.13.1] - 2026-10-04
 
 ### Geändert
