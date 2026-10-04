@@ -4,6 +4,12 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.12.5] - 2026-10-04
+
+### Geändert
+- **Tankrechner: Stations-Dropdowns zeigen den vollen Text.** Die Auswahlfelder für CZ- und DE-Station waren auf 220 px begrenzt und schnitten Einträge wie "Tank ONO · Cheb, Horní Vojtanov 39 — 43.50 Kč" ab; sie passen sich jetzt der Breite des längsten Eintrags an (auf dem Handy volle Breite, ohne die Seite zu verbreitern).
+- **Ergebnis-Kacheln auf einer Höhe.** Bei zugeschalteten Umwegkosten brach die Beschriftung "Kosten einfache Strecke" auf zwei Zeilen um und schob ihren Wert tiefer als die anderen; die Werte aller Kacheln stehen jetzt unabhängig vom Zeilenumbruch auf einer Linie.
+
 ## [2.12.4] - 2026-10-04
 
 ### Geändert
