@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.12.8] - 2026-10-04
+
+### Geändert
+- **Preisvergleich mit Fußnote.** Der Preisunterschied in der grünen Zeile trägt jetzt einen Stern, darunter steht eine kurze Erklärung: "* Preisunterschied zwischen der günstigsten Tankstelle im CZ-Bereich und der günstigsten in Deutschland".
+
 ## [2.12.7] - 2026-10-04
 
 ### Geändert
