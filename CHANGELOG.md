@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.12.6] - 2026-10-04
+
+### Geändert
+- **Preisvergleich unter den Stationslisten verständlich erklärt.** Die Kurzanzeige "CZ günstiger · 0,221 €/l · 11.1%" war für Außenstehende nicht nachvollziehbar. Jetzt steht dort ein ganzer Satz ("Tanken in Tschechien ist günstiger: 0,261 € pro Liter (12,7 % weniger)") und darunter eine Erklärung, was verglichen wird: die jeweils günstigste Station in Tschechien und Deutschland (mit Name, Ort und Preis), für die gewählte Kraftstoffart, Kronen zum aktuellen Kurs umgerechnet, bezogen auf einen Liter – mit Verweis auf den Tankrechner für die tatsächliche Ersparnis. Prozentwert jetzt mit Dezimalkomma und stets relativ zur teureren Seite berechnet (auch wenn Deutschland einmal günstiger sein sollte).
+
 ## [2.12.5] - 2026-10-04
 
 ### Geändert

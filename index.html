@@ -468,14 +468,21 @@
     align-items:center;
     justify-content:center;
     gap:10px;
-    flex-wrap:wrap;
+    flex-direction:column;
     text-align:center;
+  }
+  .summary-note{
+    max-width:640px;
+    margin:0;
+    font-size:.74rem;
+    line-height:1.5;
+    color:var(--muted);
   }
   .summary .pill{
     background:var(--good-soft);
     color:var(--good);
     border:1px solid var(--line);
-    border-radius:999px;
+    border-radius:18px;
     padding:8px 16px;
     font-family:"IBM Plex Mono", ui-monospace, monospace;
     font-size:.8rem;
@@ -761,7 +768,7 @@
   <header class="gantry reveal">
     <h1 class="gantry-title">
       <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 6C32 6 14 26 14 40a18 18 0 0 0 36 0C50 26 32 6 32 6Z" fill="var(--accent-cz)"/><path d="M32 6C32 6 50 26 50 40a18 18 0 0 1-18 18Z" fill="var(--accent-de)"/><path d="M32 8v50" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round"/></svg>
-      <span class="gantry-title-text">Tankpreise Grenzvergleich<span class="version-badge">v2.12.5</span>
+      <span class="gantry-title-text">Tankpreise Grenzvergleich<span class="version-badge">v2.12.6</span>
         <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
       </span>
     </h1>
@@ -885,7 +892,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.12.5</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.12.6</p>
   </footer>
 
 </div>
@@ -1279,9 +1286,19 @@
     if (czPriced.length && dePriced.length) {
       var czEur = czPriced[0].val / data.fx.eurCzk;
       var diff = dePriced[0].val - czEur;
-      var pct = dePriced[0].val ? (diff / dePriced[0].val * 100) : 0;
-      var cheaperSide = diff >= 0 ? "CZ" : "DE";
-      summary.innerHTML = '<span class="pill">' + cheaperSide + ' günstiger · ' + fmtEur(Math.abs(diff)) + '/l · ' + Math.abs(pct).toFixed(1) + '%</span>';
+      var czCheaper = diff >= 0;
+      // Percentage relative to the more expensive side, so "x % weniger"
+      // reads correctly in both directions.
+      var pctBase = czCheaper ? dePriced[0].val : czEur;
+      var pctText = (pctBase ? Math.abs(diff) / pctBase * 100 : 0).toLocaleString("de-DE", {minimumFractionDigits:1, maximumFractionDigits:1});
+      var czBest = czPriced[0], deBest = dePriced[0];
+      summary.innerHTML =
+        '<span class="pill">Tanken in ' + (czCheaper ? 'Tschechien' : 'Deutschland') + ' ist günstiger: ' +
+          fmtEur(Math.abs(diff)) + ' pro Liter (' + pctText + ' % weniger)</span>' +
+        '<p class="summary-note">Verglichen werden die jeweils günstigste Tankstelle in Tschechien (' +
+          czBest.station.name + ', ' + czBest.station.town + ': ' + czBest.val.toFixed(2) + ' Kč ≈ ' + fmtEur(czEur) + ') und in Deutschland (' +
+          deBest.station.name + ', ' + deBest.station.town + ': ' + fmtEur(deBest.val) + ') für ' + FUEL_LABELS[STATE.fuel] +
+          ', Kronen zum aktuellen Kurs in Euro umgerechnet. Das ist der Unterschied für einen Liter – wie viel du bei deiner Tankfüllung wirklich sparst, zeigt der Tankrechner unten.</p>';
     } else {
       summary.innerHTML = '';
     }
