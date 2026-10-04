@@ -1,6 +1,6 @@
 # Tankpreise Grenzvergleich
 
-**Version 2.12.8** · [Changelog](CHANGELOG.md)
+**Version 2.13.0** · [Changelog](CHANGELOG.md)
 
 Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wählbar nach Region (Grenzgebiet Sachsen-Vogtland, Grenzgebiet Bayern-Oberfranken, Grenzgebiet Sachsen-Erzgebirge, Grenzgebiet Sachsen-Dresden/Osterzgebirge oder Grenzgebiet Sachsen-Oberlausitz) und Kraftstoff, inklusive Kronen-Euro-Umrechnung, Preisverlauf und Google-Maps-Links zu jeder Station.
 
@@ -14,6 +14,7 @@ Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wäh
 - Echte, einzelne Tankstellen je Region und Land (keine Länder-Durchschnitte), günstigste zuerst
 - Drei Kraftstoffarten: Natural 95 (entspricht Super E10), Premium (98 Oktan), Diesel – mit `*`-Kennzeichnung, wenn ein Wert ein Richtwert statt eines gemeldeten Preises ist
 - Tankrechner mit freier Auswahl der tatsächlichen CZ- und DE-Station
+- Ampel im Tankrechner: lohnt sich die Fahrt (inkl. Entfernung und Verbrauch)? Mit Break-even (maximale Entfernung / Mindest-Liter) und Rückblick auf die letzten 14 Tage
 - Google-Maps-Link an jeder Station
 - Preisverlauf-Chart je Region/Kraftstoff (wächst mit jeder Aktualisierung)
 

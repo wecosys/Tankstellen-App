@@ -21,6 +21,8 @@
     --accent-de-soft:#f6e9e2;
     --good:#3c7a41;
     --good-soft:#e6f0e4;
+    --warn:#b7791f;
+    --bad:#b3402a;
     --muted:#726d5c;
     --shadow: 0 1px 0 rgba(28,27,25,.05);
     --focus:#1d5f93;
@@ -40,6 +42,8 @@
       --accent-de-soft:#332420;
       --good:#66c26c;
       --good-soft:#1c2e1e;
+      --warn:#e0b04a;
+      --bad:#e8745a;
       --muted:#9e9a8b;
       --shadow: 0 1px 0 rgba(0,0,0,.4);
       --focus:#4a8ac0;
@@ -59,6 +63,8 @@
     --accent-de-soft:#332420;
     --good:#66c26c;
     --good-soft:#1c2e1e;
+    --warn:#e0b04a;
+    --bad:#e8745a;
     --muted:#9e9a8b;
     --shadow: 0 1px 0 rgba(0,0,0,.4);
     --focus:#4a8ac0;
@@ -581,6 +587,59 @@
   }
   .result-tile.highlight .v{ color:var(--good); }
 
+  /* ---- worth-it verdict (traffic light) ---- */
+  .calc-verdict{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    margin-top:14px;
+    padding:12px 14px;
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    border-left:6px solid var(--muted);
+    border-radius:8px;
+  }
+  .calc-verdict.green{ border-left-color:var(--good); }
+  .calc-verdict.yellow{ border-left-color:var(--warn); }
+  .calc-verdict.red{ border-left-color:var(--bad); }
+  .verdict-lamps{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    padding:6px 5px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:999px;
+    flex:none;
+  }
+  .verdict-lamps i{
+    display:block;
+    width:12px; height:12px;
+    border-radius:50%;
+    opacity:.18;
+  }
+  .verdict-lamps i.r{ background:var(--bad); }
+  .verdict-lamps i.y{ background:var(--warn); }
+  .verdict-lamps i.g{ background:var(--good); }
+  .calc-verdict.red .verdict-lamps i.r,
+  .calc-verdict.yellow .verdict-lamps i.y,
+  .calc-verdict.green .verdict-lamps i.g{ opacity:1; }
+  .verdict-head{
+    font-weight:700;
+    font-size:.95rem;
+    margin:0 0 4px;
+  }
+  .calc-verdict.green .verdict-head{ color:var(--good); }
+  .calc-verdict.yellow .verdict-head{ color:var(--warn); }
+  .calc-verdict.red .verdict-head{ color:var(--bad); }
+  .verdict-body p{
+    margin:0 0 3px;
+    font-size:.78rem;
+    line-height:1.5;
+    color:var(--ink);
+  }
+  .verdict-body p.fine{ color:var(--muted); font-size:.72rem; }
+
   /* ---- history chart ---- */
   .history{
     background:var(--surface);
@@ -761,7 +820,7 @@
   <header class="gantry reveal">
     <h1 class="gantry-title">
       <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 6C32 6 14 26 14 40a18 18 0 0 0 36 0C50 26 32 6 32 6Z" fill="var(--accent-cz)"/><path d="M32 6C32 6 50 26 50 40a18 18 0 0 1-18 18Z" fill="var(--accent-de)"/><path d="M32 8v50" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round"/></svg>
-      <span class="gantry-title-text">Tankpreise Grenzvergleich<span class="version-badge">v2.12.8</span>
+      <span class="gantry-title-text">Tankpreise Grenzvergleich<span class="version-badge">v2.13.0</span>
         <small>Tankstellen im deutsch-tschechischen Grenzgebiet</small>
       </span>
     </h1>
@@ -866,6 +925,7 @@
         <div class="v" id="calcFinalSave">–</div>
       </div>
     </div>
+    <div class="calc-verdict" id="calcVerdict" hidden></div>
   </section>
 
   <section class="history reveal">
@@ -885,7 +945,7 @@
     <p id="provisionalNote">Die DE-Seite zeigt aktuell eine manuell erfasste Momentaufnahme statt Live-Stationsdaten – sobald ein Tankerkönig-API-Key vorliegt, stellt sie auf echte Live-Preise um.</p>
     <p>Preise mit <span class="est-star">*</span> sind keine gemeldeten Werte, sondern Richtwerte (üblicher Aufschlag ggü. Natural 95/Super E10: DE Premium ≈ +13 Ct, CZ Premium ≈ +2,40 Kč).</p>
     <p>Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.</p>
-    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.12.8</p>
+    <p class="copyright">© 2026 Michael Riedel. Alle Rechte vorbehalten. · v2.13.0</p>
   </footer>
 
 </div>
@@ -1358,9 +1418,9 @@
     var consumption = parseFloat(document.getElementById("consumptionInput").value) || 0;
     var detourCostTile = document.getElementById("calcDetourCostTile");
     var finalSaveTile = document.getElementById("calcFinalSaveTile");
+    var detourCost = extraKm > 0 ? (extraKm / 100) * consumption * czEur : 0;
+    var finalSave = save - detourCost;
     if (extraKm > 0) {
-      var detourCost = (extraKm / 100) * consumption * czEur;
-      var finalSave = save - detourCost;
       document.getElementById("calcDetourCost").textContent = "−" + fmtEur2(detourCost);
       document.getElementById("calcFinalSave").textContent = (finalSave >= 0 ? "+" : "") + fmtEur2(finalSave);
       detourCostTile.hidden = false;
@@ -1369,6 +1429,76 @@
       detourCostTile.hidden = true;
       finalSaveTile.hidden = true;
     }
+
+    renderVerdict({
+      liters: liters, extraKm: extraKm, consumption: consumption,
+      czEur: czEur, deVal: deSel.val, totalDe: totalDe,
+      save: save, detourCost: detourCost, finalSave: finalSave,
+      czUpdatedAt: region.cz.updatedAt
+    });
+  }
+
+  // Traffic-light verdict on whether the trip pays off at the CURRENT
+  // prices. Deliberately not a probability: we only have ~14 days of
+  // averaged history, so a percentage would suggest precision that isn't
+  // there. "Knapp" (yellow) = net saving below 3 % of the German fill-up
+  // price (at least 2 EUR) - small enough that an ordinary price move
+  // before arrival could eat it.
+  function renderVerdict(c){
+    var box = document.getElementById("calcVerdict");
+    if (!(c.liters > 0)) { box.hidden = true; return; }
+
+    var margin = Math.max(2, c.totalDe * 0.03);
+    var perLiter = c.deVal - c.czEur;
+    var level, head;
+    if (c.finalSave <= 0) {
+      level = "red";
+      head = perLiter <= 0 ? "Lohnt sich nicht – die CZ-Station ist pro Liter nicht günstiger"
+                           : "Lohnt sich nicht – der Weg kostet mehr, als du sparst";
+    } else if (c.finalSave < margin) {
+      level = "yellow";
+      head = "Knapp – ca. " + fmtEur2(c.finalSave) + " Ersparnis";
+    } else {
+      level = "green";
+      head = "Lohnt sich – ca. " + fmtEur2(c.finalSave) + " Ersparnis";
+    }
+
+    var lines = [];
+    var perKm = (c.consumption / 100) * c.czEur;
+    if (perLiter > 0) {
+      if (perKm > 0) {
+        var kmMax = Math.floor(c.save / perKm);
+        lines.push("Bei " + c.liters.toLocaleString("de-DE") + " Litern lohnt sich ein Weg bis ca. " + kmMax.toLocaleString("de-DE") + " km (einfache Strecke).");
+      }
+      if (c.detourCost > 0) {
+        var litersMin = Math.ceil(c.detourCost / perLiter);
+        lines.push("Bei " + c.extraKm.toLocaleString("de-DE") + " km Umweg müssten es mindestens ca. " + litersMin.toLocaleString("de-DE") + " Liter sein.");
+      }
+    }
+
+    // How often this exact choice would have paid off at the price gap of
+    // each recent day (averages of all stations, so only the day-to-day
+    // CHANGE in the gap is applied to today's actual selection).
+    var pts = historyPoints().slice(-HISTORY_WINDOW_DAYS);
+    if (pts.length >= 5) {
+      var ref = pts[pts.length - 1];
+      var refGap = ref.de - ref.czEur;
+      var ok = pts.filter(function(p){ return c.finalSave + c.liters * ((p.de - p.czEur) - refGap) > 0; }).length;
+      lines.push("Mit dem Preisabstand der letzten " + pts.length + " Tage hätte sich das in " + ok + " von " + pts.length + " Tagen gelohnt.");
+    }
+
+    var stale = staleBadge(c.czUpdatedAt);
+    var fine = stale
+      ? "Achtung: Die CZ-Preise sind " + stale.label.replace("veraltet · ", "") + " alt – das Ergebnis ist unsicher."
+      : "Berechnet mit den angezeigten Preisen; bis zur Ankunft können sie sich ändern.";
+
+    box.className = "calc-verdict " + level;
+    box.innerHTML =
+      '<div class="verdict-lamps" aria-hidden="true"><i class="r"></i><i class="y"></i><i class="g"></i></div>' +
+      '<div class="verdict-body"><p class="verdict-head">' + head + '</p>' +
+      lines.map(function(l){ return "<p>" + l + "</p>"; }).join("") +
+      '<p class="fine">' + fine + '</p></div>';
+    box.hidden = false;
   }
 
   var CONSUMPTION_DEFAULTS = { e10: 7.5, premium: 7.5, diesel: 5.5 };

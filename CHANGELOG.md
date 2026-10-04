@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.13.0] - 2026-10-04
+
+### Hinzugefügt
+- **Ampel "Lohnt sich das Tanken?" im Tankrechner.** Unter den Ergebnis-Kacheln zeigt eine Ampel (grün / gelb / rot, mit Text, nicht nur Farbe), ob sich die Fahrt zur CZ-Station bei den aktuellen Preisen lohnt – unter Berücksichtigung von Entfernung und Verbrauch. Gelb ("Knapp") heißt: Endersparnis unter 3 % des deutschen Tankpreises (mindestens 2 €), also klein genug, dass eine gewöhnliche Preisänderung bis zur Ankunft sie aufzehren könnte. Dazu: Break-even ("Bei 40 Litern lohnt sich ein Weg bis ca. 77 km" und – bei eingetragenem Umweg – "mindestens ca. 32 Liter") sowie ein Rückblick, an wie vielen der letzten 14 Tage dieselbe Auswahl bei dem damaligen Preisabstand rentabel gewesen wäre. Bewusst keine Prozent-Wahrscheinlichkeit: bei nur 14 Tagen gemittelter Historie wäre das Scheingenauigkeit. Sind die CZ-Preise veraltet (Badge), weist die Ampel ausdrücklich darauf hin.
+
 ## [2.12.8] - 2026-10-04
 
 ### Geändert

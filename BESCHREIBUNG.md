@@ -19,6 +19,9 @@ Zeigt alle bekannten Tankstellen der Region getrennt nach Land, nach Preis sorti
 **Tankrechner**
 Deine tatsächliche CZ- und DE-Tankstelle sowie die Literzahl auswählen – die App rechnet dir die konkrete Ersparnis für deine Tankfüllung aus. Optional: Entfernung zur CZ-Station eintragen (einfache Strecke), dann rechnet die App die Fahrtkosten mit ein und zeigt eine realistische Endersparnis statt nur der reinen Preisdifferenz.
 
+**Lohnt sich das Tanken?**
+Unter den Ergebnissen zeigt eine Ampel auf einen Blick, ob sich die Fahrt bei den aktuellen Preisen lohnt: grün = lohnt sich, gelb = knapp (die Ersparnis ist so klein, dass schon eine kleine Preisänderung sie aufzehren könnte), rot = lohnt sich nicht. Dazu steht, bis zu welcher Entfernung sich der Weg bei deiner Literzahl lohnt und wie viele Liter es bei deinem Umweg mindestens sein sollten. Außerdem zeigt die App, an wie vielen der letzten 14 Tage sich dieselbe Fahrt bei dem damaligen Preisabstand gelohnt hätte. Das ist keine Prognose, sondern eine Einordnung auf Basis der angezeigten Preise.
+
 **Preisverlauf**
 Zwei kleine Diagramme zeigen, wie sich die Preise in den letzten 14 Tagen entwickelt haben – für Tschechien und Deutschland getrennt, weil die Preisniveaus zu unterschiedlich sind, um sie auf einer gemeinsamen Skala zu vergleichen.
 
