@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [3.0.3] - 2026-10-04
+
+### Behoben
+- **Tankrechner: "Kosten einfache Strecke" und "Endersparnis" blieben bei leerem Km-Feld sichtbar** und zeigten dabei alte, nicht mehr passende Werte (z. B. +7,15 € Endersparnis, während die Ampel korrekt ohne Weg rechnete). Ursache: Seit v2.12.5 haben die Ergebnis-Kacheln `display:flex`, was das `hidden`-Attribut überstimmt (nur im Claude-Artifact verhinderte dessen eigenes CSS das; auf der Webseite nicht). Eine globale `[hidden]{display:none}`-Regel stellt das Ausblenden wieder her – betrifft auch die Ampel-Box, die bei 0 Litern nicht verschwand.
+
 ## [3.0.2] - 2026-10-04
 
 ### Geändert
