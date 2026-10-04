@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [3.0.1] - 2026-10-04
+
+### Geändert
+- **Ampel: Gelb bei einer Ersparnis unter 10 €.** Einstellige Beträge sind den Weg meist nicht wert. Die Stufen sind jetzt: Rot = keine Ersparnis, Gelb ("Wenig lukrativ") = Endersparnis unter 10 €, Grün = ab 10 €. Vorher galt gelb nur bei weniger als 3 % des Tankpreises (mindestens 2 €).
+
 ## [3.0.0] - 2026-10-04
 
 Meilenstein-Version: die App ist mit den letzten Ausbaustufen vom reinen Preisvergleich zu einer Entscheidungshilfe geworden. Keine inkompatiblen Änderungen für Nutzer; der Versionssprung markiert den Funktionsumfang. Die Neuerungen seit v2.11 im Überblick (Details in den Einträgen darunter):
