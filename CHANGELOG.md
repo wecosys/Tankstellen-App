@@ -4,6 +4,11 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [2.12.7] - 2026-10-04
+
+### Geändert
+- **Schlanker.** Die "Quelle: …"-Zeilen unter den beiden Stationslisten und die ausführliche Erklärzeile unter dem Preisvergleich (v2.12.4/v2.12.6) entfallen wieder; die grüne Zeile ("Tanken in Tschechien ist günstiger: … pro Liter") genügt. Die Quellenangabe mit Links auf mbenzin.cz und Tankerkönig bleibt im hervorgehobenen Footer-Block "Datenquellen".
+
 ## [2.12.6] - 2026-10-04
 
 ### Geändert
