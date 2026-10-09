@@ -147,8 +147,15 @@ def fetch_cz_town(town, retries=2, backoff=3):
                 raise requests.exceptions.RequestException(
                     "mbenzin.cz browser-verification page (MBENZIN_API_KEY missing or invalid?)")
             break
-        except requests.exceptions.RequestException:
+        except requests.exceptions.RequestException as e:
             if attempt == retries:
+                # mbenzin.cz sometimes answers 403 even with a valid key
+                # (seen 2026-10-08, intermittent) - log what the server said
+                # so the cause can be told apart next time.
+                r = getattr(e, "response", None)
+                if r is not None:
+                    print(f"DEBUG mbenzin.cz {r.status_code} for {town}: server={r.headers.get('server')} "
+                          f"retry-after={r.headers.get('retry-after')} body={r.text[:200]!r}", file=sys.stderr)
                 raise
             time.sleep(backoff)
 
@@ -289,12 +296,28 @@ def fetch_de_region(center, radius=25, limit=MAX_STATIONS_PER_SIDE):
     return stations
 
 
-def fetch_fx_rate():
-    resp = requests.get("https://api.frankfurter.app/latest?from=EUR&to=CZK", timeout=15)
-    resp.raise_for_status()
-    payload = resp.json()
-    rate = round(float(payload["rates"]["CZK"]), 2)
-    return rate, "frankfurter.app (EZB-Referenzkurs)"
+def fetch_fx_rate(fallback=None):
+    """EUR/CZK from frankfurter.dev, with retries. Read timeouts here crashed
+    whole runs twice (2026-09-24, 2026-10-07) although the rate barely moves
+    within a day - so if every attempt fails, `fallback` (the previous
+    data.json's (rate, source)) is used instead of aborting the run.
+    api.frankfurter.app only 301s to .dev (and is marked deprecated), so the
+    .dev v1 endpoint is called directly."""
+    last_err = None
+    for attempt in range(3):
+        try:
+            resp = requests.get("https://api.frankfurter.dev/v1/latest?from=EUR&to=CZK", timeout=15)
+            resp.raise_for_status()
+            rate = round(float(resp.json()["rates"]["CZK"]), 2)
+            return rate, "frankfurter.dev (EZB-Referenzkurs)"
+        except (requests.exceptions.RequestException, KeyError, ValueError) as e:
+            last_err = e
+            if attempt < 2:
+                time.sleep(3)
+    if fallback:
+        print(f"WARNING: FX fetch failed ({last_err}) - keeping previous rate {fallback[0]}", file=sys.stderr)
+        return fallback
+    raise last_err
 
 
 def average(vals):
@@ -345,7 +368,9 @@ def main():
     else:
         existing = {"history": {}}
 
-    eur_czk, fx_source = fetch_fx_rate()
+    prev_fx = existing.get("fx") or {}
+    fx_fallback = (prev_fx["eurCzk"], prev_fx.get("source", "frankfurter.dev (EZB-Referenzkurs)")) if prev_fx.get("eurCzk") else None
+    eur_czk, fx_source = fetch_fx_rate(fx_fallback)
 
     regions_out = {}
     history_out = existing.get("history", {})

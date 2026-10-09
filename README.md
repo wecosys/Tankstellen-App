@@ -1,6 +1,6 @@
 # Tankpreise Grenzvergleich
 
-**Version 3.0.3** · [Changelog](CHANGELOG.md)
+**Version 3.0.4** · [Changelog](CHANGELOG.md)
 
 Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wählbar nach Region (Grenzgebiet Sachsen-Vogtland, Grenzgebiet Bayern-Oberfranken, Grenzgebiet Sachsen-Erzgebirge, Grenzgebiet Sachsen-Dresden/Osterzgebirge oder Grenzgebiet Sachsen-Oberlausitz) und Kraftstoff, inklusive Kronen-Euro-Umrechnung, Preisverlauf und Google-Maps-Links zu jeder Station.
 
@@ -23,11 +23,11 @@ Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wäh
 - **CZ:** [mbenzin.cz](https://www.mbenzin.cz/) – reale Stationspreise, live gescrapt (siehe `scripts/update_prices.py`)
 - **DE:** [Tankerkönig-API](https://creativecommons.tankerkoenig.de/) – echte Live-Stationsdaten per Umkreissuche um Klingenthal bzw. Selb
 - **Premium (98 Oktan):** wo keine gemeldeten Werte vorliegen, Richtwert als Aufschlag auf Natural 95/Super E10 (siehe Footnote in der App)
-- **Wechselkurs:** [frankfurter.app](https://www.frankfurter.app/) (EZB-Referenzkurs)
+- **Wechselkurs:** [frankfurter.dev](https://frankfurter.dev/) (EZB-Referenzkurs)
 
 ## Aktualisierung
 
-**Vollautomatisch auf tanken.wecosys.com:** Ein täglicher GitHub-Actions-Workflow (`.github/workflows/update-prices.yml`, 07:00 Uhr Europe/Berlin) ruft Tankerkönig und mbenzin.cz neu ab, schreibt [`data.json`](data.json) und committet die Änderung – läuft komplett auf GitHub-Servern, unabhängig von jedem lokalen Rechner. Der Tankerkönig-API-Key liegt als GitHub-Actions-Secret (`TANKERKOENIG_API_KEY`), nie im Klartext im Repo.
+**Vollautomatisch auf tanken.wecosys.com:** Ein GitHub-Actions-Workflow (`.github/workflows/update-prices.yml`, mehrmals täglich; die genauen Zeiten schwanken je nach GitHub-Auslastung) ruft Tankerkönig und mbenzin.cz neu ab, schreibt [`data.json`](data.json) und committet die Änderung – läuft komplett auf GitHub-Servern, unabhängig von jedem lokalen Rechner. Der Tankerkönig-API-Key liegt als GitHub-Actions-Secret (`TANKERKOENIG_API_KEY`), nie im Klartext im Repo.
 
 `index.html` lädt `data.json` per `fetch()` beim Seitenaufruf; schlägt das fehl (z. B. lokal ohne Server), zeigt die Seite den eingebetteten Stand vom letzten `git push`.
 

@@ -2,12 +2,15 @@ name: Update fuel prices
 
 on:
   schedule:
-    # Times are Europe/Berlin during CEST (UTC+2); GitHub Actions cron is
-    # always UTC and doesn't shift for daylight saving, so during CET
-    # (winter) these fire an hour later in local time (08:00/14:00/20:00).
-    - cron: "0 5 * * *"   # 07:00 Europe/Berlin - morning
-    - cron: "0 11 * * *"  # 13:00 Europe/Berlin - after Germany's 12:00 price-change window
-    - cron: "0 17 * * *"  # 19:00 Europe/Berlin - evening
+    # GitHub Actions cron is always UTC (no daylight-saving shift) and the
+    # scheduler is best-effort: since 2026-09-30 runs fire hours late and the
+    # 05:00 slot was repeatedly skipped. GitHub advises against :00 start
+    # times (peak load), so the minutes are deliberately odd, and one extra
+    # catch-up run sits mid-morning. Runs only commit when data changed.
+    - cron: "17 5 * * *"   # ~07:17 Europe/Berlin (CEST) - morning
+    - cron: "23 8 * * *"   # ~10:23 - catch-up if the morning run was skipped
+    - cron: "41 11 * * *"  # ~13:41 - after Germany's 12:00 price-change window
+    - cron: "23 17 * * *"  # ~19:23 - evening
   workflow_dispatch: {}
 
 permissions:

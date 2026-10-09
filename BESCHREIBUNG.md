@@ -29,8 +29,8 @@ Zwei kleine Diagramme zeigen, wie sich die Preise in den letzten 14 Tagen entwic
 
 - **Deutschland:** [Tankerkönig](https://creativecommons.tankerkoenig.de/) – echte Live-Stationsdaten
 - **Tschechien:** [mbenzin.cz](https://www.mbenzin.cz/) – aktuelle Stationspreise
-- **Wechselkurs:** [frankfurter.app](https://www.frankfurter.app/) (EZB-Referenzkurs)
-- Automatische Aktualisierung 3× täglich
+- **Wechselkurs:** [frankfurter.dev](https://frankfurter.dev/) (EZB-Referenzkurs)
+- Automatische Aktualisierung mehrmals täglich (die genauen Zeiten schwanken je nach Auslastung des Hosting-Dienstes)
 
 Alle Preise sind Momentaufnahmen; regionale und tagesaktuelle Abweichungen sind möglich.
 

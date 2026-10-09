@@ -4,6 +4,15 @@ Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
 Format angelehnt an [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [3.0.4] - 2026-10-09
+
+### Behoben
+- **Wechselkurs-Abruf konnte den ganzen Lauf abbrechen.** Ein Lese-Timeout bei frankfurter ließ zum zweiten Mal (24.09., 07.10.) die komplette Aktualisierung scheitern, obwohl sich der Kurs kaum bewegt. Der Abruf versucht es jetzt dreimal und nutzt notfalls den zuletzt gespeicherten Kurs. Außerdem wird direkt `api.frankfurter.dev` aufgerufen (die alte `.app`-Adresse leitet nur noch weiter und ist als veraltet markiert); die Quellenangabe lautet entsprechend "frankfurter.dev".
+
+### Geändert
+- **Zeitplan der automatischen Aktualisierung.** GitHubs Scheduler arbeitet seit dem 30.09. unzuverlässig (Läufe kommen Stunden zu spät, der Morgenlauf fiel seit dem 01.10. praktisch aus, dafür kam täglich ein Lauf gegen 23:30 Uhr). Die Startzeiten liegen jetzt nicht mehr auf voller Stunde (GitHub rät wegen Lastspitzen davon ab), dazu gibt es einen zusätzlichen Auffang-Lauf am Vormittag. Der Footer nennt deshalb keine festen Uhrzeiten mehr, sondern "mehrmals täglich (morgens, mittags und abends) – die genauen Zeiten schwanken je nach Auslastung".
+- **mbenzin.cz-Diagnose:** In 2 der letzten 12 Läufe antwortete mbenzin.cz trotz gültigem Schlüssel mit `403` (alle Regionen, nur vorübergehend; die App zeigte dann die letzten Preise weiter). Bei einem Fehlschlag protokolliert das Skript jetzt Statuscode, Server-Header und den Anfang der Antwort, damit die Ursache beim nächsten Mal erkennbar ist.
+
 ## [3.0.3] - 2026-10-04
 
 ### Behoben
