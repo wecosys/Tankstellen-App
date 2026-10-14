@@ -7,11 +7,19 @@ on:
     # 05:00 slot was repeatedly skipped. GitHub advises against :00 start
     # times (peak load), so the minutes are deliberately odd, and one extra
     # catch-up run sits mid-morning. Runs only commit when data changed.
+    # Observed 2026-10-01..14: the 05:17 and 08:23 slots never fired at all and
+    # the others drift 2-5 h, so these crons are only a safety net; punctual
+    # runs come from the external workflow_dispatch trigger.
     - cron: "17 5 * * *"   # ~07:17 Europe/Berlin (CEST) - morning
     - cron: "23 8 * * *"   # ~10:23 - catch-up if the morning run was skipped
     - cron: "41 11 * * *"  # ~13:41 - after Germany's 12:00 price-change window
     - cron: "23 17 * * *"  # ~19:23 - evening
-  workflow_dispatch: {}
+  workflow_dispatch: {}   # primary trigger: cron-job.org calls this at 07:00/13:00/19:00 Berlin time
+
+# External trigger and the (late) GitHub cron may fire close together: never run two at once.
+concurrency:
+  group: update-prices
+  cancel-in-progress: false
 
 permissions:
   contents: write

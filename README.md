@@ -33,6 +33,13 @@ Vergleicht echte Tankstellenpreise im deutsch-tschechischen Grenzgebiet – wäh
 
 **Claude Artifact:** Kann aus Sandbox-Gründen nicht selbst durch GitHub Actions aktualisiert werden (kein Zugriff auf die Artifact-Datenbank von außerhalb). Bleibt auf manuelle Aktualisierung im Chat mit Claude ("aktualisiere die Preise") angewiesen. Eine früher eingerichtete Cloud-Routine dafür wurde deaktiviert, da unbeaufsichtigte Datenbank-Schreibzugriffe an einem nicht umgehbaren Freigabe-Dialog scheitern (Plattform-Limitierung).
 
+**Pünktliche Auslösung:** GitHubs Cron-Scheduler ist nur "best effort" – seit 30.09.2026 feuern Läufe 2–5 Stunden zu spät, einzelne Slots (05:17 und 08:23 UTC) gar nicht. Deshalb stößt zusätzlich [cron-job.org](https://cron-job.org/) den Workflow per `workflow_dispatch` zu festen Zeiten an (07:00, 13:00, 19:00 Europe/Berlin); die GitHub-Crons bleiben als Sicherheitsnetz, eine Concurrency-Sperre verhindert parallele Läufe. Einrichtung:
+
+- URL: `POST https://api.github.com/repos/wecosys/Tankstellen-App/actions/workflows/update-prices.yml/dispatches`
+- Header: `Authorization: Bearer <Token>`, `Accept: application/vnd.github+json`, `X-GitHub-Api-Version: 2022-11-28`, `Content-Type: application/json`
+- Body: `{"ref":"main"}` – Erfolg = HTTP 204
+- Token: Fine-grained PAT, nur dieses Repo, Berechtigung *Actions: Read and write*; liegt ausschließlich bei cron-job.org, nie im Repo.
+
 Workflow manuell anstoßen: [Actions → Update fuel prices → Run workflow](https://github.com/wecosys/Tankstellen-App/actions/workflows/update-prices.yml)
 
 ## Hosting über eigene Domain (GitHub Pages)
