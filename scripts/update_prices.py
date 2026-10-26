@@ -170,8 +170,17 @@ def fetch_cz_town(town, retries=2, backoff=3):
 
     soup = BeautifulSoup(resp.text, "html.parser")
 
+    rows = soup.select("div.st-row")
+    if not rows:
+        # A 200 page without a single station row: the site's markup changed
+        # or we were served some other page. Say what came back, so the
+        # cause is readable in the Actions log instead of guessed.
+        title = soup.title.get_text(strip=True) if soup.title else None
+        print(f"DEBUG mbenzin.cz {town}: 200 but no div.st-row (final url={resp.url}, bytes={len(resp.content)}, "
+              f"title={title!r}, head={resp.text[:300]!r})", file=sys.stderr)
+
     stations = []
-    for row in soup.select("div.st-row"):
+    for row in rows:
         name_el = row.select_one(".st-name span[itemprop=name]")
         locality_el = row.select_one("span[itemprop=addressLocality]")
         if not name_el or not locality_el:
@@ -240,6 +249,13 @@ def fetch_cz_region(town_list, town_prefixes=None, priority_keywords=None):
 
     if town_prefixes:
         stations = [s for s in stations if any(s["town"].startswith(p) for p in town_prefixes)]
+
+    # An empty region is a failed fetch, not "no stations": the caller keeps
+    # the last good stations instead of wiping the CZ side (and its history)
+    # with an empty list. Seen 2026-10-24 onward with every region at 0.
+    if not stations:
+        raise requests.exceptions.RequestException(
+            f"mbenzin.cz returned no usable stations for {town_list}")
 
     if priority_keywords:
         # mbenzin.cz's own "nearest" sort is relative to the fetched town's
