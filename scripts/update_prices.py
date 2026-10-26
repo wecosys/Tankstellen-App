@@ -234,6 +234,9 @@ def fetch_cz_town(town, retries=2, backoff=3):
         # recognizable prices is not useful for comparison.
         if "e10" in station or "diesel" in station:
             stations.append(station)
+    if rows and not stations:
+        print(f"DEBUG mbenzin.cz {town}: {len(rows)} rows parsed to 0 stations; first row={str(rows[0])[:1200]!r}",
+              file=sys.stderr)
     return stations
 
 
