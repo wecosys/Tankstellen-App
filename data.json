@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-26T11:06:58+02:00",
+  "updatedAt": "2026-10-26T11:08:37+02:00",
   "fx": {
     "eurCzk": 24.33,
     "source": "frankfurter.dev (EZB-Referenzkurs)"
@@ -9,8 +9,46 @@
       "label": "Grenzgebiet Sachsen-Vogtland",
       "cz": {
         "source": "mbenzin.cz",
-        "stations": [],
-        "updatedAt": "2026-10-25T21:43:38+02:00"
+        "stations": [
+          {
+            "name": "Orlen",
+            "town": "Kraslice, Čs. Armády 1883",
+            "e10": 45.5,
+            "diesel": 47.7
+          },
+          {
+            "name": "MOL",
+            "town": "Kraslice, Čs.armády",
+            "e10": 43.5,
+            "diesel": 47.7,
+            "premium": 49.9
+          },
+          {
+            "name": "Schnell",
+            "town": "Kraslice, Hraničná 7",
+            "e10": 45.5,
+            "diesel": 46.9
+          },
+          {
+            "name": "EuroOil",
+            "town": "Vojtanov 105, silnice E49",
+            "e10": 43.5,
+            "diesel": 45.9,
+            "premium": 46.5
+          },
+          {
+            "name": "Armex Oil",
+            "town": "Vojtanov, silnice E49 - Horní Vojtanov",
+            "e10": 45.5
+          },
+          {
+            "name": "Suchopár",
+            "town": "Hazlov 445",
+            "e10": 43.8,
+            "diesel": 47.2
+          }
+        ],
+        "updatedAt": "2026-10-26T11:08:37+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -194,7 +232,7 @@
             "plz": "8060",
             "e10": 2.019,
             "e5": 2.079,
-            "diesel": 2.209
+            "diesel": 2.189
           },
           {
             "name": "Freie Tankstelle",
@@ -223,8 +261,71 @@
       "label": "Grenzgebiet Bayern-Oberfranken",
       "cz": {
         "source": "mbenzin.cz",
-        "stations": [],
-        "updatedAt": "2026-10-25T21:43:38+02:00"
+        "stations": [
+          {
+            "name": "EuroOil",
+            "town": "Vojtanov 105, silnice E49",
+            "e10": 43.5,
+            "diesel": 45.9,
+            "premium": 46.5
+          },
+          {
+            "name": "Armex Oil",
+            "town": "Vojtanov, silnice E49 - Horní Vojtanov",
+            "e10": 45.5
+          },
+          {
+            "name": "Tank ONO",
+            "town": "Cheb, Horní Vojtanov 39",
+            "e10": 42.5,
+            "diesel": 45.9,
+            "premium": 45.5
+          },
+          {
+            "name": "Skalenská autodoprava a.s.",
+            "town": "Skalná u Chebu, Chebská 533",
+            "e10": 44.94,
+            "diesel": 47.4
+          },
+          {
+            "name": "MOL",
+            "town": "Aš, Okružní 36",
+            "e10": 43.5,
+            "diesel": 47.9
+          },
+          {
+            "name": "F1 Gas",
+            "town": "Aš, Selbská 15/2732",
+            "e10": 43.0,
+            "diesel": 45.6
+          },
+          {
+            "name": "F1 Gas",
+            "town": "Aš, Rybniční 2744",
+            "e10": 44.3,
+            "diesel": 48.6
+          },
+          {
+            "name": "F1 Gas",
+            "town": "Aš, Selbská 2865",
+            "e10": 46.7,
+            "diesel": 45.9,
+            "premium": 49.9
+          },
+          {
+            "name": "MOL",
+            "town": "Nový Žďár 47, silnice 217",
+            "e10": 43.9,
+            "diesel": 48.5
+          },
+          {
+            "name": "Suchopár",
+            "town": "Hazlov 445",
+            "e10": 43.8,
+            "diesel": 47.2
+          }
+        ],
+        "updatedAt": "2026-10-26T11:08:37+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -336,8 +437,27 @@
       "label": "Grenzgebiet Sachsen-Erzgebirge",
       "cz": {
         "source": "mbenzin.cz",
-        "stations": [],
-        "updatedAt": "2026-10-25T21:43:38+02:00"
+        "stations": [
+          {
+            "name": "OMV",
+            "town": "Boží Dar, silnice 25",
+            "e10": 45.3,
+            "diesel": 47.9
+          },
+          {
+            "name": "RMW",
+            "town": "Potůčky 175",
+            "e10": 45.9,
+            "diesel": 47.9
+          },
+          {
+            "name": "F1 Gas",
+            "town": "Potůčky, Potůčky 180",
+            "e10": 46.9,
+            "diesel": 49.1
+          }
+        ],
+        "updatedAt": "2026-10-26T11:08:37+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -400,7 +520,7 @@
             "plz": "8340",
             "e10": 2.029,
             "e5": 2.089,
-            "diesel": 2.219
+            "diesel": 2.209
           },
           {
             "name": "Schmidt Mineralöl -Vertrieb GmbH Scheibenberg",
@@ -448,8 +568,70 @@
       "label": "Grenzgebiet Sachsen-Dresden/Osterzgebirge",
       "cz": {
         "source": "mbenzin.cz",
-        "stations": [],
-        "updatedAt": "2026-10-25T21:43:38+02:00"
+        "stations": [
+          {
+            "name": "Tank ONO",
+            "town": "Chlumec, Ústecká 228",
+            "e10": 42.5,
+            "diesel": 45.9,
+            "premium": 45.5
+          },
+          {
+            "name": "MOL",
+            "town": "Varvažov, dálnice D8, směr Nemecko",
+            "e10": 44.5,
+            "diesel": 48.6
+          },
+          {
+            "name": "MOL",
+            "town": "Varvažov, dálnice D8, směr Praha",
+            "e10": 44.5,
+            "diesel": 48.6
+          },
+          {
+            "name": "EuroOil",
+            "town": "Ústí nad Labem, Všebořická 106",
+            "e10": 43.5,
+            "diesel": 47.21
+          },
+          {
+            "name": "Nord",
+            "town": "Krupka, Revoluční",
+            "e10": 43.91,
+            "diesel": 47.5
+          },
+          {
+            "name": "Zaris",
+            "town": "Ústí nad Labem, Masarykova 1024/236",
+            "e10": 43.8,
+            "diesel": 46.9
+          },
+          {
+            "name": "Tank ONO",
+            "town": "Ústí nad Labem, Božtěšická",
+            "e10": 42.5,
+            "diesel": 45.9,
+            "premium": 45.5
+          },
+          {
+            "name": "Orlen",
+            "town": "Ústí nad Labem, Hrbovická",
+            "e10": 46.7
+          },
+          {
+            "name": "Shell",
+            "town": "Ústí nad Labem, Sociální péče",
+            "e10": 44.5,
+            "diesel": 48.5
+          },
+          {
+            "name": "G.A.S. Petroleum",
+            "town": "Ústí nad Labem, Tovární 3444/21",
+            "e10": 46.5,
+            "diesel": 49.5
+          }
+        ],
+        "updatedAt": "2026-10-26T11:08:37+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -561,8 +743,71 @@
       "label": "Grenzgebiet Sachsen-Oberlausitz",
       "cz": {
         "source": "mbenzin.cz",
-        "stations": [],
-        "updatedAt": "2026-10-25T21:43:38+02:00"
+        "stations": [
+          {
+            "name": "MOL",
+            "town": "Hrádek nad Nisou, Liberecká",
+            "e10": 43.5,
+            "diesel": 47.9
+          },
+          {
+            "name": "EuroOil",
+            "town": "Hrádek nad Nisou, Liberecká 732",
+            "e10": 44.2,
+            "diesel": 47.2
+          },
+          {
+            "name": "7 Station",
+            "town": "Hrádek nad Nisou, Žitavská 747",
+            "e10": 44.2,
+            "diesel": 46.4
+          },
+          {
+            "name": "Robin Oil",
+            "town": "Jitrava - Rynoltice, silnice E442",
+            "e10": 43.5,
+            "diesel": 46.91
+          },
+          {
+            "name": "MOL",
+            "town": "Chrastava, Bilokostelecka",
+            "e10": 43.7,
+            "diesel": 47.9
+          },
+          {
+            "name": "Orlen",
+            "town": "Rynoltice, Rynoltice 151",
+            "e10": 43.3,
+            "diesel": 46.9
+          },
+          {
+            "name": "Orlen",
+            "town": "Dolní Chrastava, Nádražní",
+            "e10": 43.7,
+            "diesel": 47.9,
+            "premium": 50.9
+          },
+          {
+            "name": "EuroOil",
+            "town": "Chrastava, Novoborská 8",
+            "e10": 43.9,
+            "diesel": 47.2
+          },
+          {
+            "name": "Orlen",
+            "town": "Jablonné v Podještědí, silnice E442",
+            "e10": 42.5,
+            "diesel": 45.9,
+            "premium": 48.5
+          },
+          {
+            "name": "MOL",
+            "town": "Jablonné v Podještědí, U Koupaliště 30",
+            "e10": 42.9,
+            "diesel": 47.5
+          }
+        ],
+        "updatedAt": "2026-10-26T11:08:37+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -1422,6 +1667,24 @@
           "fx": {
             "eurCzk": 24.33
           }
+        },
+        {
+          "date": "2026-10-26",
+          "cz": {
+            "e10": 44.55,
+            "e5": 44.55,
+            "premium": 47.717,
+            "diesel": 47.08
+          },
+          "de": {
+            "e10": 1.992,
+            "e5": 2.052,
+            "premium": 2.122,
+            "diesel": 2.218
+          },
+          "fx": {
+            "eurCzk": 24.33
+          }
         }
       ]
     },
@@ -2082,6 +2345,24 @@
           "fx": {
             "eurCzk": 24.33
           }
+        },
+        {
+          "date": "2026-10-26",
+          "cz": {
+            "e10": 44.164,
+            "e5": 44.164,
+            "premium": 46.764,
+            "diesel": 46.989
+          },
+          "de": {
+            "e10": 1.986,
+            "e5": 2.045,
+            "premium": 2.116,
+            "diesel": 2.209
+          },
+          "fx": {
+            "eurCzk": 24.33
+          }
         }
       ]
     },
@@ -2688,6 +2969,24 @@
           "fx": {
             "eurCzk": 24.33
           }
+        },
+        {
+          "date": "2026-10-26",
+          "cz": {
+            "e10": 46.033,
+            "e5": 46.033,
+            "premium": 48.433,
+            "diesel": 48.3
+          },
+          "de": {
+            "e10": 2.022,
+            "e5": 2.075,
+            "premium": 2.151,
+            "diesel": 2.203
+          },
+          "fx": {
+            "eurCzk": 24.33
+          }
         }
       ]
     },
@@ -3276,6 +3575,24 @@
           "fx": {
             "eurCzk": 24.33
           }
+        },
+        {
+          "date": "2026-10-26",
+          "cz": {
+            "e10": 44.291,
+            "e5": 44.291,
+            "premium": 46.811,
+            "diesel": 47.623
+          },
+          "de": {
+            "e10": 1.993,
+            "e5": 2.046,
+            "premium": 2.123,
+            "diesel": 2.188
+          },
+          "fx": {
+            "eurCzk": 24.33
+          }
         }
       ]
     },
@@ -3860,6 +4177,24 @@
             "e5": 2.062,
             "premium": 2.136,
             "diesel": 2.192
+          },
+          "fx": {
+            "eurCzk": 24.33
+          }
+        },
+        {
+          "date": "2026-10-26",
+          "cz": {
+            "e10": 43.54,
+            "e5": 43.54,
+            "premium": 46.78,
+            "diesel": 47.171
+          },
+          "de": {
+            "e10": 1.98,
+            "e5": 2.035,
+            "premium": 2.11,
+            "diesel": 2.19
           },
           "fx": {
             "eurCzk": 24.33
