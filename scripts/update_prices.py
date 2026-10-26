@@ -179,6 +179,10 @@ def fetch_cz_town(town, retries=2, backoff=3):
         print(f"DEBUG mbenzin.cz {town}: 200 but no div.st-row (final url={resp.url}, bytes={len(resp.content)}, "
               f"title={title!r}, head={resp.text[:300]!r})", file=sys.stderr)
 
+    elif not any(r.select_one(".st-price") for r in rows):
+        print(f"DEBUG mbenzin.cz {town}: {len(rows)} rows, none with .st-price; first row={str(rows[0])[:900]!r}",
+              file=sys.stderr)
+
     stations = []
     for row in rows:
         name_el = row.select_one(".st-name span[itemprop=name]")
