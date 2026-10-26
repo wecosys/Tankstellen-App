@@ -222,13 +222,12 @@ def fetch_cz_town(town, retries=2, backoff=3):
             key = CZ_LABEL_MAP.get(label)
             if not key:
                 continue
-            val_text = val_el.get_text(strip=True)
-            if not val_text or val_text in ("–", "-"):
+            # Since ~2026-10-24 .val also contains a nested source label
+            # ("45,50 (mbenzin.cz)"), so take the leading number only.
+            m = re.match(r"\s*(\d+(?:[.,]\d+)?)", val_el.get_text(" ", strip=True))
+            if not m:
                 continue
-            try:
-                station[key] = float(val_text.replace(",", "."))
-            except ValueError:
-                continue
+            station[key] = float(m.group(1).replace(",", "."))
 
         # Only keep stations with at least a benzin price - a row with no
         # recognizable prices is not useful for comparison.
