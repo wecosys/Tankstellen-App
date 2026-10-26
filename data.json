@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-26T11:08:37+02:00",
+  "updatedAt": "2026-10-26T11:35:05+02:00",
   "fx": {
     "eurCzk": 24.33,
     "source": "frankfurter.dev (EZB-Referenzkurs)"
@@ -48,7 +48,7 @@
             "diesel": 47.2
           }
         ],
-        "updatedAt": "2026-10-26T11:08:37+02:00"
+        "updatedAt": "2026-10-26T11:35:05+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -70,8 +70,8 @@
             "lat": 50.39499,
             "lng": 12.34057,
             "plz": "8261",
-            "e10": 1.989,
-            "e5": 2.049,
+            "e10": 1.899,
+            "e5": 1.959,
             "diesel": 2.219
           },
           {
@@ -325,7 +325,7 @@
             "diesel": 47.2
           }
         ],
-        "updatedAt": "2026-10-26T11:08:37+02:00"
+        "updatedAt": "2026-10-26T11:35:05+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -457,7 +457,7 @@
             "diesel": 49.1
           }
         ],
-        "updatedAt": "2026-10-26T11:08:37+02:00"
+        "updatedAt": "2026-10-26T11:35:05+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -631,7 +631,7 @@
             "diesel": 49.5
           }
         ],
-        "updatedAt": "2026-10-26T11:08:37+02:00"
+        "updatedAt": "2026-10-26T11:35:05+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -807,7 +807,7 @@
             "diesel": 47.5
           }
         ],
-        "updatedAt": "2026-10-26T11:08:37+02:00"
+        "updatedAt": "2026-10-26T11:35:05+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -1677,9 +1677,9 @@
             "diesel": 47.08
           },
           "de": {
-            "e10": 1.992,
-            "e5": 2.052,
-            "premium": 2.122,
+            "e10": 1.98,
+            "e5": 2.043,
+            "premium": 2.11,
             "diesel": 2.218
           },
           "fx": {
