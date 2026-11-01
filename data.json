@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-31T22:28:49+02:00",
+  "updatedAt": "2026-11-01T08:00:48+02:00",
   "fx": {
     "eurCzk": 24.35,
     "source": "frankfurter.dev (EZB-Referenzkurs)"
@@ -32,7 +32,7 @@
           {
             "name": "EuroOil",
             "town": "Vojtanov 105, silnice E49",
-            "e10": 43.5,
+            "e10": 41.5,
             "diesel": 46.9,
             "premium": 46.5
           },
@@ -48,12 +48,51 @@
             "diesel": 47.6
           }
         ],
-        "updatedAt": "2026-10-31T22:28:49+02:00"
+        "updatedAt": "2026-11-01T08:00:48+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
         "provisional": false,
         "stations": [
+          {
+            "name": "STAR",
+            "town": "Klingenthal",
+            "lat": 50.36543,
+            "lng": 12.46842,
+            "plz": "8248",
+            "e10": 2.049,
+            "e5": 2.109,
+            "diesel": 2.189
+          },
+          {
+            "name": "GULF",
+            "town": "Markneukirchen",
+            "lat": 50.3095,
+            "lng": 12.304,
+            "plz": "8258",
+            "e5": 2.109,
+            "diesel": 2.239
+          },
+          {
+            "name": "AGIP ENI",
+            "town": "Adorf",
+            "lat": 50.3265,
+            "lng": 12.25652,
+            "plz": "8626",
+            "e10": 2.059,
+            "e5": 2.119,
+            "diesel": 2.249
+          },
+          {
+            "name": "ARAL",
+            "town": "Falkenstein",
+            "lat": 50.47417,
+            "lng": 12.35437,
+            "plz": "8223",
+            "e10": 2.099,
+            "e5": 2.159,
+            "diesel": 2.199
+          },
           {
             "name": "AGIP ENI",
             "town": "Auerbach",
@@ -85,24 +124,34 @@
             "diesel": 2.209
           },
           {
-            "name": "ARAL",
-            "town": "Plauen",
-            "lat": 50.46731,
-            "lng": 12.18522,
-            "plz": "8527",
-            "e10": 2.589,
-            "e5": 2.649,
-            "diesel": 2.779
+            "name": "bft",
+            "town": "Rodewisch",
+            "lat": 50.5323,
+            "lng": 12.4315,
+            "plz": "8228",
+            "e10": 2.069,
+            "e5": 2.119,
+            "diesel": 2.199
           },
           {
-            "name": "TotalEnergies",
-            "town": "Treuen",
-            "lat": 50.54418,
-            "lng": 12.29917,
-            "plz": "8233",
-            "e10": 2.049,
-            "e5": 2.099,
+            "name": "STAR",
+            "town": "Johanngeorgenstadt",
+            "lat": 50.44429,
+            "lng": 12.7278,
+            "plz": "8349",
+            "e10": 1.989,
+            "e5": 2.049,
             "diesel": 2.199
+          },
+          {
+            "name": "Esso",
+            "town": "Oelsnitz/Vogtland",
+            "lat": 50.419,
+            "lng": 12.1779,
+            "plz": "8606",
+            "e10": 2.019,
+            "e5": 2.079,
+            "diesel": 2.239
           }
         ],
         "plzStations": [
@@ -137,6 +186,16 @@
             "diesel": 2.189
           },
           {
+            "name": "SB",
+            "town": "Werdau",
+            "lat": 50.7554,
+            "lng": 12.3716,
+            "plz": "8412",
+            "e10": 1.979,
+            "e5": 2.039,
+            "diesel": 2.189
+          },
+          {
             "name": "HEM",
             "town": "Zwickau",
             "lat": 50.70928,
@@ -145,6 +204,16 @@
             "e10": 1.979,
             "e5": 2.039,
             "diesel": 2.189
+          },
+          {
+            "name": "TotalEnergies",
+            "town": "Zwickau",
+            "lat": 50.7084,
+            "lng": 12.46476,
+            "plz": "8056",
+            "e10": 1.989,
+            "e5": 2.049,
+            "diesel": 2.199
           },
           {
             "name": "ARAL",
@@ -183,26 +252,6 @@
             "lng": 12.48044,
             "plz": "8056",
             "diesel": 2.189
-          },
-          {
-            "name": "ARAL",
-            "town": "Zwickau",
-            "lat": 50.74269,
-            "lng": 12.48817,
-            "plz": "8058",
-            "e10": 1.989,
-            "e5": 2.049,
-            "diesel": 2.199
-          },
-          {
-            "name": "Tankcenter",
-            "town": "Crimmitschau",
-            "lat": 50.80817,
-            "lng": 12.38853,
-            "plz": "8451",
-            "e10": 1.979,
-            "e5": 2.039,
-            "diesel": 2.189
           }
         ]
       }
@@ -215,7 +264,7 @@
           {
             "name": "EuroOil",
             "town": "Vojtanov 105, silnice E49",
-            "e10": 43.5,
+            "e10": 41.5,
             "diesel": 46.9,
             "premium": 46.5
           },
@@ -258,7 +307,7 @@
           {
             "name": "F1 Gas",
             "town": "Aš, Selbská 2865",
-            "e10": 44.7,
+            "e10": 43.8,
             "diesel": 49.4,
             "premium": 48.5
           },
@@ -275,7 +324,7 @@
             "diesel": 47.6
           }
         ],
-        "updatedAt": "2026-10-31T22:28:49+02:00"
+        "updatedAt": "2026-11-01T08:00:48+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -348,8 +397,8 @@
             "lng": 12.0285,
             "plz": "95111",
             "e10": 1.979,
-            "e5": 2.029,
-            "diesel": 2.209
+            "e5": 2.019,
+            "diesel": 2.199
           },
           {
             "name": "Shell",
@@ -371,14 +420,14 @@
             "diesel": 2.219
           },
           {
-            "name": "bft - Walther",
-            "town": "Arzberg",
-            "lat": 50.0554,
-            "lng": 12.1821,
-            "plz": "95659",
-            "e10": 2.039,
-            "e5": 2.099,
-            "diesel": 2.279
+            "name": "K u. W Tankstelle GbR",
+            "town": "Oberkotzau",
+            "lat": 50.25924,
+            "lng": 11.93339,
+            "plz": "95145",
+            "e10": 1.979,
+            "e5": 2.019,
+            "diesel": 2.189
           }
         ]
       }
@@ -407,7 +456,7 @@
             "diesel": 48.9
           }
         ],
-        "updatedAt": "2026-10-31T22:28:49+02:00"
+        "updatedAt": "2026-11-01T08:00:48+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -424,6 +473,16 @@
             "diesel": 2.209
           },
           {
+            "name": "STAR",
+            "town": "Johanngeorgenstadt",
+            "lat": 50.44429,
+            "lng": 12.7278,
+            "plz": "8349",
+            "e10": 1.989,
+            "e5": 2.049,
+            "diesel": 2.199
+          },
+          {
             "name": "Schmidt Mineralöl-Vertrieb GmbH Oberwiesental",
             "town": "Oberwiesenthal",
             "lat": 50.41988,
@@ -431,6 +490,26 @@
             "plz": "9484",
             "e5": 2.059,
             "diesel": 2.199
+          },
+          {
+            "name": "Q1",
+            "town": "Crottendorf",
+            "lat": 50.5031,
+            "lng": 12.9323,
+            "plz": "9474",
+            "e10": 2.099,
+            "e5": 2.089,
+            "diesel": 2.249
+          },
+          {
+            "name": "freie Tankstelle",
+            "town": "Schwarzenberg",
+            "lat": 50.52409,
+            "lng": 12.79004,
+            "plz": "8340",
+            "e10": 2.029,
+            "e5": 2.049,
+            "diesel": 2.209
           },
           {
             "name": "ARAL",
@@ -463,53 +542,23 @@
             "diesel": 2.189
           },
           {
-            "name": "BFT",
-            "town": "Bockau",
-            "lat": 50.54186,
-            "lng": 12.6857,
-            "plz": "8324",
-            "e10": 2.069,
-            "e5": 2.129,
-            "diesel": 2.179
+            "name": "Q1",
+            "town": "Schwarzenberg",
+            "lat": 50.556,
+            "lng": 12.7557,
+            "plz": "8340",
+            "e10": 1.994,
+            "e5": 2.044,
+            "diesel": 2.194
           },
           {
-            "name": "Calpam Express 24/7 Tanken",
-            "town": "Lauter-Bernsbach",
-            "lat": 50.56273,
-            "lng": 12.73351,
-            "plz": "8315",
-            "e10": 1.969,
-            "e5": 2.019,
-            "diesel": 2.179
-          },
-          {
-            "name": "ARAL",
-            "town": "Eibenstock",
-            "lat": 50.5013,
-            "lng": 12.6031,
-            "plz": "8309",
-            "e10": 1.999,
-            "e5": 2.059,
-            "diesel": 2.209
-          },
-          {
-            "name": "ESSO",
-            "town": "ANNABERG-BUCHHOLZ",
-            "lat": 50.56665,
-            "lng": 12.99822,
-            "plz": "9456",
+            "name": "Q1",
+            "town": "Schlettau",
+            "lat": 50.5586,
+            "lng": 12.9603,
+            "plz": "9487",
             "e10": 2.009,
             "e5": 2.059,
-            "diesel": 2.199
-          },
-          {
-            "name": "ORLEN",
-            "town": "Aue",
-            "lat": 50.57976,
-            "lng": 12.71343,
-            "plz": "8280",
-            "e10": 1.979,
-            "e5": 2.039,
             "diesel": 2.199
           }
         ]
@@ -542,7 +591,7 @@
           {
             "name": "EuroOil",
             "town": "Ústí nad Labem, Všebořická 106",
-            "e10": 42.4,
+            "e10": 42.39,
             "diesel": 47.9
           },
           {
@@ -582,7 +631,7 @@
             "diesel": 49.5
           }
         ],
-        "updatedAt": "2026-10-31T22:28:49+02:00"
+        "updatedAt": "2026-11-01T08:00:48+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -596,7 +645,17 @@
             "plz": "1819",
             "e10": 2.049,
             "e5": 2.109,
-            "diesel": 2.269
+            "diesel": 2.249
+          },
+          {
+            "name": "ARAL",
+            "town": "Pirna",
+            "lat": 50.95316,
+            "lng": 13.93844,
+            "plz": "1796",
+            "e10": 2.079,
+            "e5": 2.139,
+            "diesel": 2.289
           },
           {
             "name": "ARAL",
@@ -616,7 +675,7 @@
             "plz": "1796",
             "e10": 2.019,
             "e5": 2.079,
-            "diesel": 2.239
+            "diesel": 2.219
           },
           {
             "name": "SB",
@@ -627,6 +686,16 @@
             "e10": 2.019,
             "e5": 2.079,
             "diesel": 2.239
+          },
+          {
+            "name": "Sprint",
+            "town": "Pirna",
+            "lat": 50.95735,
+            "lng": 13.9165,
+            "plz": "1796",
+            "e10": 2.019,
+            "e5": 2.079,
+            "diesel": 2.219
           },
           {
             "name": "BFT",
@@ -655,7 +724,7 @@
             "plz": "1809",
             "e10": 2.019,
             "e5": 2.079,
-            "diesel": 2.239
+            "diesel": 2.219
           },
           {
             "name": "ARAL",
@@ -666,26 +735,6 @@
             "e10": 2.069,
             "e5": 2.129,
             "diesel": 2.309
-          },
-          {
-            "name": "STAR",
-            "town": "Altenberg",
-            "lat": 50.76424,
-            "lng": 13.75747,
-            "plz": "1773",
-            "e10": 1.979,
-            "e5": 2.039,
-            "diesel": 2.199
-          },
-          {
-            "name": "Hoyer",
-            "town": "Dippoldiswalde OT Reiholdshain",
-            "lat": 50.89759,
-            "lng": 13.69611,
-            "plz": "1744",
-            "e10": 1.989,
-            "e5": 2.049,
-            "diesel": 2.199
           }
         ]
       }
@@ -758,7 +807,7 @@
             "diesel": 47.9
           }
         ],
-        "updatedAt": "2026-10-31T22:28:49+02:00"
+        "updatedAt": "2026-11-01T08:00:48+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -790,9 +839,19 @@
             "lat": 50.9374,
             "lng": 14.8772,
             "plz": "2788",
-            "e10": 2.009,
-            "e5": 2.069,
+            "e10": 1.999,
+            "e5": 2.059,
             "diesel": 2.259
+          },
+          {
+            "name": "Sprint",
+            "town": "Oderwitz",
+            "lat": 50.96708,
+            "lng": 14.71069,
+            "plz": "2791",
+            "e10": 1.999,
+            "e5": 2.059,
+            "diesel": 2.249
           },
           {
             "name": "GULF",
@@ -800,9 +859,9 @@
             "lat": 51.0389,
             "lng": 14.883,
             "plz": "2899",
-            "e10": 2.009,
-            "e5": 2.029,
-            "diesel": 2.219
+            "e10": 1.989,
+            "e5": 2.009,
+            "diesel": 2.179
           },
           {
             "name": "ARAL",
@@ -815,14 +874,34 @@
             "diesel": 2.309
           },
           {
+            "name": "Sprint",
+            "town": "Löbau",
+            "lat": 51.08424,
+            "lng": 14.6607,
+            "plz": "2708",
+            "e10": 1.929,
+            "e5": 1.989,
+            "diesel": 2.169
+          },
+          {
+            "name": "Sprint",
+            "town": "Neusalza-Spremberg",
+            "lat": 51.03664,
+            "lng": 14.54419,
+            "plz": "2742",
+            "e10": 1.949,
+            "e5": 2.009,
+            "diesel": 2.239
+          },
+          {
             "name": "TotalEnergies",
             "town": "Loebau",
             "lat": 51.1033,
             "lng": 14.67016,
             "plz": "2708",
-            "e10": 1.979,
-            "e5": 2.039,
-            "diesel": 2.229
+            "e10": 1.939,
+            "e5": 1.999,
+            "diesel": 2.179
           }
         ],
         "plzStations": [
@@ -832,9 +911,29 @@
             "lat": 51.17923,
             "lng": 14.4084,
             "plz": "2625",
-            "e10": 1.999,
-            "e5": 2.059,
-            "diesel": 2.289
+            "e10": 1.979,
+            "e5": 2.039,
+            "diesel": 2.269
+          },
+          {
+            "name": "T",
+            "town": "Bautzen",
+            "lat": 51.18043,
+            "lng": 14.43009,
+            "plz": "2625",
+            "e10": 1.969,
+            "e5": 2.029,
+            "diesel": 2.259
+          },
+          {
+            "name": "ESSO",
+            "town": "BAUTZEN",
+            "lat": 51.18002,
+            "lng": 14.40244,
+            "plz": "2625",
+            "e10": 1.979,
+            "e5": 2.039,
+            "diesel": 2.269
           },
           {
             "name": "JET",
@@ -852,9 +951,19 @@
             "lat": 51.19018,
             "lng": 14.45167,
             "plz": "2625",
-            "e10": 1.999,
-            "e5": 2.059,
-            "diesel": 2.289
+            "e10": 1.979,
+            "e5": 2.039,
+            "diesel": 2.269
+          },
+          {
+            "name": "ARAL",
+            "town": "Bautzen",
+            "lat": 51.17863,
+            "lng": 14.45308,
+            "plz": "2625",
+            "e10": 1.979,
+            "e5": 2.039,
+            "diesel": 2.269
           },
           {
             "name": "TS am Marktkauf",
@@ -887,14 +996,14 @@
             "diesel": 2.779
           },
           {
-            "name": "ARAL",
-            "town": "Bautzen",
-            "lat": 51.19863,
-            "lng": 14.32828,
-            "plz": "2625",
-            "e10": 2.589,
-            "e5": 2.649,
-            "diesel": 2.779
+            "name": "STAR",
+            "town": "Göda",
+            "lat": 51.17865,
+            "lng": 14.32813,
+            "plz": "2633",
+            "e10": 1.959,
+            "e5": 2.009,
+            "diesel": 2.229
           }
         ]
       }
@@ -1662,6 +1771,24 @@
             "e5": 2.211,
             "premium": 2.283,
             "diesel": 2.317
+          },
+          "fx": {
+            "eurCzk": 24.35
+          }
+        },
+        {
+          "date": "2026-11-01",
+          "cz": {
+            "e10": 43.867,
+            "e5": 43.867,
+            "premium": 47.367,
+            "diesel": 47.52
+          },
+          "de": {
+            "e10": 2.046,
+            "e5": 2.105,
+            "premium": 2.176,
+            "diesel": 2.212
           },
           "fx": {
             "eurCzk": 24.35
@@ -2434,6 +2561,24 @@
           "fx": {
             "eurCzk": 24.35
           }
+        },
+        {
+          "date": "2026-11-01",
+          "cz": {
+            "e10": 43.366,
+            "e5": 43.366,
+            "premium": 46.316,
+            "diesel": 48.111
+          },
+          "de": {
+            "e10": 1.964,
+            "e5": 2.023,
+            "premium": 2.094,
+            "diesel": 2.2
+          },
+          "fx": {
+            "eurCzk": 24.35
+          }
         }
       ]
     },
@@ -3148,6 +3293,24 @@
           "fx": {
             "eurCzk": 24.35
           }
+        },
+        {
+          "date": "2026-11-01",
+          "cz": {
+            "e10": 43.8,
+            "e5": 43.8,
+            "premium": 46.2,
+            "diesel": 48.467
+          },
+          "de": {
+            "e10": 2.012,
+            "e5": 2.054,
+            "premium": 2.142,
+            "diesel": 2.205
+          },
+          "fx": {
+            "eurCzk": 24.35
+          }
         }
       ]
     },
@@ -3844,6 +4007,24 @@
           "fx": {
             "eurCzk": 24.35
           }
+        },
+        {
+          "date": "2026-11-01",
+          "cz": {
+            "e10": 43.329,
+            "e5": 43.329,
+            "premium": 45.849,
+            "diesel": 48.278
+          },
+          "de": {
+            "e10": 2.04,
+            "e5": 2.094,
+            "premium": 2.17,
+            "diesel": 2.247
+          },
+          "fx": {
+            "eurCzk": 24.35
+          }
         }
       ]
     },
@@ -4536,6 +4717,24 @@
             "e5": 2.061,
             "premium": 2.139,
             "diesel": 2.256
+          },
+          "fx": {
+            "eurCzk": 24.35
+          }
+        },
+        {
+          "date": "2026-11-01",
+          "cz": {
+            "e10": 42.87,
+            "e5": 42.87,
+            "premium": 46.19,
+            "diesel": 47.881
+          },
+          "de": {
+            "e10": 1.985,
+            "e5": 2.039,
+            "premium": 2.115,
+            "diesel": 2.233
           },
           "fx": {
             "eurCzk": 24.35
