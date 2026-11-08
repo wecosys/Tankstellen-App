@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T13:57:33+02:00",
+  "updatedAt": "2026-11-08T14:01:20+02:00",
   "fx": {
     "eurCzk": 24.35,
     "source": "frankfurter.dev (EZB-Referenzkurs)"
@@ -48,7 +48,7 @@
             "diesel": 47.6
           }
         ],
-        "updatedAt": "2026-11-08T13:57:33+02:00"
+        "updatedAt": "2026-11-08T14:01:20+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -123,16 +123,6 @@
             "diesel": 2.399
           },
           {
-            "name": "Freie Tankstelle",
-            "town": "Schönheide",
-            "lat": 50.50367,
-            "lng": 12.50377,
-            "plz": "8304",
-            "e10": 2.279,
-            "e5": 2.299,
-            "diesel": 2.399
-          },
-          {
             "name": "bft",
             "town": "Auerbach",
             "lat": 50.5065,
@@ -151,6 +141,16 @@
             "e10": 2.239,
             "e5": 2.299,
             "diesel": 2.419
+          },
+          {
+            "name": "bft",
+            "town": "Rodewisch",
+            "lat": 50.5323,
+            "lng": 12.4315,
+            "plz": "8228",
+            "e10": 2.219,
+            "e5": 2.279,
+            "diesel": 2.399
           }
         ],
         "plzStations": [
@@ -160,9 +160,9 @@
             "lat": 50.73511,
             "lng": 12.37341,
             "plz": "8412",
-            "e10": 2.179,
-            "e5": 2.239,
-            "diesel": 2.399
+            "e10": 2.139,
+            "e5": 2.199,
+            "diesel": 2.319
           },
           {
             "name": "ARAL",
@@ -180,9 +180,9 @@
             "lat": 50.71364,
             "lng": 12.37183,
             "plz": "8427",
-            "e10": 2.179,
-            "e5": 2.239,
-            "diesel": 2.399
+            "e10": 2.029,
+            "e5": 2.089,
+            "diesel": 2.259
           },
           {
             "name": "SB",
@@ -323,7 +323,7 @@
             "diesel": 47.6
           }
         ],
-        "updatedAt": "2026-11-08T13:57:33+02:00"
+        "updatedAt": "2026-11-08T14:01:20+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -455,7 +455,7 @@
             "diesel": 48.6
           }
         ],
-        "updatedAt": "2026-11-08T13:57:33+02:00"
+        "updatedAt": "2026-11-08T14:01:20+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -488,7 +488,7 @@
             "lng": 12.97752,
             "plz": "9484",
             "e5": 2.239,
-            "diesel": 2.419
+            "diesel": 2.399
           },
           {
             "name": "Q1",
@@ -528,7 +528,7 @@
             "plz": "9481",
             "e10": 2.179,
             "e5": 2.239,
-            "diesel": 2.419
+            "diesel": 2.399
           },
           {
             "name": "Shell",
@@ -628,7 +628,7 @@
             "e10": 40.5
           }
         ],
-        "updatedAt": "2026-11-08T13:57:33+02:00"
+        "updatedAt": "2026-11-08T14:01:20+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -803,7 +803,7 @@
             "diesel": 46.7
           }
         ],
-        "updatedAt": "2026-11-08T13:57:33+02:00"
+        "updatedAt": "2026-11-08T14:01:20+02:00"
       },
       "de": {
         "source": "Tankerkönig (Live-Stationsdaten)",
@@ -937,8 +937,8 @@
             "lat": 51.17197,
             "lng": 14.43611,
             "plz": "2625",
-            "e10": 2.209,
-            "e5": 2.269,
+            "e10": 2.199,
+            "e5": 2.259,
             "diesel": 2.399
           },
           {
@@ -1907,9 +1907,9 @@
             "diesel": 47.04
           },
           "de": {
-            "e10": 2.232,
-            "e5": 2.25,
-            "premium": 2.361,
+            "e10": 2.224,
+            "e5": 2.248,
+            "premium": 2.354,
             "diesel": 2.374
           },
           "fx": {
@@ -3680,7 +3680,7 @@
             "e10": 2.187,
             "e5": 2.236,
             "premium": 2.317,
-            "diesel": 2.394
+            "diesel": 2.39
           },
           "fx": {
             "eurCzk": 24.35
