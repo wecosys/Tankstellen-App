@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-24T00:54:20+02:00",
+  "updatedAt": "2026-11-24T05:21:48+02:00",
   "fx": {
     "eurCzk": 24.45,
     "source": "frankfurter.dev (EZB-Referenzkurs)"
@@ -540,6 +540,16 @@
         "provisional": false,
         "stations": [
           {
+            "name": "ARAL",
+            "town": "Pirna",
+            "lat": 50.9578,
+            "lng": 13.94946,
+            "plz": "1796",
+            "e10": 1.779,
+            "e5": 1.839,
+            "diesel": 2.009
+          },
+          {
             "name": "SB",
             "town": "Pirna",
             "lat": 50.9578,
@@ -557,6 +567,16 @@
             "plz": "1768",
             "e5": 1.839,
             "diesel": 2.029
+          },
+          {
+            "name": "ARAL",
+            "town": "Rathmannsdorf",
+            "lat": 50.92352,
+            "lng": 14.13471,
+            "plz": "1814",
+            "e10": 1.799,
+            "e5": 1.859,
+            "diesel": 2.009
           },
           {
             "name": "Hoyer",
@@ -599,6 +619,16 @@
             "diesel": 1.999
           },
           {
+            "name": "STAR",
+            "town": "Dresden",
+            "lat": 51.00494,
+            "lng": 13.78846,
+            "plz": "1239",
+            "e10": 1.759,
+            "e5": 1.819,
+            "diesel": 1.989
+          },
+          {
             "name": "Greenline",
             "town": "Dürröhrsdorf-Dittersbach",
             "lat": 51.0651,
@@ -607,16 +637,6 @@
             "e10": 1.808,
             "e5": 1.858,
             "diesel": 1.998
-          },
-          {
-            "name": "ARAL",
-            "town": "Dresden",
-            "lat": 51.01983,
-            "lng": 13.73,
-            "plz": "1217",
-            "e10": 1.779,
-            "e5": 1.839,
-            "diesel": 1.999
           }
         ]
       }
